@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import contactData from '../data/contact.json';
 import { 
   Mail, 
   Phone, 
@@ -50,39 +51,51 @@ const Contact: React.FC = () => {
     }, 3000);
   };
 
+  const locationInformation ={
+    title: "STEAM Buds Office and Lab",
+    address: contactData.address,
+    coordinates: contactData.coordinates,
+    details:{
+      nearBy:`Located near by ${contactData.address.landmark}`,
+      hours:`Open ${contactData.hours} for visits and consultations`,
+      facility:"1000 sq ft innovation lab with the latest equipment and tools"
+    },
+    googleMapsLink: contactData.googleMapsLink,
+
+  }
+
+
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
-      details: "hello@steambuds.in",
+      details: contactData.email,
       subtitle: "We'll respond within 24 hours"
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+91 98765 43210",
+      details: contactData.mobile,
       subtitle: "Mon-Fri, 9 AM - 6 PM IST"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "123 Innovation Street, Tech City, Bangalore, KA 560001",
+      details: contactData.fullAddress,
       subtitle: "Schedule a visit to our lab"
     },
     {
       icon: Clock,
       title: "Office Hours",
-      details: "Monday - Saturday",
-      subtitle: "9:00 AM - 6:00 PM IST"
+      details: contactData.hoursDetail.days,
+      subtitle: contactData.hoursDetail.time
     }
   ];
 
   const inquiryTypes = [
     { value: 'general', label: 'General Inquiry' },
-    { value: 'student-classes', label: 'Student Classes' },
+    { value: 'student-session', label: 'Student Session' },
     { value: 'school-partnership', label: 'School Partnership' },
-    { value: 'teacher-training', label: 'Teacher Training' },
-    { value: 'curriculum', label: 'Curriculum Development' },
     { value: 'support', label: 'Technical Support' }
   ];
 
@@ -95,14 +108,14 @@ const Contact: React.FC = () => {
             Get in <span className="bg-gradient-to-r from-electric-blue-600 to-vibrant-orange-600 bg-clip-text text-transparent">Touch</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Ready to start your innovation journey? We'd love to hear from you. 
+            Ready to start your journey with STEAM Buds? We'd love to hear from you.
             Reach out to discuss how we can help inspire the next generation of innovators.
           </p>
         </div>
       </section>
 
       {/* Contact Form and Info */}
-      <section className="py-20">
+      <section id="contact" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
@@ -246,20 +259,20 @@ const Contact: React.FC = () => {
                 <h3 className="text-xl font-bold font-display text-gray-800 mb-6">Quick Actions</h3>
                 <div className="space-y-4">
                   <a 
-                    href="mailto:hello@steambuds.in?subject=Student Classes Inquiry"
+                    href="/contact"
                     className="flex items-center p-4 bg-electric-blue-50 hover:bg-electric-blue-100 rounded-lg transition-all duration-300 hover:border-cyber-purple-300 group"
                   >
                     <div className="bg-electric-blue-500 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
                       <GraduationCap className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-800 group-hover:text-electric-blue-600">Student Classes</div>
+                      <div className="font-medium text-gray-800 group-hover:text-electric-blue-600">Student Sessions</div>
                       <div className="text-sm text-gray-600">Enroll your child</div>
                     </div>
                   </a>
                   
                   <a 
-                    href="mailto:hello@steambuds.in?subject=School Partnership Inquiry"
+                    href="/contact"
                     className="flex items-center p-4 bg-vibrant-orange-50 hover:bg-vibrant-orange-100 rounded-lg transition-all duration-300 hover:border-cyber-purple-300 group"
                   >
                     <div className="bg-vibrant-orange-500 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
@@ -267,7 +280,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <div className="font-medium text-gray-800 group-hover:text-vibrant-orange-600">School Partnership</div>
-                      <div className="text-sm text-gray-600">Setup innovation labs</div>
+                      <div className="text-sm text-gray-600">Have quality faculty</div>
                     </div>
                   </a>
                 </div>
@@ -282,21 +295,25 @@ const Contact: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
-              Visit Our Innovation Lab
+              Visit STEAM Buds
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Located in the heart of Bangalore's tech district, our state-of-the-art facility is open for visits
+              Located in the heart of Delhi, our state-of-the-art facility is open for visits
             </p>
           </div>
           
           {/* Map Placeholder */}
-          <div className="bg-gradient-to-br from-gray-200 to-gray-300 h-96 rounded-xl flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 text-gray-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">Interactive Map</h3>
-              <p className="text-gray-600">Google Maps integration would be embedded here</p>
-              <p className="text-sm text-gray-500 mt-2">123 Innovation Street, Tech City, Bangalore, KA 560001</p>
-            </div>
+          <div className="rounded-xl overflow-hidden h-96 w-full flex items-center justify-center">
+            <iframe
+              title={locationInformation.title}
+              src={locationInformation.googleMapsLink}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
 
           {/* Location Details */}
@@ -306,7 +323,7 @@ const Contact: React.FC = () => {
                 <MapPin className="h-8 w-8 text-electric-blue-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Easy to Find</h3>
-              <p className="text-gray-600 text-sm">Located near major tech parks and easily accessible by metro</p>
+              <p className="text-gray-600 text-sm">{locationInformation.details.nearBy}</p>
             </div>
             
             <div className="text-center">
@@ -314,7 +331,7 @@ const Contact: React.FC = () => {
                 <Clock className="h-8 w-8 text-vibrant-orange-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Flexible Hours</h3>
-              <p className="text-gray-600 text-sm">Open Monday-Saturday, 9 AM - 6 PM for visits and consultations</p>
+              <p className="text-gray-600 text-sm">{locationInformation.details.hours}</p>
             </div>
             
             <div className="text-center">
@@ -322,7 +339,7 @@ const Contact: React.FC = () => {
                 <Building2 className="h-8 w-8 text-lime-green-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Modern Facility</h3>
-              <p className="text-gray-600 text-sm">3000 sq ft innovation lab with the latest equipment and tools</p>
+              <p className="text-gray-600 text-sm">{locationInformation.details.facility}</p>
             </div>
           </div>
         </div>
