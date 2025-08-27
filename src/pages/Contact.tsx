@@ -139,19 +139,18 @@ const Contact: React.FC = () => {
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         What can we help you with?
                       </label>
-                      <select
-                        name="inquiryType"
-                        value={formData.inquiryType}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300"
-                        required
-                      >
+                      <div className="flex flex-wrap gap-4">
                         {inquiryTypes.map((type) => (
-                          <option key={type.value} value={type.value}>
+                          <button
+                            key={type.value}
+                            type="button"
+                            className={`px-4 py-2 rounded-lg border font-medium transition-colors duration-200 focus:outline-none ${formData.inquiryType === type.value ? 'bg-electric-blue-600 text-white border-electric-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-electric-blue-50'}`}
+                            onClick={() => setFormData(prev => ({ ...prev, inquiryType: type.value }))}
+                          >
                             {type.label}
-                          </option>
+                          </button>
                         ))}
-                      </select>
+                      </div>
                     </div>
 
                     {/* Name and Email */}
