@@ -52,25 +52,25 @@ const services = {
             focus:[
                 {
                     title: "STEAM Explorers (Ages 8-12)",
-                    sessionTime: "2 hours/week",
+                    duration: "2 hours/week",
                     description: "We prioritize safety in all our workshops, ensuring a secure and supportive environment for students to explore and learn.",
-                    highlight:[
+                    features:[
                         "Safety first", "Fun and engaging activities", "Collaborative projects", "Basics of STEAM"
                     ]
                 },
                 {
                     title: "STEAM Innovators (Ages 13-15)",
-                    sessionTime: "3 hours/week",
+                    duration: "3 hours/week",
                     description: "Advanced interdisciplinary projects combining science, technology, art, and medicine.",
-                    highlight:[
+                    features:[
                         "No pressure of deadlines", "Encouragement of self-directed learning", "Focus on real-world applications", "Practical uses of STEAM"
                     ]
                 },
                 {
                     title: "STEAM Leaders (Ages 16-18)",
-                    sessionTime: "4 hours/week",
-                    content: "Professional-level interdisciplinary projects preparing students for STEAM careers",
-                    highlight:[
+                    duration: "4 hours/week",
+                    description: "Professional-level interdisciplinary projects preparing students for STEAM careers",
+                    features:[
                         "gradual learning", "Peer-to-peer learning", "Building a supportive community", "project management"
                     ]
                 },
@@ -87,22 +87,22 @@ const services = {
                 {  
                     title: "Highly Qualified Educators",
                     icon: Award,
-                    content: "Our educators are highly qualified and experienced in their respective fields, ensuring that students receive the best possible guidance."
+                    description: "Our educators are highly qualified and experienced in their respective fields, ensuring that students receive the best possible guidance."
                 },
                 {
                     title: "Always Online Support",
                     icon: UserCheck,
-                    content: "We provide continuous online support for students, ensuring that help is always available when needed."
+                    description: "We provide continuous online support for students, ensuring that help is always available when needed."
                 },
                 {
                     title: "Tailored Learning Experiences",
                     icon: BookOpen,
-                    content: "We understand that every student is unique, and we tailor our teaching methods to meet the individual needs of each learner."
+                    description: "We understand that every student is unique, and we tailor our teaching methods to meet the individual needs of each learner."
                 },
                 {
                     title: "No pressure Learning Environment",
                     icon: Clock,
-                    content: "We believe in allowing students to learn at their own pace, without the pressure of strict timelines."
+                    description: "We believe in allowing students to learn at their own pace, without the pressure of strict timelines."
                 },
                 
             ]
