@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import contactData from '../data/contact.json';
+import contactData from '../config/contact';
 import { 
   Mail, 
   Phone, 
@@ -15,11 +15,11 @@ import {
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    inquiryType: 'general'
+  name: '',
+  email: '',
+  mobile: '',
+  message: '',
+  inquiryType: 'general'
   });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
       setFormData({
         name: '',
         email: '',
-        subject: '',
+        mobile: '',
         message: '',
         inquiryType: 'general'
       });
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <User className="h-4 w-4 inline mr-1" />
-                          Full Name
+                          Full Name <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="text"
@@ -174,7 +174,7 @@ const Contact: React.FC = () => {
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                           <Mail className="h-4 w-4 inline mr-1" />
-                          Email Address
+                          Email Address <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="email"
@@ -188,19 +188,18 @@ const Contact: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Subject */}
+                    {/* Mobile Number */}
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Subject
+                        Mobile Number
                       </label>
                       <input
-                        type="text"
-                        name="subject"
-                        value={formData.subject}
+                        type="tel"
+                        name="mobile"
+                        value={formData.mobile}
                         onChange={handleInputChange}
-                        placeholder="Brief subject of your inquiry"
+                        placeholder="Your mobile number"
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300"
-                        required
                       />
                     </div>
 
@@ -208,7 +207,7 @@ const Contact: React.FC = () => {
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         <MessageSquare className="h-4 w-4 inline mr-1" />
-                        Message
+                        Message <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         name="message"
@@ -301,8 +300,6 @@ const Contact: React.FC = () => {
               Located in the heart of Delhi, our state-of-the-art facility is open for visits
             </p>
           </div>
-          
-          {/* Map Placeholder */}
           <div className="rounded-xl overflow-hidden h-96 w-full flex items-center justify-center">
             <iframe
               title={locationInformation.title}
