@@ -2,10 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   GraduationCap, 
-  Users, 
   Clock, 
-  Calendar, 
-  Award, 
   CheckCircle, 
   ArrowRight,
   Cpu,
@@ -13,56 +10,12 @@ import {
   Cog,
   Building2,
   BookOpen,
-  UserCheck
 } from 'lucide-react';
 import services from '../config/services';
 
 const Services: React.FC = () => {
   const schoolService = services.forSchools;
   const studentService = services.forStudents;
-  const studentClasses = [
-    {
-      title: "STEAM Explorers (Ages 8-12)",
-      description: "Introduction to integrated STEAM concepts through fun, hands-on activities",
-      duration: "2 hours/week",
-      features: ["Basic robotics", "Art & design", "Simple circuits", "Science experiments"]
-    },
-    {
-      title: "STEAM Innovators (Ages 13-15)",
-      description: "Advanced interdisciplinary projects combining science, technology, art, and medicine",
-      duration: "3 hours/week",
-      features: ["Arduino programming", "Digital art", "Biomedical projects", "Team challenges"]
-    },
-    {
-      title: "STEAM Leaders (Ages 16-18)",
-      description: "Professional-level interdisciplinary projects preparing students for STEAM careers",
-      duration: "4 hours/week",
-      features: ["Advanced robotics", "Medical technology", "AI/ML applications", "Research projects"]
-    }
-  ];
-
-  const schoolServices = [
-    {
-      icon: Building2,
-      title: "STEAM Lab Infrastructure Setup",
-      description: "Complete setup of interdisciplinary STEAM labs with cutting-edge equipment for science, technology, engineering, art, and medicine"
-    },
-    {
-      icon: BookOpen,
-      title: "STEAM Curriculum Development",
-      description: "Custom interdisciplinary curriculum design that integrates science, technology, engineering, art, and medicine with practical learning outcomes"
-    },
-    {
-      icon: UserCheck,
-      title: "Teacher Training",
-      description: "Comprehensive training programs to empower educators with hands-on teaching methodologies"
-    },
-    {
-      icon: Cog,
-      title: "Ongoing Support",
-      description: "Continuous support, maintenance, and curriculum updates to ensure program success"
-    }
-  ];
 
   return (
     <div className="bg-white">
