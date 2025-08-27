@@ -81,10 +81,10 @@ const Services: React.FC = () => {
               </div>
 
               <div className="mt-8">
-                <Link to="/contact" className="btn-primary">
+                <a href="/contact" className="btn-primary">
                   Get Expert Teachers
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -140,10 +140,10 @@ const Services: React.FC = () => {
               </div>
 
               <div className="mt-8">
-                <Link to="/contact" className="btn-secondary">
+                <a href="/contact" className="btn-secondary">
                   Join Workshops
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -209,13 +209,13 @@ const Services: React.FC = () => {
             we're here to help you build the future.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <a href="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
               Contact Us Today
               <ArrowRight className="ml-2 h-5 w-5 inline" />
-            </Link>
-            <Link to="/about" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
+            </a>
+            <a href="/about" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
               Learn About Us
-            </Link>
+            </a>
           </div>
         </div>
       </section>
