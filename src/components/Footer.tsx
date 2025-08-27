@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Lightbulb, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import contactData from '../config/contact';
 
 const Footer: React.FC = () => {
+  const socialMediaLinks = contactData.socialMedia;
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -19,17 +21,20 @@ const Footer: React.FC = () => {
 Inspiring the next generation through integrated STEAM education - combining Science, Technology, Engineering, Art, and Medicine in hands-on learning experiences.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.facebook} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.twitter} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.instagram} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.linkedin} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
+              </a>
+              <a href={socialMediaLinks.youtube} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+                <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -78,17 +83,17 @@ Inspiring the next generation through integrated STEAM education - combining Sci
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-neon-yellow-400" />
-                <span className="text-gray-300 text-sm">hello@steambuds.in</span>
+                <span className="text-gray-300 text-sm">{contactData.email}</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-neon-yellow-400" />
-                <span className="text-gray-300 text-sm">+91 8777001129</span>
+                <span className="text-gray-300 text-sm">{contactData.mobile}</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-neon-yellow-400 mt-0.5" />
                 <span className="text-gray-300 text-sm">
-                  1/23, old rajendra nagar<br />
-                  Delhi, 110060
+                  {contactData.address.floor}, {contactData.address.flat}, {contactData.address.area} <br />
+                  {contactData.address.city}, {contactData.address.pincode}
                 </span>
               </div>
             </div>
