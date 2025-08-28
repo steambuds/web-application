@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-electric-blue-50 to-vibrant-orange-50 py-20">
+      <section className="bg-gradient-to-br from-electric-blue-50 to-vibrant-orange-50 py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold font-display text-gray-800 mb-6">
             Get in <span className="bg-gradient-to-r from-electric-blue-600 to-vibrant-orange-600 bg-clip-text text-transparent">Touch</span>

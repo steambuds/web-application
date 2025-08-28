@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logoImage from '../images/steambuds_logo.svg';
+import logoImage from '../images/steambuds_logo_ar_1.6.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ const Header: React.FC = () => {
             <img 
                 src={logoImage} 
                 alt="Logo"
-                className="w-20 h-15"
+                className="w-24 h-15"
               />
             <div>
               <h1 className="text-2xl font-bold font-display gradient-text">
