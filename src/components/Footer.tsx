@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Lightbulb, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
 import contactData from '../config/contact';
+import logoImage from '../images/steambuds_logo_ar_1.6.svg';
 
 const Footer: React.FC = () => {
   const socialMediaLinks = contactData.socialMedia;
@@ -12,9 +13,11 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500 p-2 rounded-lg shadow-lg glow-effect">
-                <Lightbulb className="h-6 w-6 text-white" />
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Logo"
+                className="w-16 h-10"
+              />
               <h3 className="text-xl font-bold font-display">STEAM Buds</h3>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
