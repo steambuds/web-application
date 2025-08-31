@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import contactData from '../config/contact';
+import env from '../config/env';
 import { 
   Mail, 
   Phone, 
@@ -32,23 +33,37 @@ const Contact: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        mobile: '',
-        message: '',
-        inquiryType: 'general'
+    const transformedData = {
+      name: formData.name,
+      email: formData.email,
+      mobile_number: formData.mobile,
+      description: formData.message,
+      category: formData.inquiryType
+    }
+    try {
+      const response = await fetch(env.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transformedData),
       });
-    }, 3000);
+
+      if (response.ok) {
+        console.log('Form submitted successfully!');
+        setIsSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        console.error('Form submission failed. Server error:', errorData);
+        alert('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Network or server error:', error);
+      alert('An error occurred. Please check your network connection.');
+    }
   };
 
   const locationInformation ={
