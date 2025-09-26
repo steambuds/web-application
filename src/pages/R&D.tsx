@@ -32,14 +32,14 @@ const RnD: React.FC = () => {
               <h3 className="text-xl font-semibold font-display text-gray-800 mb-2">Concept to Creation</h3>
               <p className="text-gray-600">Turn theory into prototypes so students experience how ideas evolve into usable solutions.</p>
             </div>
-            <div className="card border border-vibrant-orange-100">
+            <div className="card border border-hot-pink-100">
               <div className="bg-gradient-to-br from-vibrant-orange-500 to-hot-pink-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                 <Wrench className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-semibold font-display text-gray-800 mb-2">Hands-on & Affordable</h3>
               <p className="text-gray-600">Design low-cost kits and workflows that any school can adopt without heavy infrastructure.</p>
             </div>
-            <div className="card border border-lime-green-100">
+            <div className="card border border-cyber-purple-100">
               <div className="bg-gradient-to-br from-lime-green-500 to-neon-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                 <Cpu className="h-7 w-7 text-white" />
               </div>
@@ -120,29 +120,29 @@ const RnD: React.FC = () => {
               </ul>
             </div>
 
-            <div className="card group border border-vibrant-orange-100 hover:border-vibrant-orange-300 transition-colors">
+            <div className="card group border border-hot-pink-100 hover:border-hot-pink-300 transition-colors">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold font-display text-gray-800">Smart Garden (IoT)</h3>
-                <span className="text-xs text-vibrant-orange-700 bg-vibrant-orange-50 px-2 py-1 rounded-full">3 sessions</span>
+                <span className="text-xs text-hot-pink-700 bg-hot-pink-50 px-2 py-1 rounded-full">3 sessions</span>
               </div>
               <p className="text-gray-600 mb-4">Built soil-moisture monitoring with automatic watering and mobile notifications.</p>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-vibrant-orange-600 mr-2" />20+ students, Grades 8–10</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-vibrant-orange-600 mr-2" />Electronics + coding integration</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-vibrant-orange-600 mr-2" />Reusable classroom kit</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-hot-pink-600 mr-2" />20+ students, Grades 8–10</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-hot-pink-600 mr-2" />Electronics + coding integration</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-hot-pink-600 mr-2" />Reusable classroom kit</li>
               </ul>
             </div>
 
-            <div className="card group border border-lime-green-100 hover:border-lime-green-300 transition-colors">
+            <div className="card group border border-cyber-purple-100 hover:border-cyber-purple-300 transition-colors">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold font-display text-gray-800">Health-Tech Challenge</h3>
-                <span className="text-xs text-lime-green-700 bg-lime-green-50 px-2 py-1 rounded-full">1 week</span>
+                <span className="text-xs text-cyber-purple-700 bg-cyber-purple-50 px-2 py-1 rounded-full">1 week</span>
               </div>
               <p className="text-gray-600 mb-4">Teams designed low-cost assistive devices and presented working mockups.</p>
               <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-lime-green-600 mr-2" />15+ teams participated</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-lime-green-600 mr-2" />Mentor feedback rounds</li>
-                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-lime-green-600 mr-2" />Showcase and awards</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-cyber-purple-600 mr-2" />15+ teams participated</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-cyber-purple-600 mr-2" />Mentor feedback rounds</li>
+                <li className="flex items-center"><CheckCircle className="h-4 w-4 text-cyber-purple-600 mr-2" />Showcase and awards</li>
               </ul>
             </div>
           </div>
