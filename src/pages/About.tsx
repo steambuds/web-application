@@ -67,7 +67,7 @@ const About: React.FC = () => {
             </div>
 
             {/* Vision */}
-            <div className="card bg-gradient-to-br from-hot-pink-50 to-hot-pink-100 border border-vibrant-orange-200">
+            <div className="card bg-gradient-to-br from-hot-pink-50 to-hot-pink-100 border border-hot-pink-200">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-hot-pink-500 to-hot-pink-600 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Eye className="h-6 w-6 text-white" />
