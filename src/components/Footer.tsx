@@ -24,19 +24,19 @@ const Footer: React.FC = () => {
 Inspiring the next generation through integrated STEAM education - combining Science, Technology, Engineering, Art, and Medicine in hands-on learning experiences.
             </p>
             <div className="flex space-x-4">
-              <a href={socialMediaLinks.facebook} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.facebook} className="text-gray-300 hover:text-hot-pink-400 transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.twitter} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.twitter} className="text-gray-300 hover:text-hot-pink-400 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.instagram} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.instagram} className="text-gray-300 hover:text-hot-pink-400 transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.linkedin} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.linkedin} className="text-gray-300 hover:text-hot-pink-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href={socialMediaLinks.youtube} className="text-gray-300 hover:text-neon-yellow-400 transition-colors">
+              <a href={socialMediaLinks.youtube} className="text-gray-300 hover:text-hot-pink-400 transition-colors">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
@@ -47,22 +47,27 @@ Inspiring the next generation through integrated STEAM education - combining Sci
             <h4 className="text-lg font-semibold font-display mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
+                <Link to="/" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
+                <Link to="/services" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   Our Services
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
+                <Link to="/rnd" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
+                  R&D
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
+                <Link to="/contact" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   Contact
                 </Link>
               </li>
@@ -85,15 +90,15 @@ Inspiring the next generation through integrated STEAM education - combining Sci
             <h4 className="text-lg font-semibold font-display mb-4">Contact Info</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-neon-yellow-400" />
+                <Mail className="h-4 w-4 text-hot-pink-400" />
                 <span className="text-gray-300 text-sm">{contactData.email}</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-neon-yellow-400" />
+                <Phone className="h-4 w-4 text-hot-pink-400" />
                 <span className="text-gray-300 text-sm">{contactData.mobile}</span>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-neon-yellow-400 mt-0.5" />
+                <MapPin className="h-4 w-4 text-hot-pink-400 mt-0.5" />
                 <span className="text-gray-300 text-sm">
                   {contactData.address.floor}, {contactData.address.flat}, {contactData.address.area} <br />
                   {contactData.address.city}, {contactData.address.pincode}
@@ -109,10 +114,10 @@ Inspiring the next generation through integrated STEAM education - combining Sci
               © 2024 STEAM Buds. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-neon-yellow-400 text-sm transition-colors">
+              <a href="#" className="text-gray-400 hover:text-hot-pink-400 text-sm transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-neon-yellow-400 text-sm transition-colors">
+              <a href="#" className="text-gray-400 hover:text-hot-pink-400 text-sm transition-colors">
                 Terms of Service
               </a>
             </div>

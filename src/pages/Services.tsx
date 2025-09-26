@@ -90,12 +90,12 @@ const Services: React.FC = () => {
             {/* Classes for Students */}
             <div>
               <div className="flex items-center mb-8">
-                <div className="bg-gradient-to-br from-vibrant-orange-500 to-vibrant-orange-600 w-16 h-16 rounded-xl flex items-center justify-center mr-4">
+                <div className="bg-gradient-to-br from-hot-pink-500 to-hot-pink-600 w-16 h-16 rounded-xl flex items-center justify-center mr-4">
                   <Building2 className="h-8 w-8 text-white" />
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold font-display text-gray-800">{studentService.title}</h2>
-                  <p className="text-vibrant-orange-600 font-medium">{studentService.subTitle}</p>
+                  <p className="text-hot-pink-600 font-medium">{studentService.subTitle}</p>
                 </div>
               </div>
               
@@ -105,10 +105,10 @@ const Services: React.FC = () => {
 
               <div className="space-y-6 mb-8">
                 {studentService.detail.focus.map((classInfo, index) => (
-                  <div key={index} className="card border border-vibrant-orange-100 hover:border-vibrant-orange-300 transition-colors">
+                  <div key={index} className="card border border-hot-pink-100 hover:border-hot-pink-300 transition-colors">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-semibold font-display text-gray-800">{classInfo.title}</h3>
-                      <div className="flex items-center text-sm text-vibrant-orange-600 bg-vibrant-orange-50 px-3 py-1 rounded-full">
+                      <div className="flex items-center text-sm text-hot-pink-600 bg-hot-pink-50 px-3 py-1 rounded-full">
                         <Clock className="h-4 w-4 mr-1" />
                         {classInfo.duration}
                       </div>
@@ -117,7 +117,7 @@ const Services: React.FC = () => {
                     <div className="grid grid-cols-2 gap-2">
                       {classInfo.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center text-sm text-gray-700">
-                          <CheckCircle className="h-4 w-4 text-lime-green-500 mr-2" />
+                          <CheckCircle className="h-4 w-4 text-cyber-purple-500 mr-2" />
                           {feature}
                         </div>
                       ))}
@@ -126,12 +126,12 @@ const Services: React.FC = () => {
                 ))}
               </div>
 
-              <div className="bg-gradient-to-br from-vibrant-orange-50 to-vibrant-orange-100 rounded-xl p-6 mb-8">
+              <div className="bg-gradient-to-br from-hot-pink-50 to-hot-pink-100 rounded-xl p-6 mb-8">
                 <h3 className="text-lg font-semibold font-display text-gray-800 mb-4">What's Included in Our School Partnership:</h3>
                 <div className="space-y-3">
                   {studentService.Highlights.map((highlight) => (
                     <div className="flex items-center text-sm text-gray-700">
-                      <highlight.icon className="h-4 w-4 text-lime-green-500 mr-3" />
+                      <highlight.icon className="h-4 w-4 text-cyber-purple-500 mr-3" />
                       {highlight.title}
                     </div>
                   ))}
@@ -171,7 +171,7 @@ const Services: React.FC = () => {
             </div>
             
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-vibrant-orange-500 to-vibrant-orange-600 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-gradient-to-br from-hot-pink-500 to-hot-pink-600 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold font-display text-gray-800 mb-2">Electronics & IoT</h3>
@@ -179,7 +179,7 @@ const Services: React.FC = () => {
             </div>
             
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-lime-green-500 to-lime-green-600 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="bg-gradient-to-br from-cyber-purple-500 to-cyber-purple-600 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                 <BookOpen className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold font-display text-gray-800 mb-2">Digital Art & Programming</h3>

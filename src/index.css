@@ -22,7 +22,7 @@
   }
 
   .btn-secondary {
-    @apply bg-gradient-to-r from-vibrant-orange-400 via-hot-pink-500 to-atomic-green-500 hover:from-vibrant-orange-300 hover:via-hot-pink-400 hover:to-atomic-green-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-110 hover:shadow-hot-pink-300;
+    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 hover:from-electric-blue-400 hover:via-cyber-purple-400 hover:to-hot-pink-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-110 hover:shadow-hot-pink-300;
   }
 
   .btn-outline {
@@ -48,11 +48,11 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 via-hot-pink-500 to-atomic-green-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
   }
 
   .gradient-text-alt {
-    @apply bg-gradient-to-r from-neon-yellow-400 via-vibrant-orange-500 to-plasma-red-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
   }
 
   .card-hover-neon {

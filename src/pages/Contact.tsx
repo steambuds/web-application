@@ -117,10 +117,10 @@ const Contact: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-electric-blue-50 to-vibrant-orange-50 py-5">
+      <section className="bg-gradient-to-br from-electric-blue-50 to-hot-pink-50 py-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold font-display text-gray-800 mb-6">
-            Get in <span className="bg-gradient-to-r from-electric-blue-600 to-vibrant-orange-600 bg-clip-text text-transparent">Touch</span>
+            Get in <span className="bg-gradient-to-r from-electric-blue-600 to-hot-pink-600 bg-clip-text text-transparent">Touch</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Ready to start your journey with STEAM Buds? We'd love to hear from you.
@@ -141,8 +141,8 @@ const Contact: React.FC = () => {
                 
                 {isSubmitted ? (
                   <div className="text-center py-12">
-                    <div className="bg-lime-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle className="h-10 w-10 text-lime-green-600" />
+                    <div className="bg-cyber-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle className="h-10 w-10 text-cyber-purple-600" />
                     </div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">Message Sent Successfully!</h3>
                     <p className="text-gray-600">Thank you for reaching out. We'll get back to you within 24 hours.</p>
@@ -249,12 +249,12 @@ const Contact: React.FC = () => {
 
             {/* Contact Information */}
             <div className="space-y-6">
-              <div className="card bg-gradient-to-br from-electric-blue-50 to-vibrant-orange-50">
+              <div className="card bg-gradient-to-br from-electric-blue-50 to-hot-pink-50">
                 <h3 className="text-xl font-bold font-display text-gray-800 mb-6">Contact Information</h3>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-start">
-                      <div className="bg-gradient-to-br from-electric-blue-500 to-vibrant-orange-500 w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                      <div className="bg-gradient-to-br from-electric-blue-500 to-hot-pink-500 w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                         <info.icon className="h-5 w-5 text-white" />
                       </div>
                       <div>
@@ -286,13 +286,13 @@ const Contact: React.FC = () => {
                   
                   <a 
                     href="/contact"
-                    className="flex items-center p-4 bg-vibrant-orange-50 hover:bg-vibrant-orange-100 rounded-lg transition-all duration-300 hover:border-cyber-purple-300 group"
+                    className="flex items-center p-4 bg-hot-pink-50 hover:bg-hot-pink-100 rounded-lg transition-all duration-300 hover:border-cyber-purple-300 group"
                   >
-                    <div className="bg-vibrant-orange-500 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                    <div className="bg-hot-pink-500 w-10 h-10 rounded-lg flex items-center justify-center mr-3">
                       <Building2 className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-800 group-hover:text-vibrant-orange-600">School Partnership</div>
+                      <div className="font-medium text-gray-800 group-hover:text-hot-pink-600">School Partnership</div>
                       <div className="text-sm text-gray-600">Have quality faculty</div>
                     </div>
                   </a>
@@ -338,16 +338,16 @@ const Contact: React.FC = () => {
             </div>
             
             <div className="text-center">
-              <div className="bg-vibrant-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Clock className="h-8 w-8 text-vibrant-orange-600" />
+              <div className="bg-hot-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="h-8 w-8 text-hot-pink-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Flexible Hours</h3>
               <p className="text-gray-600 text-sm">{locationInformation.details.hours}</p>
             </div>
             
             <div className="text-center">
-              <div className="bg-lime-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Building2 className="h-8 w-8 text-lime-green-600" />
+              <div className="bg-cyber-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Building2 className="h-8 w-8 text-cyber-purple-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Modern Facility</h3>
               <p className="text-gray-600 text-sm">{locationInformation.details.facility}</p>

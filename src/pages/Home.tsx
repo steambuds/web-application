@@ -75,11 +75,11 @@ const Home: React.FC = () => {
                   <span>50+ Students</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <GraduationCap className="h-5 w-5 text-vibrant-orange-500" />
+                  <GraduationCap className="h-5 w-5 text-hot-pink-500" />
                   <span>2+ Schools</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Award className="h-5 w-5 text-lime-green-500" />
+                  <Award className="h-5 w-5 text-cyber-purple-500" />
                   <span>5+ Projects</span>
                 </div>
               </div>
@@ -123,7 +123,7 @@ const Home: React.FC = () => {
             </div>
             
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-vibrant-orange-500 to-hot-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="bg-gradient-to-br from-cyber-purple-500 to-hot-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <Wrench className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold font-display text-gray-800 mb-4">Build</h3>
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
             </div>
             
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-lime-green-500 to-neon-yellow-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <div className="bg-gradient-to-br from-electric-blue-500 to-hot-pink-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                 <Lightbulb className="h-10 w-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold font-display text-gray-800 mb-4">Invent</h3>
@@ -186,9 +186,9 @@ const Home: React.FC = () => {
             </div>
 
             {/* private Student Workshops */}
-            <div className="card group hover:bg-gradient-to-br hover:from-vibrant-orange-50 hover:to-hot-pink-100 transition-all duration-300">
+            <div className="card group hover:bg-gradient-to-br hover:from-cyber-purple-50 hover:to-hot-pink-100 transition-all duration-300">
               <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-br from-vibrant-orange-400 to-hot-pink-500 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                <div className="bg-gradient-to-br from-cyber-purple-400 to-hot-pink-500 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Users className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold font-display text-gray-800">{studentService.title}</h3>
@@ -199,7 +199,7 @@ const Home: React.FC = () => {
               <div className="space-y-3 mb-6">
                 {studentService.Highlights.slice(0, 3).map((highlight, index) => (
                   <div className="flex items-center text-sm text-gray-700" key={index}>
-                    <div className="w-2 h-2 bg-vibrant-orange-500 rounded-full mr-3"></div>
+                    <div className="w-2 h-2 bg-hot-pink-500 rounded-full mr-3"></div>
                     {highlight.title}
                   </div>
                 ))}
@@ -241,7 +241,7 @@ const Home: React.FC = () => {
                 </div>
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-neon-yellow-400 fill-current" />
+                    <Star key={i} className="h-4 w-4 text-hot-pink-400 fill-current" />
                   ))}
                 </div>
                 <div className="relative">
@@ -257,7 +257,7 @@ const Home: React.FC = () => {
       </section> */}
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 via-hot-pink-500 to-atomic-green-500">
+      <section className="py-20 bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-6">
             Ready to Inspire the Next Generation?

@@ -17,7 +17,7 @@ const About: React.FC = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-electric-blue-50 to-vibrant-orange-50 py-20">
+      <section className="bg-gradient-to-br from-electric-blue-50 to-hot-pink-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -43,7 +43,7 @@ const About: React.FC = () => {
                 alt="Students collaborating on innovative projects" 
                 className="rounded-2xl shadow-2xl"
               />
-              <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-electric-blue-200 to-vibrant-orange-200 rounded-2xl opacity-20"></div>
+              <div className="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-electric-blue-200 to-hot-pink-200 rounded-2xl opacity-20"></div>
             </div>
           </div>
         </div>
@@ -67,9 +67,9 @@ const About: React.FC = () => {
             </div>
 
             {/* Vision */}
-            <div className="card bg-gradient-to-br from-vibrant-orange-50 to-vibrant-orange-100 border border-vibrant-orange-200">
+            <div className="card bg-gradient-to-br from-hot-pink-50 to-hot-pink-100 border border-hot-pink-200">
               <div className="flex items-center mb-6">
-                <div className="bg-gradient-to-br from-vibrant-orange-500 to-vibrant-orange-600 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
+                <div className="bg-gradient-to-br from-hot-pink-500 to-hot-pink-600 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Eye className="h-6 w-6 text-white" />
                 </div>
                 <h2 className="text-2xl font-bold font-display text-gray-800">{about.vision.title}</h2>
@@ -150,7 +150,7 @@ const About: React.FC = () => {
             {values.map((value, index) => (
               <div key={index} className="card bg-white hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 transition-all duration-300">
                 <div className="flex items-start">
-                  <div className="bg-gradient-to-br from-electric-blue-100 to-vibrant-orange-100 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="bg-gradient-to-br from-electric-blue-100 to-hot-pink-100 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                     <value.icon className="h-6 w-6 text-electric-blue-600" />
                   </div>
                   <div>
@@ -186,7 +186,7 @@ const About: React.FC = () => {
       </section>
           
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-electric-blue-600 to-vibrant-orange-600">
+      <section className="py-20 bg-gradient-to-br from-electric-blue-600 to-hot-pink-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-6">
             Join Our Mission
