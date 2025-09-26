@@ -57,6 +57,11 @@ Inspiring the next generation through integrated STEAM education - combining Sci
                 </Link>
               </li>
               <li>
+                <Link to="/rnd" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
+                  R&D
+                </Link>
+              </li>
+              <li>
                 <Link to="/about" className="text-gray-300 hover:text-neon-yellow-400 transition-colors text-sm">
                   About Us
                 </Link>
