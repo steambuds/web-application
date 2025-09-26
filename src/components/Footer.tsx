@@ -98,7 +98,7 @@ Inspiring the next generation through integrated STEAM education - combining Sci
                 <span className="text-gray-300 text-sm">{contactData.mobile}</span>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-neon-yellow-400 mt-0.5" />
+                <MapPin className="h-4 w-4 text-hot-pink-400 mt-0.5" />
                 <span className="text-gray-300 text-sm">
                   {contactData.address.floor}, {contactData.address.flat}, {contactData.address.area} <br />
                   {contactData.address.city}, {contactData.address.pincode}
