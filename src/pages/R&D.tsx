@@ -33,7 +33,7 @@ const RnD: React.FC = () => {
               <p className="text-gray-600">Turn theory into prototypes so students experience how ideas evolve into usable solutions.</p>
             </div>
             <div className="card border border-hot-pink-100">
-              <div className="bg-gradient-to-br from-vibrant-orange-500 to-hot-pink-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-gradient-to-br from-cyber-purple-500 to-hot-pink-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                 <Wrench className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-semibold font-display text-gray-800 mb-2">Hands-on & Affordable</h3>
@@ -74,7 +74,7 @@ const RnD: React.FC = () => {
               <p className="text-gray-600">Work with teachers and students to shortlist real problems and map them to learning outcomes.</p>
             </div>
             <div className="card text-center">
-              <div className="bg-gradient-to-br from-vibrant-orange-500 to-hot-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-gradient-to-br from-cyber-purple-500 to-hot-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold font-display text-gray-800 mb-2">2. Design Sprint</h3>
