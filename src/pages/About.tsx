@@ -3,78 +3,16 @@ import { Link } from 'react-router-dom';
 import { 
   Target, 
   Eye, 
-  Heart, 
-  Users, 
-  Award, 
-  BookOpen, 
-  Lightbulb, 
   ArrowRight,
   Mail,
   Linkedin,
-  Globe
 } from 'lucide-react';
+import about from '../config/about';
 
 const About: React.FC = () => {
-  const teamMembers = [
-    {
-      name: "Ghanshyam",
-      role: "Founder & CTO",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-      bio: "NIT graduate with over 8 years of professional software engineering experience. Leads technology strategy and development initiatives to create innovative educational solutions.",
-      expertise: ["Software Engineering", "Technology Strategy", "System Architecture"]
-    },
-    {
-      name: "Devesh Singh",
-      role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e1?w=300&h=300&fit=crop&crop=face",
-      bio: "NIT graduate with 6+ years of experience in teaching robotics and science. Passionate about transforming education through hands-on learning methodologies.",
-      expertise: ["Robotics Education", "STEM Teaching", "Curriculum Design"]
-    },
-    {
-      name: "Sandeep Malhotra",
-      role: "Founder & Head of Project Management",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-      bio: "NIT graduate with 8+ years in data engineering and a passion for practical knowledge application. Manages strategic projects and operational excellence.",
-      expertise: ["Data Engineering", "Project Management", "Practical Applications"]
-    },
-    {
-      name: "Govind Bajpai",
-      role: "Founder & Advisor",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-      bio: "NIT graduate with 6+ years as an IBM scientist and expertise in hands-on activity development. Provides strategic guidance and mentorship to the team.",
-      expertise: ["Scientific Research", "IBM Technologies", "Activity Development"]
-    }
-  ];
-
-  const values = [
-    {
-      icon: Lightbulb,
-      title: "Learning by Doing",
-      description: "We believe the best learning happens when students actively build, create, and experiment with real-world projects."
-    },
-    {
-      icon: Heart,
-      title: "Fostering Curiosity",
-      description: "Every child is naturally curious. We nurture this curiosity and help students ask better questions and seek innovative solutions."
-    },
-    {
-      icon: Users,
-      title: "Collaborative Innovation",
-      description: "Great innovations emerge from collaboration. We encourage teamwork, peer learning, and knowledge sharing."
-    },
-    {
-      icon: BookOpen,
-      title: "Making Education Fun",
-      description: "Learning should be joyful and engaging. We make complex concepts accessible through play, creativity, and hands-on exploration."
-    }
-  ];
-
-  const achievements = [
-    { number: "5000+", label: "Students Impacted" },
-    { number: "200+", label: "Schools Partnered" },
-    { number: "50+", label: "Innovation Labs Setup" },
-    { number: "95%", label: "Student Satisfaction" }
-  ];
+  const teamMembers = about.team.members;
+  const values = about.coreValues.principles;
+  const story = about.story;
 
   return (
     <div className="bg-white">
@@ -84,20 +22,19 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold font-display text-gray-800 mb-6">
-                About <span className="bg-gradient-to-r from-electric-blue-600 to-vibrant-orange-600 bg-clip-text text-transparent">Inventors Hub</span>
+                <span className="gradient-text">{about.title}</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                We're on a mission to transform education in India by inspiring the next generation of innovators, 
-                thinkers, and problem-solvers through hands-on learning experiences.
+                {about.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/contact" className="btn-primary">
                   Join Our Mission
                   <ArrowRight className="ml-2 h-5 w-5 inline" />
                 </Link>
-                <Link to="/services" className="btn-outline">
+                {/* <Link to="/services" className="btn-outline">
                   Explore Our Impact
-                </Link>
+                </Link> */}
               </div>
             </div>
             <div className="relative">
@@ -122,12 +59,10 @@ const About: React.FC = () => {
                 <div className="bg-gradient-to-br from-electric-blue-500 to-electric-blue-600 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Target className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold font-display text-gray-800">Our Mission</h2>
+                <h2 className="text-2xl font-bold font-display text-gray-800">{about.mission.title}</h2>
               </div>
               <p className="text-lg text-gray-700 leading-relaxed">
-                To inspire and empower the next generation of Indian innovators by providing hands-on learning experiences 
-                that transform curiosity into creativity, ideas into innovations, and students into confident problem-solvers 
-                who will shape the future of our nation.
+                {about.mission.description}
               </p>
             </div>
 
@@ -137,12 +72,10 @@ const About: React.FC = () => {
                 <div className="bg-gradient-to-br from-vibrant-orange-500 to-vibrant-orange-600 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Eye className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold font-display text-gray-800">Our Vision</h2>
+                <h2 className="text-2xl font-bold font-display text-gray-800">{about.vision.title}</h2>
               </div>
               <p className="text-lg text-gray-700 leading-relaxed">
-                To create a future where every Indian student has access to quality hands-on education, where innovation 
-                labs are present in every school, and where the spirit of creativity and invention thrives in every 
-                classroom across the country.
+                {about.vision.description}
               </p>
             </div>
           </div>
@@ -155,10 +88,10 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
-              Meet Our Team
+              {about.team.title}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Passionate educators and innovators dedicated to transforming learning experiences
+              {about.team.description}
             </p>
           </div>
           
@@ -206,10 +139,10 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
-              Our Core Values
+              {about.coreValues.title}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The principles that guide everything we do and shape our approach to education
+              {about.coreValues.description}
             </p>
           </div>
           
@@ -231,46 +164,27 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* TODO: Achievements */}
+      
       {/* Story Section */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
-              Our Story
+              {story.title}
             </h2>
           </div>
           
           <div className="space-y-8 text-lg text-gray-600 leading-relaxed">
-            <p>
-              Our journey began during our college days at NIT, where Devesh and Ghanshyam first collaborated to set up a
-              small laboratory for their own learning and experimentation. What started as a personal project quickly evolved
-              into something much bigger—a vibrant innovation hub that attracted passionate NITians from across the campus.
-            </p>
-
-            <p>
-              As our college lab grew, many talented students joined us, but Sandeep and Govind truly embodied our shared
-              passion for building innovative products and solutions. Together, our team participated in numerous national-level
-              innovation challenges, earning recognition and winning several prestigious competitions that validated our
-              approach to hands-on, practical learning.
-            </p>
-
-            <p>
-              After graduation, life took us in different directions as we pursued our individual careers—Ghanshyam in software
-              engineering, Devesh in education, Sandeep in data engineering, and Govind in scientific research at IBM. However,
-              our commitment to student development never wavered. Sandeep and Govind launched workshop programs in their
-              respective fields, while Devesh and Ghanshyam worked on creating a universal learning platform.
-            </p>
-
-            <p>
-              Though we maintained awareness of each other's endeavors over the years, it wasn't until recently that we realized
-              the power of combining our diverse expertise and shared vision. The convergence of our individual experiences in
-              education, technology, and innovation naturally led to the birth of STEAM Buds—a platform where our collective
-              passion for transforming education could finally flourish and impact students across India.
-            </p>
+            {story.paragraphs.map((para, idx) => (
+              <p key={idx}>
+                {para}
+              </p>
+            ))}
           </div>
         </div>
       </section>
-
+          
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-electric-blue-600 to-vibrant-orange-600">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -282,13 +196,13 @@ const About: React.FC = () => {
             hands-on learning revolution. Let's work together to inspire the next generation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <a href="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
               Get Involved
               <ArrowRight className="ml-2 h-5 w-5 inline" />
-            </Link>
-            <Link to="/services" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
+            </a>
+            {/* <Link to="/services" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
               Explore Our Programs
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>

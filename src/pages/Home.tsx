@@ -7,38 +7,39 @@ import {
   Lightbulb, 
   Users, 
   GraduationCap, 
-  Award,
-  Star,
-  Quote
+  Award
 } from 'lucide-react';
+import services from '../config/services';
 
 const Home: React.FC = () => {
-  const testimonials = [
-    {
-      id: 1,
-      name: "Priya Sharma",
-      role: "Parent",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e1?w=150&h=150&fit=crop&crop=face",
-      content: "My child's confidence in STEAM subjects has soared! The integrated approach at STEAM Buds has transformed how she thinks about problem-solving across disciplines.",
-      rating: 5
-    },
-    {
-      id: 2,
-      name: "Rajesh Kumar",
-      role: "School Principal",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      content: "The lab setup was seamless, and the curriculum is fantastic. Our students are now building robots and solving real-world problems!",
-      rating: 5
-    },
-    {
-      id: 3,
-      name: "Aisha Patel",
-      role: "Student (Grade 8)",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
-      content: "I never thought I could build a working robot! Now I want to become an engineer and invent things that help people.",
-      rating: 5
-    }
-  ];
+  // const testimonials = [
+  //   {
+  //     id: 1,
+  //     name: "Priya Sharma",
+  //     role: "Parent",
+  //     image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e1?w=150&h=150&fit=crop&crop=face",
+  //     content: "My child's confidence in STEAM subjects has soared! The integrated approach at STEAM Buds has transformed how she thinks about problem-solving across disciplines.",
+  //     rating: 5
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Rajesh Kumar",
+  //     role: "School Principal",
+  //     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+  //     content: "The lab setup was seamless, and the curriculum is fantastic. Our students are now building robots and solving real-world problems!",
+  //     rating: 5
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Aisha Patel",
+  //     role: "Student (Grade 8)",
+  //     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+  //     content: "I never thought I could build a working robot! Now I want to become an engineer and invent things that help people.",
+  //     rating: 5
+  //   }
+  // ];
+  const schoolService = services.forSchools;
+  const studentService = services.forStudents;
 
   return (
     <div className="bg-white">
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
               <div className="flex items-center space-x-8 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <Users className="h-5 w-5 text-electric-blue-500" />
-                  <span>500+ Students</span>
+                  <span>50+ Students</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <GraduationCap className="h-5 w-5 text-vibrant-orange-500" />
@@ -151,81 +152,69 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
-              Our Services
+              {services.title}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Expert teachers for schools and direct offline workshops for students
+              {services.description}
             </p>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Direct Student Workshops */}
+            {/* private Student Workshops */}
             <div className="card group hover:bg-gradient-to-br hover:from-electric-blue-50 hover:to-cyber-purple-100 transition-all duration-300">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-electric-blue-400 to-cyber-purple-500 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <GraduationCap className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold font-display text-gray-800">Direct Student Workshops</h3>
+                <h3 className="text-2xl font-bold font-display text-gray-800">{schoolService.title}</h3>
               </div>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Offline workshops for students who want to learn directly from our expert educators. We develop problem-solving skills, feasibility analysis, social relevance, potential impact, novelty, and questioning abilities through hands-on STEAM projects.
+                {schoolService.description}
               </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-electric-blue-500 rounded-full mr-3"></div>
-                  Problem-solving & critical thinking skills
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-electric-blue-500 rounded-full mr-3"></div>
-                  Feasibility and social relevance analysis
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-electric-blue-500 rounded-full mr-3"></div>
-                  Science, Arts, Technology, Medicine, Engineering projects
-                </div>
+                {schoolService.Highlights.slice(0, 3).map((highlight, index) => (
+                  <div className="flex items-center text-sm text-gray-700" key={index}>
+                    <div className="w-2 h-2 bg-electric-blue-500 rounded-full mr-3"></div>
+                    {highlight.title}
+                  </div>
+                ))}
               </div>
-              <Link to="/services" className="btn-primary">
-                Join Workshops
+              <a href="/contact" className="btn-primary">
+                Get Expert Teachers
                 <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
+              </a>
             </div>
 
-            {/* Expert Teachers for Schools */}
+            {/* private Student Workshops */}
             <div className="card group hover:bg-gradient-to-br hover:from-vibrant-orange-50 hover:to-hot-pink-100 transition-all duration-300">
               <div className="flex items-center mb-6">
                 <div className="bg-gradient-to-br from-vibrant-orange-400 to-hot-pink-500 w-12 h-12 rounded-lg flex items-center justify-center mr-4">
                   <Users className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold font-display text-gray-800">Expert Teachers for Schools</h3>
+                <h3 className="text-2xl font-bold font-display text-gray-800">{studentService.title}</h3>
               </div>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                We provide expert teachers to schools who specialize in ATL labs and project making. Our educators teach students problem-solving skills, feasibility, social relevance, potential impact, novelty, and questioning through building innovative STEAM projects.
+                {studentService.description}
               </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-vibrant-orange-500 rounded-full mr-3"></div>
-                  ATL lab specialists and project-making experts
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-vibrant-orange-500 rounded-full mr-3"></div>
-                  Focus on innovation and critical thinking
-                </div>
-                <div className="flex items-center text-sm text-gray-700">
-                  <div className="w-2 h-2 bg-vibrant-orange-500 rounded-full mr-3"></div>
-                  Hands-on STEAM project development
-                </div>
+                {studentService.Highlights.slice(0, 3).map((highlight, index) => (
+                  <div className="flex items-center text-sm text-gray-700" key={index}>
+                    <div className="w-2 h-2 bg-vibrant-orange-500 rounded-full mr-3"></div>
+                    {highlight.title}
+                  </div>
+                ))}
               </div>
-              <Link to="/services" className="btn-secondary">
-                Get Expert Teachers
+              <a href="/contact" className="btn-secondary">
+                Join Workshops
                 <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-800 mb-4">
@@ -265,10 +254,10 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 via-hot-pink-500 to-atomic-green-500 pattern-grid">
+      <section className="py-20 bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 via-hot-pink-500 to-atomic-green-500">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold font-display text-white mb-6">
             Ready to Inspire the Next Generation?
@@ -278,13 +267,13 @@ const Home: React.FC = () => {
             Start your innovation journey today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <a href="/contact" className="bg-white text-electric-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
               Contact Us Today
               <ArrowRight className="ml-2 h-5 w-5 inline" />
-            </Link>
-            <Link to="/services" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
+            </a>
+            <a href="/services" className="border-2 border-white text-white hover:bg-white hover:text-electric-blue-600 font-semibold py-3 px-8 rounded-lg transition-all duration-200">
               Explore Our Programs
-            </Link>
+            </a>
           </div>
         </div>
       </section>

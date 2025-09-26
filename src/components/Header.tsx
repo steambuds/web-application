@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Lightbulb } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logoImage from '../images/steambuds_logo_ar_1.6.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
 
   const navLinks = [
     { to: '/', label: 'Home' },
@@ -21,9 +23,11 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-br from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500 p-2 rounded-lg shadow-lg glow-effect">
-              <Lightbulb className="h-8 w-8 text-white" />
-            </div>
+            <img 
+                src={logoImage} 
+                alt="Logo"
+                className="w-24 h-15"
+              />
             <div>
               <h1 className="text-2xl font-bold font-display gradient-text">
                 STEAM Buds
