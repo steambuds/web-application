@@ -40,7 +40,7 @@ const RnD: React.FC = () => {
               <p className="text-gray-600">Design low-cost kits and workflows that any school can adopt without heavy infrastructure.</p>
             </div>
             <div className="card border border-cyber-purple-100">
-              <div className="bg-gradient-to-br from-lime-green-500 to-neon-yellow-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+              <div className="bg-gradient-to-br from-electric-blue-500 to-hot-pink-600 w-14 h-14 rounded-xl flex items-center justify-center mb-4">
                 <Cpu className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-semibold font-display text-gray-800 mb-2">Future Skills</h3>
@@ -81,7 +81,7 @@ const RnD: React.FC = () => {
               <p className="text-gray-600">Rapid ideation, paper modelling, and circuit sketches to plan the build.</p>
             </div>
             <div className="card text-center">
-              <div className="bg-gradient-to-br from-lime-green-500 to-neon-yellow-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-gradient-to-br from-electric-blue-500 to-hot-pink-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Wrench className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold font-display text-gray-800 mb-2">3. Build & Test</h3>
