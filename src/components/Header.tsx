@@ -38,21 +38,23 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-medium transition-colors duration-200 ${
-                  isActive(link.to)
-                    ? 'text-electric-blue-600 border-b-2 border-electric-blue-600'
-                    : 'text-gray-700 hover:text-electric-blue-600'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          {location.pathname !== '/' && (
+            <nav className="hidden md:flex space-x-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`font-medium transition-colors duration-200 ${
+                    isActive(link.to)
+                      ? 'text-electric-blue-600 border-b-2 border-electric-blue-600'
+                      : 'text-gray-700 hover:text-electric-blue-600'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           {/* CTA Button */}
           <div className="hidden md:block">
