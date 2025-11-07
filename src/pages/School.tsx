@@ -1,5 +1,5 @@
 import React from 'react';
-import { Building2, Wrench, Users, BookOpenCheck, Cog } from 'lucide-react';
+import { Building2, Wrench, Users, BookOpen, Cog } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const School: React.FC = () => {
