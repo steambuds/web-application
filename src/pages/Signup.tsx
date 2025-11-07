@@ -28,6 +28,7 @@ const Signup: React.FC = () => {
       return;
     }
     const target = roles.find(r => r.key === role)!;
+    setAuth({ email, role, name });
     navigate(target.route, { replace: true });
   };
 
