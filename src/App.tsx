@@ -13,6 +13,7 @@ import Student from './pages/Student';
 import Teacher from './pages/Teacher';
 import Guardian from './pages/Guardian';
 import School from './pages/School';
+import Others from './pages/Others';
 
 function App() {
   return (
