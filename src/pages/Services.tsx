@@ -52,8 +52,8 @@ const Services: React.FC = () => {
               </p>
 
               <div className="space-y-6 mb-8">
-                {schoolService.detail.focus.map((service, index) => (
-                  <div key={index} className="card border border-electric-blue-100 hover:border-electric-blue-300 transition-colors">
+                {schoolService.detail.focus.map((service) => (
+                  <div key={service.title} className="card border border-electric-blue-100 hover:border-electric-blue-300 transition-colors">
                     <div className="flex items-start">
                       <div className="bg-gradient-to-br from-electric-blue-100 to-electric-blue-200 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                         <service.icon className="h-6 w-6 text-electric-blue-600" />
@@ -71,7 +71,7 @@ const Services: React.FC = () => {
                 <h3 className="text-lg font-semibold font-display text-gray-800 mb-4">What's Included in Our School Partnership:</h3>
                 <div className="space-y-3">
                   {schoolService.Highlights.map((highlight) => (
-                    <div className="flex items-center text-sm text-gray-700">
+                    <div key={highlight.title} className="flex items-center text-sm text-gray-700">
                     <highlight.icon className="h-4 w-4 text-cyber-purple-500 mr-3" />
                     {highlight.title}
                   </div>
@@ -104,8 +104,8 @@ const Services: React.FC = () => {
               </p>
 
               <div className="space-y-6 mb-8">
-                {studentService.detail.focus.map((classInfo, index) => (
-                  <div key={index} className="card border border-hot-pink-100 hover:border-hot-pink-300 transition-colors">
+                {studentService.detail.focus.map((classInfo) => (
+                  <div key={classInfo.title} className="card border border-hot-pink-100 hover:border-hot-pink-300 transition-colors">
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-semibold font-display text-gray-800">{classInfo.title}</h3>
                       <div className="flex items-center text-sm text-hot-pink-600 bg-hot-pink-50 px-3 py-1 rounded-full">
@@ -115,8 +115,8 @@ const Services: React.FC = () => {
                     </div>
                     <p className="text-gray-600 mb-4">{classInfo.description}</p>
                     <div className="grid grid-cols-2 gap-2">
-                      {classInfo.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center text-sm text-gray-700">
+                      {classInfo.features.map((feature) => (
+                        <div key={feature} className="flex items-center text-sm text-gray-700">
                           <CheckCircle className="h-4 w-4 text-cyber-purple-500 mr-2" />
                           {feature}
                         </div>
@@ -130,7 +130,7 @@ const Services: React.FC = () => {
                 <h3 className="text-lg font-semibold font-display text-gray-800 mb-4">What's Included in Our School Partnership:</h3>
                 <div className="space-y-3">
                   {studentService.Highlights.map((highlight) => (
-                    <div className="flex items-center text-sm text-gray-700">
+                    <div key={highlight.title} className="flex items-center text-sm text-gray-700">
                       <highlight.icon className="h-4 w-4 text-cyber-purple-500 mr-3" />
                       {highlight.title}
                     </div>
