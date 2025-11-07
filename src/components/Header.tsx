@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logoImage from '../images/steambuds_logo_ar_1.6.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,18 +22,12 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img 
-                src={logoImage} 
+          <Link to="/" className="flex items-center">
+            <img
+                src="https://cdn.builder.io/api/v1/image/assets%2Feb86118a426a451d80c7f6e121c9e2c0%2F6bbf2e69ae9b4abdb143beb3b813ce43"
                 alt="Logo"
                 className="w-24 h-15"
               />
-            <div>
-              <h1 className="text-2xl font-bold font-display gradient-text">
-                STEAM Buds
-              </h1>
-              <p className="text-xs text-gray-600 hidden sm:block">Science • Tech • Engineering • Art • Medicine</p>
-            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -92,8 +85,8 @@ const Header: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="btn-primary w-fit"
                 onClick={() => setIsMenuOpen(false)}
               >
