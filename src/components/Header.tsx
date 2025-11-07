@@ -31,7 +31,7 @@ const Header: React.FC = () => {
               />
             <div>
               <h1 className="text-2xl font-bold font-display gradient-text">
-                <span>STEAM</span> <span>Buds</span>
+                <span className="text-electric-blue-600">STEAM</span> <span className="text-gray-700">Buds</span>
               </h1>
               <p className="text-xs text-gray-600 hidden sm:block">Science • Tech • Engineering • Art • Medicine</p>
             </div>
