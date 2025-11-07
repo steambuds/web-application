@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import logoImage from '../images/steambuds_logo_ar_1.6.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,16 +23,16 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img 
-                src={logoImage} 
+            <img
+                src="https://cdn.builder.io/api/v1/image/assets%2Feb86118a426a451d80c7f6e121c9e2c0%2F6bbf2e69ae9b4abdb143beb3b813ce43"
                 alt="Logo"
                 className="w-24 h-15"
               />
             <div>
-              <h1 className="text-2xl font-bold">
-                <span className="text-electric-blue-600">STEAM</span> <span className="text-gray-700" style={{ color: 'rgba(221, 20, 20, 0)' }}>Buds</span>
+              <h1 className="text-2xl leading-8 font-bold font-display">
+                <span className="text-electric-blue-600" style={{ color: '#f86087' }}>STEAM</span> <span className="text-gray-700" style={{ color: '#ee936b' }}>&nbsp;Buds</span>
               </h1>
-              <p className="text-xs text-gray-600 hidden sm:block">Science • Tech • Engineering • Art • Medicine</p>
+              <p style={{ color: '#886bbb', fontSize: '9px', fontWeight: 700, lineHeight: '16px' }}>INSPIRE.IGNITE.INCEPT.CREATE.MASTER</p>
             </div>
           </Link>
 
