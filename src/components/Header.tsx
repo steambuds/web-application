@@ -31,7 +31,7 @@ const Header: React.FC = () => {
               />
             <div>
               <h1 className="text-2xl font-bold">
-                <span className="text-electric-blue-600">STEAM</span> <span className="text-gray-700">Buds</span>
+                <span className="text-electric-blue-600">STEAM</span> <span className="text-gray-700" style={{ color: 'rgba(221, 20, 20, 0)' }}>Buds</span>
               </h1>
               <p className="text-xs text-gray-600 hidden sm:block">Science • Tech • Engineering • Art • Medicine</p>
             </div>
