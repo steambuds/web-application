@@ -18,15 +18,15 @@
 
 @layer components {
   .btn-primary {
-    @apply btn bg-electric-blue-500 text-white hover:bg-electric-blue-600 focus:ring-electric-blue-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-electric-blue-500 text-white hover:bg-electric-blue-600 focus:ring-electric-blue-500 shadow-md;
   }
 
   .btn-secondary {
-    @apply btn bg-cyber-purple-500 text-white hover:bg-cyber-purple-600 focus:ring-cyber-purple-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-cyber-purple-500 text-white hover:bg-cyber-purple-600 focus:ring-cyber-purple-500 shadow-md;
   }
 
   .btn-outline {
-    @apply btn border-2 border-electric-blue-500 text-electric-blue-600 hover:bg-electric-blue-500 hover:text-white focus:ring-electric-blue-500;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-electric-blue-500 text-electric-blue-600 hover:bg-electric-blue-500 hover:text-white focus:ring-electric-blue-500;
   }
 
   .card {
@@ -72,7 +72,7 @@
     @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   .btn-accent {
-    @apply btn bg-hot-pink-500 text-white hover:bg-hot-pink-600 focus:ring-hot-pink-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-hot-pink-500 text-white hover:bg-hot-pink-600 focus:ring-hot-pink-500 shadow-md;
   }
   .brand-text { @apply text-electric-blue-600; }
   .accent-text { @apply text-cyber-purple-600; }
