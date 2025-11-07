@@ -30,7 +30,7 @@ const Header: React.FC = () => {
                 className="w-24 h-15"
               />
             <div>
-              <h1 className="text-2xl font-bold font-display">
+              <h1 className="text-2xl font-bold">
                 <span className="text-electric-blue-600">STEAM</span> <span className="text-gray-700">Buds</span>
               </h1>
               <p className="text-xs text-gray-600 hidden sm:block">Science • Tech • Engineering • Art • Medicine</p>
