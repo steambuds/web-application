@@ -26,7 +26,7 @@ const School: React.FC = () => {
             <ul className="space-y-3 text-gray-700">
               <li className="flex items-start gap-2"><Wrench className="h-5 w-5 text-hot-pink-500 mt-0.5" /> Lab setup and maintenance</li>
               <li className="flex items-start gap-2"><Users className="h-5 w-5 text-electric-blue-500 mt-0.5" /> Full-time/part-time expert teachers</li>
-              <li className="flex items-start gap-2"><BookOpenCheck className="h-5 w-5 text-cyber-purple-500 mt-0.5" /> Curriculum and assessments</li>
+              <li className="flex items-start gap-2"><BookOpen className="h-5 w-5 text-cyber-purple-500 mt-0.5" /> Curriculum and assessments</li>
               <li className="flex items-start gap-2"><Cog className="h-5 w-5 text-electric-blue-500 mt-0.5" /> Program management and reporting</li>
             </ul>
           </div>
