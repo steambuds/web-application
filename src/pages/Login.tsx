@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail } from 'lucide-react';
+import { setAuth } from '../auth';
 
 function inferRoleFromEmail(email: string): 'student' | 'teacher' | 'school' | 'guardian' {
   const e = email.toLowerCase();
