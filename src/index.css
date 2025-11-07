@@ -18,15 +18,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500 hover:from-electric-blue-300 hover:via-cyber-purple-400 hover:to-hot-pink-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-110 hover:shadow-cyber-purple-300;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-electric-blue-500 text-white hover:bg-electric-blue-600 focus:ring-electric-blue-500 shadow-md;
   }
 
   .btn-secondary {
-    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 hover:from-electric-blue-400 hover:via-cyber-purple-400 hover:to-hot-pink-400 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:scale-110 hover:shadow-hot-pink-300;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-cyber-purple-500 text-white hover:bg-cyber-purple-600 focus:ring-cyber-purple-500 shadow-md;
   }
 
   .btn-outline {
-    @apply border-2 border-electric-blue-400 text-electric-blue-500 hover:bg-gradient-to-r hover:from-electric-blue-400 hover:via-cyber-purple-500 hover:to-hot-pink-500 hover:text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:border-transparent hover:shadow-2xl hover:scale-110;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-electric-blue-500 text-electric-blue-600 hover:bg-electric-blue-500 hover:text-white focus:ring-electric-blue-500;
   }
 
   .card {
@@ -34,16 +34,16 @@
   }
 
   .pattern-dots {
-    background-image: radial-gradient(circle, rgba(255, 26, 140, 0.2) 3px, transparent 3px),
-                      radial-gradient(circle, rgba(0, 153, 255, 0.15) 2px, transparent 2px);
+    background-image: radial-gradient(circle, rgba(248, 96, 135, 0.2) 3px, transparent 3px),
+                      radial-gradient(circle, rgba(136, 107, 187, 0.15) 2px, transparent 2px);
     background-size: 40px 40px, 25px 25px;
     background-position: 0 0, 20px 20px;
   }
 
   .pattern-grid {
-    background-image: linear-gradient(rgba(255, 26, 140, 0.15) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(140, 26, 255, 0.15) 1px, transparent 1px),
-                      linear-gradient(45deg, rgba(0, 255, 128, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(248, 96, 135, 0.15) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(136, 107, 187, 0.15) 1px, transparent 1px),
+                      linear-gradient(45deg, rgba(238, 147, 107, 0.08) 1px, transparent 1px);
     background-size: 30px 30px, 30px 30px, 60px 60px;
   }
 
@@ -52,11 +52,11 @@
   }
 
   .gradient-text-alt {
-    @apply bg-gradient-to-r from-electric-blue-400 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
   }
 
   .card-hover-neon {
-    @apply hover:shadow-electric-blue-300 hover:shadow-2xl hover:bg-gradient-to-br hover:from-white hover:to-electric-blue-50;
+    @apply hover:shadow-electric-blue-300 hover:shadow-2xl hover:bg-electric-blue-50;
   }
 
   .glow-effect {
@@ -66,4 +66,20 @@
   .neon-border {
     @apply border-2 border-hot-pink-400 shadow-lg shadow-hot-pink-200;
   }
+
+  /* Reusable brand utilities */
+  .btn {
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-hot-pink-500 text-white hover:bg-hot-pink-600 focus:ring-hot-pink-500 shadow-md;
+  }
+  .brand-text { @apply text-electric-blue-600; }
+  .accent-text { @apply text-cyber-purple-600; }
+  .highlight-text { @apply text-hot-pink-600; }
+  .brand-bg { @apply bg-electric-blue-500; }
+  .accent-bg { @apply bg-cyber-purple-500; }
+  .highlight-bg { @apply bg-hot-pink-500; }
+  .badge { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-electric-blue-100 text-electric-blue-700; }
+  .badge-outline { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border border-electric-blue-300 text-electric-blue-700; }
 }
