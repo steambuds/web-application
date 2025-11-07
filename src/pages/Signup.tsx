@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { User, Mail, Lock, ChevronDown } from 'lucide-react';
+import { setAuth } from '../auth';
 
 const roles = [
   { key: 'student', label: 'Student', route: '/student' },
