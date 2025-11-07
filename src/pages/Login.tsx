@@ -25,9 +25,9 @@ const Login: React.FC = () => {
       return;
     }
     const role = inferRoleFromEmail(email);
-    // In a real app, authenticate and fetch role from server.
-    // Here we route deterministically based on email for demo purposes.
-    const routeByRole: Record<typeof role, string> = {
+    // Simulated authentication: persist role + email
+    setAuth({ email, role });
+    const routeByRole: Record<'student' | 'teacher' | 'school' | 'guardian', string> = {
       student: '/student',
       teacher: '/teacher',
       school: '/school',
