@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GraduationCap, BookOpen, Users, Building2, LogIn, Library } from 'lucide-react';
+import logoImage from '../images/steambuds_logo.svg';
 
 const Home: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Home: React.FC = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 text-center">
           <div className="flex flex-col items-center gap-3">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets%2Feb86118a426a451d80c7f6e121c9e2c0%2F6bbf2e69ae9b4abdb143beb3b813ce43"
+              src={logoImage}
               alt="STEAM Buds Logo"
               className="w-28 h-16"
             />

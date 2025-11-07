@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logoImage from '../images/steambuds_logo.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,7 +26,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Feb86118a426a451d80c7f6e121c9e2c0%2F6bbf2e69ae9b4abdb143beb3b813ce43"
+                src={logoImage}
                 alt="Logo"
                 className="w-24 h-15"
               />
