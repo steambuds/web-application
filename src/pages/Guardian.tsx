@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { Users, Heart, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Guardian: React.FC = () => {
