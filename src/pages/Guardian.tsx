@@ -24,7 +24,7 @@ const Guardian: React.FC = () => {
           <div className="card">
             <h2 className="font-display text-2xl font-bold mb-4">Services for Families</h2>
             <ul className="space-y-3 text-gray-700">
-              <li className="flex items-start gap-2"><HeartHandshake className="h-5 w-5 text-electric-blue-500 mt-0.5" /> Private workshops and camps</li>
+              <li className="flex items-start gap-2"><Heart className="h-5 w-5 text-electric-blue-500 mt-0.5" /> Private workshops and camps</li>
               <li className="flex items-start gap-2"><ShieldCheck className="h-5 w-5 text-cyber-purple-500 mt-0.5" /> Safe learning with vetted mentors</li>
               <li className="flex items-start gap-2"><Users className="h-5 w-5 text-hot-pink-500 mt-0.5" /> Parent communities and events</li>
             </ul>
