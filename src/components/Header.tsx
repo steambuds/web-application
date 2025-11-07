@@ -9,6 +9,7 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { to: '/', label: 'Home' },
+    { to: '/resources', label: 'Resources' },
     { to: '/services', label: 'Services' },
     { to: '/rnd', label: 'R&D' },
     { to: '/about', label: 'About Us' },
@@ -55,9 +56,17 @@ const Header: React.FC = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link to="/contact" className="btn-primary">
-              Get Started
-            </Link>
+            {location.pathname === '/' ? (
+              <div className="flex gap-3">
+                <Link to="/resources" className="btn-outline">Resources</Link>
+                <Link to="/login" className="btn-primary">Login</Link>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <Link to="/login" className="btn-outline">Login</Link>
+                <Link to="/signup" className="btn-primary">Sign up</Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -91,13 +100,25 @@ const Header: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link 
-                to="/contact" 
-                className="btn-primary w-fit"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Get Started
-              </Link>
+              {location.pathname === '/' ? (
+                <>
+                  <Link to="/resources" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
+                    Resources
+                  </Link>
+                  <Link to="/login" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
+                    Login
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
+                    Login
+                  </Link>
+                  <Link to="/signup" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
+                    Sign up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}

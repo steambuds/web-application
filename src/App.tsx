@@ -6,6 +6,13 @@ import Services from './pages/Services';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import RnD from './pages/R&D';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Resources from './pages/Resources';
+import Student from './pages/Student';
+import Teacher from './pages/Teacher';
+import Guardian from './pages/Guardian';
+import School from './pages/School';
 
 function App() {
   return (
@@ -15,6 +22,14 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/student" element={<Student />} />
+            <Route path="/teacher" element={<Teacher />} />
+            <Route path="/guardian" element={<Guardian />} />
+            <Route path="/school" element={<School />} />
+
             <Route path="/services" element={<Services />} />
             <Route path="/rnd" element={<RnD />} />
             <Route path="/about" element={<About />} />
