@@ -42,11 +42,29 @@ export default {
           700: '#b3664b',
           800: '#8f513d',
           900: '#6c3c2e',
-        }
+        },
+        primary: {
+          light: '#fbb0c2',
+          DEFAULT: '#f86087',
+          dark: '#e05277',
+        },
+        secondary: {
+          light: '#d5c9f0',
+          DEFAULT: '#886bbb',
+          dark: '#7358a1',
+        },
+        accent: {
+          light: '#fec9ac',
+          DEFAULT: '#ee936b',
+          dark: '#d77f5c',
+        },
       },
       fontFamily: {
         'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
         'display': ['Poppins', 'ui-sans-serif', 'system-ui'],
+      },
+      fontSize: {
+        xxs: '0.625rem', // 10px
       }
     },
   },

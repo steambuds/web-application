@@ -18,15 +18,15 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-electric-blue-500 text-white hover:bg-electric-blue-600 focus:ring-electric-blue-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-primary text-white hover:bg-primary-dark focus:ring-primary shadow-md;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-cyber-purple-500 text-white hover:bg-cyber-purple-600 focus:ring-cyber-purple-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary shadow-md;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-electric-blue-500 text-electric-blue-600 hover:bg-electric-blue-500 hover:text-white focus:ring-electric-blue-500;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary;
   }
 
   .card {
@@ -48,15 +48,15 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
   }
 
   .gradient-text-alt {
-    @apply bg-gradient-to-r from-electric-blue-500 via-cyber-purple-500 to-hot-pink-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
   }
 
   .card-hover-neon {
-    @apply hover:shadow-electric-blue-300 hover:shadow-2xl hover:bg-electric-blue-50;
+    @apply hover:shadow-primary-light hover:shadow-2xl hover:bg-primary-light;
   }
 
   .glow-effect {
@@ -64,7 +64,7 @@
   }
 
   .neon-border {
-    @apply border-2 border-hot-pink-400 shadow-lg shadow-hot-pink-200;
+    @apply border-2 border-accent shadow-lg shadow-accent-light;
   }
 
   /* Reusable brand utilities */
@@ -72,14 +72,14 @@
     @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   .btn-accent {
-    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-hot-pink-500 text-white hover:bg-hot-pink-600 focus:ring-hot-pink-500 shadow-md;
+    @apply inline-flex items-center justify-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-accent text-white hover:bg-accent-dark focus:ring-accent shadow-md;
   }
-  .brand-text { @apply text-electric-blue-600; }
-  .accent-text { @apply text-cyber-purple-600; }
-  .highlight-text { @apply text-hot-pink-600; }
-  .brand-bg { @apply bg-electric-blue-500; }
-  .accent-bg { @apply bg-cyber-purple-500; }
-  .highlight-bg { @apply bg-hot-pink-500; }
-  .badge { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-electric-blue-100 text-electric-blue-700; }
-  .badge-outline { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border border-electric-blue-300 text-electric-blue-700; }
+  .brand-text { @apply text-primary; }
+  .accent-text { @apply text-secondary; }
+  .highlight-text { @apply text-accent; }
+  .brand-bg { @apply bg-primary; }
+  .accent-bg { @apply bg-secondary; }
+  .highlight-bg { @apply bg-accent; }
+  .badge { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-light text-primary-dark; }
+  .badge-outline { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border border-primary-light text-primary-dark; }
 }
