@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import logoImage from '../images/steambuds_logo.svg';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const is_logged_in = false; // Replace with actual authentication logic
 
+  const navLinksHome = [
+    { to: '/resources', label: 'Resources' },
+    { to: '/rnd', label: 'R&D' },
+    { to: '/about', label: 'About Us' },
+    { to: '/contact', label: 'Contact' },
+  ];
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/services', label: 'Services' },
-    { to: '/rnd', label: 'R&D' },
+    { to: '/resources', label: 'Resources' },
     { to: '/about', label: 'About Us' },
     { to: '/contact', label: 'Contact' },
   ];
@@ -24,40 +31,66 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Feb86118a426a451d80c7f6e121c9e2c0%2F6bbf2e69ae9b4abdb143beb3b813ce43"
+                src={logoImage}
                 alt="Logo"
                 className="w-24 h-15"
               />
             <div>
               <h1 className="text-2xl leading-8 font-bold font-display">
-                <span className="text-electric-blue-600" style={{ color: '#f86087' }}>STEAM</span> <span className="text-gray-700" style={{ color: '#ee936b' }}>&nbsp;Buds</span>
+                <span className="text-primary">STEAM</span> <span className="text-accent">&nbsp;Buds</span>
               </h1>
-              <p style={{ color: '#886bbb', fontSize: '9px', fontWeight: 700, lineHeight: '16px' }}>INSPIRE.IGNITE.INCEPT.CREATE.MASTER</p>
+              <p className="text-secondary text-xxs font-bold">INSPIRE.IGNITE.INCEPT.CREATE.MASTER</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
+          {location.pathname == '/'? (
           <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
+            {navLinksHome.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
                 className={`font-medium transition-colors duration-200 ${
                   isActive(link.to)
-                    ? 'text-electric-blue-600 border-b-2 border-electric-blue-600'
-                    : 'text-gray-700 hover:text-electric-blue-600'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-700 hover:text-primary'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
+          ):(
+            <nav className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`font-medium transition-colors duration-200 ${
+                  isActive(link.to)
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-gray-700 hover:text-primary'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+          )}
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link to="/contact" className="btn-primary">
-              Get Started
-            </Link>
+            {is_logged_in ? (
+              <div className="flex gap-3">
+                <Link to="/resources" className="btn-outline">Resources</Link>
+                <Link to="/profile" className="btn-primary">Profile</Link>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <Link to="/login" className="btn-outline">Login</Link>
+                <Link to="/signup" className="btn-primary">Sign up</Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -83,21 +116,35 @@ const Header: React.FC = () => {
                   to={link.to}
                   className={`font-medium transition-colors duration-200 ${
                     isActive(link.to)
-                      ? 'text-electric-blue-600'
-                    : 'text-gray-700 hover:text-electric-blue-600'
+                      ? 'text-primary'
+                      : 'text-gray-700 hover:text-primary'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Link 
-                to="/contact" 
-                className="btn-primary w-fit"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Get Started
-              </Link>
+              <div className="flex flex-col space-y-2 items-start">
+                {is_logged_in ? (
+                  <>
+                    <Link to="/resources" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
+                      Resources
+                    </Link>
+                    <Link to="/profile" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
+                      Profile
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
+                      Login
+                    </Link>
+                    <Link to="/signup" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
+                      Sign up
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         )}
