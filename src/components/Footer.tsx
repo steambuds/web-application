@@ -51,11 +51,12 @@ Inspiring the next generation through integrated STEAM education - combining Sci
                   Home
                 </Link>
               </li>
-              <li>
+              {/* Services page to be implemented */}
+              {/* <li>
                 <Link to="/services" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   Our Services
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/rnd" className="text-gray-300 hover:text-hot-pink-400 transition-colors text-sm">
                   R&D
@@ -113,14 +114,15 @@ Inspiring the next generation through integrated STEAM education - combining Sci
             <p className="text-gray-400 text-sm">
               © 2024 STEAM Buds. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            {/* Privacy Policy and Terms of Service pages to be implemented */}
+            {/* <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="text-gray-400 hover:text-hot-pink-400 text-sm transition-colors">
                 Privacy Policy
               </a>
               <a href="#" className="text-gray-400 hover:text-hot-pink-400 text-sm transition-colors">
                 Terms of Service
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

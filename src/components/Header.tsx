@@ -44,7 +44,7 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          {location.pathname == '/'? (
+          {location.pathname === '/'? (
           <nav className="hidden md:flex space-x-8">
             {navLinksHome.map((link) => (
               <Link
@@ -82,8 +82,8 @@ const Header: React.FC = () => {
           <div className="hidden md:block">
             {is_logged_in ? (
               <div className="flex gap-3">
-                <Link to="/resources" className="btn-outline">Resources</Link>
-                <Link to="/profile" className="btn-primary">Profile</Link>
+                <Link to="/resources" className="btn-primary">Resources</Link>
+                {/* Profile page to be implemented */}
               </div>
             ) : (
               <div className="flex gap-3">
@@ -127,12 +127,10 @@ const Header: React.FC = () => {
               <div className="flex flex-col space-y-2 items-start">
                 {is_logged_in ? (
                   <>
-                    <Link to="/resources" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
+                    <Link to="/resources" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
                       Resources
                     </Link>
-                    <Link to="/profile" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
-                      Profile
-                    </Link>
+                    {/* Profile page to be implemented */}
                   </>
                 ) : (
                   <>

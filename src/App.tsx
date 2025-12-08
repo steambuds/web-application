@@ -12,6 +12,7 @@ import Student from './pages/Student';
 import Teacher from './pages/Teacher';
 import Guardian from './pages/Guardian';
 import School from './pages/School';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/rnd" element={<RnD />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact/>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
