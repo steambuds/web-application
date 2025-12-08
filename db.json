@@ -13,7 +13,7 @@
       "address": "789 Innovation Dr, Progress City, Country"
     }
   },
-  "school/501":{
+  "groups":{
       "group-1": {
         "title": "Grade 9 - Math A",
         "grade": "8 to 9",
@@ -40,7 +40,7 @@
         "subject": "Science"
       }
   },
-  "schools/501/group-5": [
+  "group-5": [
     {
       "user_id": 101,
       "steamer_id": 9021001,
