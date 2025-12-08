@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Rocket, Star, User } from 'lucide-react';
+import { GraduationCap, Rocket, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Student: React.FC = () => {
