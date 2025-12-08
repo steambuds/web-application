@@ -21,19 +21,19 @@ function App() {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/student" element={<Student />} />
-            <Route path="/teacher" element={<Teacher />} />
-            <Route path="/guardian" element={<Guardian />} />
-            <Route path="/school" element={<School />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/student" element={<Student />} />
+              <Route path="/teacher" element={<Teacher />} />
+              <Route path="/guardian" element={<Guardian />} />
+              <Route path="/school" element={<School />} />
 
-            <Route path="/services" element={<Services />} />
-            <Route path="/rnd" element={<RnD />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact/>} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/rnd" element={<RnD />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact/>} />
           </Routes>
         </main>
         <Footer />
