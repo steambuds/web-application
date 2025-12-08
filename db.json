@@ -1,0 +1,175 @@
+{
+  "schools":{
+    "501":{
+      "name": "Global High School",
+      "address": "123 Education Lane, Knowledge City, Country"
+    },
+    "502":{
+      "name": "International Academy",
+      "address": "456 Learning Blvd, Scholar Town, Country"
+    },
+    "503":{
+      "name": "Future Leaders School",
+      "address": "789 Innovation Dr, Progress City, Country"
+    }
+  },
+  "school/501":{
+      "group-1": {
+        "title": "Grade 9 - Math A",
+        "grade": "8 to 9",
+        "subject": "Mathematics"
+      },
+      "group-2": {
+        "title": "Grade 9 - Science B",
+        "grade": "8 to 9",
+        "subject": "Science"
+      },
+      "group-3": {
+        "title": "Grade 10 - Math A",
+        "grade": "9 to 10",
+        "subject": "Mathematics"
+      },
+      "group-4": {
+        "title": "Grade 10 - English B",
+        "grade": "9 to 10",
+        "subject": "English"
+      },
+      "group-5": {
+        "title": "Grade 10 - Science A",
+        "grade": "9 to 10",
+        "subject": "Science"
+      }
+  },
+  "schools/501/group-5": [
+    {
+      "user_id": 101,
+      "steamer_id": 9021001,
+      "name": "Aarav Patel",
+      "stats": { "present": 20, "absent": 0, "late": 2, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "present",
+        "2023-01-11": "late",
+        "2023-01-12": "present",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 102,
+      "steamer_id": 9021002,
+      "name": "Bianca Rossi",
+      "stats": { "present": 18, "absent": 2, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "absent",
+        "2023-01-10": "present",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "absent"
+      }
+    },
+    {
+      "user_id": 103,
+      "steamer_id": 9021003,
+      "name": "Chen Wei",
+      "stats": { "present": 22, "absent": 0, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "present",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 104,
+      "steamer_id": 9021004,
+      "name": "David Okafor",
+      "stats": { "present": 15, "absent": 5, "late": 1, "excused": 1 },
+      "calendar": {
+        "2023-01-09": "late",
+        "2023-01-10": "present",
+        "2023-01-11": "excused",
+        "2023-01-12": "absent",
+        "2023-01-13": "absent"
+      }
+    },
+    {
+      "user_id": 105,
+      "steamer_id": 9021005,
+      "name": "Elena Gomez",
+      "stats": { "present": 21, "absent": 1, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "present",
+        "2023-01-11": "present",
+        "2023-01-12": "absent",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 106,
+      "steamer_id": 9021006,
+      "name": "Fatima Al-Sayed",
+      "stats": { "present": 22, "absent": 0, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "present",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 107,
+      "steamer_id": 9021007,
+      "name": "George Miller",
+      "stats": { "present": 19, "absent": 3, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "absent",
+        "2023-01-10": "absent",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 108,
+      "steamer_id": 9021008,
+      "name": "Hiroshi Tanaka",
+      "stats": { "present": 20, "absent": 0, "late": 2, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "late",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "late"
+      }
+    },
+    {
+      "user_id": 109,
+      "steamer_id": 9021009,
+      "name": "Isabella Silva",
+      "stats": { "present": 22, "absent": 0, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "present",
+        "2023-01-10": "present",
+        "2023-01-11": "present",
+        "2023-01-12": "present",
+        "2023-01-13": "present"
+      }
+    },
+    {
+      "user_id": 110,
+      "steamer_id": 9021010,
+      "name": "Jack Thompson",
+      "stats": { "present": 0, "absent": 22, "late": 0, "excused": 0 },
+      "calendar": {
+        "2023-01-09": "absent",
+        "2023-01-10": "absent",
+        "2023-01-11": "absent",
+        "2023-01-12": "absent",
+        "2023-01-13": "absent"
+      }
+    }
+  ]
+}
