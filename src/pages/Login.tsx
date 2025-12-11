@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail } from 'lucide-react';
+import { Button, Input } from '../components/ui';
 
 function inferRoleFromEmail(email: string): 'student' | 'teacher' | 'school' | 'guardian' {
   const e = email.toLowerCase();
@@ -42,39 +43,31 @@ const Login: React.FC = () => {
         <p className="text-center text-sm text-gray-600 mb-6">Login to continue to your dashboard</p>
 
         <form onSubmit={onSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <div className="relative">
-              <Mail className="h-4 w-4 text-gray-400 absolute left-3 top-3" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border rounded-lg py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-electric-blue-400"
-                placeholder="e.g. priya@student.example.com"
-                required
-              />
-            </div>
-          </div>
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="e.g. priya@student.example.com"
+            iconLeft={<Mail className="h-4 w-4" />}
+            required
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <div className="relative">
-              <Lock className="h-4 w-4 text-gray-400 absolute left-3 top-3" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full border rounded-lg py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-electric-blue-400"
-                placeholder="Enter your password"
-                required
-              />
-            </div>
-          </div>
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            iconLeft={<Lock className="h-4 w-4" />}
+            required
+          />
 
           {error && <p className="text-sm text-hot-pink-600">{error}</p>}
 
-          <button type="submit" className="w-full btn-primary">Login</button>
+          <Button type="submit" variant="primary" fullWidth>
+            Login
+          </Button>
         </form>
 
         <div className="mt-4 text-xs text-gray-500 bg-gray-50 p-3 rounded">

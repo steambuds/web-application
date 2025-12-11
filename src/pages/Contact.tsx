@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import contactData from '../config/contact';
 import env from '../config/env';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
-  User, 
-  MessageSquare,
-  CheckCircle,
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  User,
   Building2,
   GraduationCap
 } from 'lucide-react';
+import { Button, Input, Textarea, Card, SuccessMessage, IconBox } from '../components/ui';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -136,17 +135,14 @@ const Contact: React.FC = () => {
             
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <div className="card">
+              <Card>
                 <h2 className="text-2xl font-bold font-display text-gray-800 mb-6">Send us a Message</h2>
-                
+
                 {isSubmitted ? (
-                  <div className="text-center py-12">
-                    <div className="bg-cyber-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle className="h-10 w-10 text-cyber-purple-600" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">Message Sent Successfully!</h3>
-                    <p className="text-gray-600">Thank you for reaching out. We'll get back to you within 24 hours.</p>
-                  </div>
+                  <SuccessMessage
+                    title="Message Sent Successfully!"
+                    message="Thank you for reaching out. We'll get back to you within 24 hours."
+                  />
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Inquiry Type */}
@@ -170,93 +166,75 @@ const Contact: React.FC = () => {
 
                     {/* Name and Email */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          <User className="h-4 w-4 inline mr-1" />
-                          Full Name <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder="Your full name"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          <Mail className="h-4 w-4 inline mr-1" />
-                          Email Address <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          placeholder="your.email@example.com"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    {/* Mobile Number */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Mobile Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="mobile"
-                        value={formData.mobile}
+                      <Input
+                        label="Full Name"
+                        type="text"
+                        name="name"
+                        value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Your mobile number"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300"
+                        placeholder="Your full name"
+                        iconLeft={<User className="h-4 w-4" />}
+                        required
                       />
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        <MessageSquare className="h-4 w-4 inline mr-1" />
-                        Message <span className="text-red-500">*</span>
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
+                      <Input
+                        label="Email Address"
+                        type="email"
+                        name="email"
+                        value={formData.email}
                         onChange={handleInputChange}
-                        rows={6}
-                        placeholder="Tell us more about your requirements, questions, or how we can help..."
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-electric-blue-400 focus:shadow-lg focus:shadow-electric-blue-200 focus:border-transparent transition-all duration-300 hover:border-cyber-purple-300 resize-none"
+                        placeholder="your.email@example.com"
+                        iconLeft={<Mail className="h-4 w-4" />}
                         required
                       />
                     </div>
 
+                    {/* Mobile Number */}
+                    <Input
+                      label="Mobile Number"
+                      type="tel"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleInputChange}
+                      placeholder="Your mobile number"
+                    />
+
+                    {/* Message */}
+                    <Textarea
+                      label="Message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={6}
+                      placeholder="Tell us more about your requirements, questions, or how we can help..."
+                      required
+                    />
+
                     {/* Submit Button */}
-                    <button
+                    <Button
                       type="submit"
-                      className="w-full btn-primary flex items-center justify-center"
+                      variant="primary"
+                      fullWidth
+                      iconRight={<Send className="h-5 w-5" />}
                     >
                       Send Message
-                      <Send className="ml-2 h-5 w-5" />
-                    </button>
+                    </Button>
                   </form>
                 )}
-              </div>
+              </Card>
             </div>
 
             {/* Contact Information */}
             <div className="space-y-6">
-              <div className="card bg-gradient-to-br from-electric-blue-50 to-hot-pink-50">
+              <Card variant="gradient">
                 <h3 className="text-xl font-bold font-display text-gray-800 mb-6">Contact Information</h3>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-start">
-                      <div className="bg-gradient-to-br from-electric-blue-500 to-hot-pink-500 w-10 h-10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <info.icon className="h-5 w-5 text-white" />
-                      </div>
+                      <IconBox
+                        icon={<info.icon className="h-5 w-5" />}
+                        color="gradient"
+                        className="mr-4"
+                      />
                       <div>
                         <h4 className="font-semibold text-gray-800">{info.title}</h4>
                         <p className="text-gray-700 text-sm">{info.details}</p>
@@ -265,10 +243,10 @@ const Contact: React.FC = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Card>
 
               {/* Quick Links */}
-              <div className="card">
+              <Card>
                 <h3 className="text-xl font-bold font-display text-gray-800 mb-6">Quick Actions</h3>
                 <div className="space-y-4">
                   <a 
@@ -297,7 +275,7 @@ const Contact: React.FC = () => {
                     </div>
                   </a>
                 </div>
-              </div>
+              </Card>
             </div>
           </div>
         </div>

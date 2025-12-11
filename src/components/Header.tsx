@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import logoImage from '../images/steambuds_logo.svg';
+import { Button } from './ui';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -82,13 +83,19 @@ const Header: React.FC = () => {
           <div className="hidden md:block">
             {is_logged_in ? (
               <div className="flex gap-3">
-                <Link to="/resources" className="btn-primary">Resources</Link>
+                <Link to="/resources">
+                  <Button variant="primary">Resources</Button>
+                </Link>
                 {/* Profile page to be implemented */}
               </div>
             ) : (
               <div className="flex gap-3">
-                <Link to="/login" className="btn-outline">Login</Link>
-                <Link to="/signup" className="btn-primary">Sign up</Link>
+                <Link to="/login">
+                  <Button variant="outline">Login</Button>
+                </Link>
+                <Link to="/signup">
+                  <Button variant="primary">Sign up</Button>
+                </Link>
               </div>
             )}
           </div>
@@ -127,18 +134,18 @@ const Header: React.FC = () => {
               <div className="flex flex-col space-y-2 items-start">
                 {is_logged_in ? (
                   <>
-                    <Link to="/resources" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
-                      Resources
+                    <Link to="/resources" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="primary">Resources</Button>
                     </Link>
                     {/* Profile page to be implemented */}
                   </>
                 ) : (
                   <>
-                    <Link to="/login" className="btn-outline w-fit" onClick={() => setIsMenuOpen(false)}>
-                      Login
+                    <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="outline">Login</Button>
                     </Link>
-                    <Link to="/signup" className="btn-primary w-fit" onClick={() => setIsMenuOpen(false)}>
-                      Sign up
+                    <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="primary">Sign up</Button>
                     </Link>
                   </>
                 )}
