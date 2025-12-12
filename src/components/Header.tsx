@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import logoImage from '../images/steambuds_logo.svg';
 import { Button } from './ui';
+import { useAuth } from '../context/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const is_logged_in = false; // Replace with actual authentication logic
+  const { isAuthenticated, user } = useAuth();
 
   const navLinksHome = [
     { to: '/resources', label: 'Resources' },
@@ -81,12 +82,13 @@ const Header: React.FC = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            {is_logged_in ? (
-              <div className="flex gap-3">
-                <Link to="/resources">
-                  <Button variant="primary">Resources</Button>
+            {isAuthenticated ? (
+              <div className="flex gap-3 items-center">
+                <Link to="/profile">
+                  <Button variant="primary" iconLeft={<User className="h-4 w-4" />}>
+                    {user?.username || 'Profile'}
+                  </Button>
                 </Link>
-                {/* Profile page to be implemented */}
               </div>
             ) : (
               <div className="flex gap-3">
@@ -132,12 +134,13 @@ const Header: React.FC = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-2 items-start">
-                {is_logged_in ? (
+                {isAuthenticated ? (
                   <>
-                    <Link to="/resources" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="primary">Resources</Button>
+                    <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="primary" iconLeft={<User className="h-4 w-4" />}>
+                        {user?.username || 'Profile'}
+                      </Button>
                     </Link>
-                    {/* Profile page to be implemented */}
                   </>
                 ) : (
                   <>
