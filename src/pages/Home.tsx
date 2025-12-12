@@ -1,9 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { GraduationCap, BookOpen, Users, Building2, LogIn, Library } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { getRoleDefaultRoute } from '../utils/auth';
 import logoImage from '../images/steambuds_logo.svg';
 
 const Home: React.FC = () => {
+  const { isAuthenticated, user, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect authenticated users to their dashboard
+  useEffect(() => {
+    if (!isLoading && isAuthenticated && user) {
+      const dashboardRoute = getRoleDefaultRoute(user.roles || []);
+      navigate(dashboardRoute, { replace: true });
+    }
+  }, [isAuthenticated, isLoading, user, navigate]);
+
+  // Show loading while checking auth
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white">
       <section className="relative bg-gradient from-primary-light via-secondary-light to-accent-light pattern-dots overflow-hidden">

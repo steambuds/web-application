@@ -10,7 +10,7 @@ const USER_DATA_KEY = 'steam_buds_user_data';
 /**
  * User roles from backend
  */
-export type UserRole = 'admin' | 'system_user' | 'instructor' | 'facilitator' | 'student' | 'guardian';
+export type UserRole = 'admin' | 'school_admin' | 'system_user' | 'instructor' | 'facilitator' | 'student' | 'guardian';
 
 /**
  * User data structure
@@ -119,33 +119,39 @@ export const getUserData = (): UserData | null => {
 /**
  * Get the default route for a user based on their roles
  * Priority order:
- * 1. student -> /student
- * 2. instructor or facilitator -> /teacher
- * 3. admin -> /school
- * 4. default/guardian -> /guardian
+ * 1. admin -> /admin/dashboard (system admin)
+ * 2. student -> /student/dashboard
+ * 3. instructor or facilitator -> /teacher/dashboard
+ * 4. school_admin -> /school/dashboard (school administrator)
+ * 5. default/guardian -> /guardian/dashboard
  */
 export const getRoleDefaultRoute = (roles: UserRole[]): string => {
   if (!roles || roles.length === 0) {
-    return '/guardian';
+    return '/guardian/dashboard';
+  }
+
+  // Check for system admin role (highest priority)
+  if (roles.includes('admin')) {
+    return '/admin/dashboard';
   }
 
   // Check for student role
   if (roles.includes('student')) {
-    return '/student';
+    return '/student/dashboard';
   }
 
   // Check for instructor or facilitator roles
   if (roles.includes('instructor') || roles.includes('facilitator')) {
-    return '/teacher';
+    return '/teacher/dashboard';
   }
 
-  // Check for admin role
-  if (roles.includes('admin')) {
-    return '/school';
+  // Check for school admin role
+  if (roles.includes('school_admin')) {
+    return '/school/dashboard';
   }
 
   // Default to guardian page
-  return '/guardian';
+  return '/guardian/dashboard';
 };
 
 /**

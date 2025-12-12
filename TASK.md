@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 2
+**Total Tasks:** 4
 - **Pending:** 0
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 2
+- **Completed:** 4
 - **Blocked:** 0
 
 ## Task Template
@@ -176,6 +176,814 @@ If a task cannot proceed:
 ## Active Tasks
 
 (No active tasks)
+
+---
+
+## Completed Tasks
+
+### WEB-004: Fix Dashboard Flow - Public Pages & Private Dashboards with Role Authorization
+**Status:** completed
+**Created:** 2025-12-12
+**Completed:** 2025-12-12
+
+#### Description
+Fix the current dashboard implementation (WEB-003) which has the wrong flow. Implement proper separation between public pages and private dashboards with strict role-based authorization. Non-authenticated users should see public content on all role pages, while authenticated users get auto-redirected to their personalized dashboard and are blocked from accessing other role dashboards.
+
+#### Context
+**What's Wrong with Current Implementation (WEB-003):**
+- Allows authenticated users to view any dashboard (they just see public content on non-matching dashboards)
+- Focuses on profile management which is not the priority
+- No clear separation between public and private content
+- Wrong URL structure (no `/dashboard` suffix for authenticated views)
+
+**Correct Requirements:**
+1. **URL Structure:**
+   - Public pages: `/student`, `/teacher`, `/school`, `/guardian`
+   - Private dashboards: `/student/dashboard`, `/teacher/dashboard`, `/school/dashboard`, `/guardian/dashboard`
+
+2. **Access Control:**
+   - Non-auth users: Can view all public pages with login/signup buttons
+   - Auth users on home/public pages: Auto-redirect to their dashboard
+   - Auth users on own dashboard: See personalized content
+   - Auth users on other dashboards: Show "Not authorized" error
+
+3. **Content:**
+   - Public pages: Resources, services, courses, advertisements + login/signup
+   - Dashboards: Personalized courses, batches, remarks, progress stats
+   - Remove all profile management functionality
+
+#### Dependencies
+- **Depends on:** WEB-001 (UI Components), WEB-002 (Authentication)
+- **Fixes:** WEB-003 (incorrect implementation)
+- **Blocks:** Future dashboard features requiring proper authorization
+
+#### Requirements
+
+**Route Configuration:**
+- [ ] Keep public routes without protection: `/student`, `/teacher`, `/school`, `/guardian`
+- [ ] Add new protected dashboard routes: `/student/dashboard`, `/teacher/dashboard`, etc.
+- [ ] Create RoleProtectedRoute component for role-specific protection
+- [ ] Create PublicRoute component that redirects authenticated users
+- [ ] Add home page redirect logic for authenticated users
+
+**Dashboard Pages (Create New):**
+- [ ] Create StudentDashboard with dummy data (courses, batch, remarks, stats)
+- [ ] Create TeacherDashboard with dummy data (teaching courses, groups, pending reviews)
+- [ ] Create SchoolDashboard with dummy data (school-wide stats, enrollments)
+- [ ] Create GuardianDashboard with dummy data (children's progress, meetings)
+
+**Public Pages (Update):**
+- [ ] Update Student page - Remove forms, add public content only
+- [ ] Update Teacher page - Remove forms, add public content only
+- [ ] Update Guardian page - Remove forms, add public content only
+- [ ] Update School page - Remove forms, add public content only
+- [ ] Ensure login/signup buttons always visible on public pages
+
+**Authorization:**
+- [ ] Create NotAuthorized component for unauthorized access
+- [ ] Implement role checking logic in RoleProtectedRoute
+- [ ] Add redirect logic for authenticated users on public pages
+- [ ] Add redirect logic for authenticated users on home page
+- [ ] Block access to non-matching role dashboards
+
+**Dummy Data & Components:**
+- [ ] Create dummy data file with courses, batches, remarks, stats
+- [ ] Create CourseCard component for displaying courses
+- [ ] Create BatchCard component for batch/group info
+- [ ] Create RemarksSection component for feedback
+- [ ] Create StatsCard component for progress statistics
+- [ ] Create ResourceSection component for public resources
+- [ ] Create CourseList component for public course catalog
+
+**Cleanup:**
+- [ ] Remove profile management code (src/api/profile.ts)
+- [ ] Remove profile forms from all pages
+- [ ] Update getRoleDefaultRoute() to return `/role/dashboard` paths
+- [ ] Verify UI component library usage consistency
+
+#### Steps
+
+**Phase 1: Route Configuration**
+
+1. [ ] Create `src/components/RoleProtectedRoute.tsx`
+   - [ ] Accept allowedRoles prop
+   - [ ] Check if user is authenticated
+   - [ ] Check if user has required role
+   - [ ] Redirect to login if not authenticated
+   - [ ] Show NotAuthorized if wrong role
+   - [ ] Render children if authorized
+
+2. [ ] Create `src/components/PublicRoute.tsx`
+   - [ ] Check if user is authenticated
+   - [ ] If authenticated, redirect to their dashboard
+   - [ ] If not authenticated, render children
+
+3. [ ] Create `src/components/NotAuthorized.tsx`
+   - [ ] Centered error message component
+   - [ ] "You are not authorized to access this page"
+   - [ ] Link to return home or their dashboard
+   - [ ] Use ErrorMessage from UI library
+
+4. [ ] Update `src/App.tsx`
+   - [ ] Wrap public routes with PublicRoute component
+   - [ ] Add dashboard routes with RoleProtectedRoute:
+     - [ ] `/student/dashboard` - students only
+     - [ ] `/teacher/dashboard` - instructors/facilitators only
+     - [ ] `/school/dashboard` - admins only
+     - [ ] `/guardian/dashboard` - guardians/no-role users only
+   - [ ] Test routing configuration
+
+**Phase 2: Dummy Data & Shared Components**
+
+5. [ ] Create `src/data/dummyDashboardData.ts`
+   - [ ] Define TypeScript interfaces for course, batch, remark, stats
+   - [ ] Create studentDummyData object
+   - [ ] Create teacherDummyData object
+   - [ ] Create schoolDummyData object
+   - [ ] Create guardianDummyData object
+
+6. [ ] Create dashboard components in `src/components/dashboard/`
+   - [ ] CourseCard.tsx - Display course with progress
+   - [ ] BatchCard.tsx - Display batch/group info
+   - [ ] RemarksSection.tsx - Display remarks with dates
+   - [ ] StatsCard.tsx - Display statistics
+
+7. [ ] Create public content components in `src/components/public/`
+   - [ ] ResourceSection.tsx - Public resources display
+   - [ ] CourseList.tsx - Public course catalog
+   - [ ] ServiceCard.tsx - Service offerings display
+
+**Phase 3: Create Dashboard Pages**
+
+8. [ ] Create `src/pages/dashboards/StudentDashboard.tsx`
+   - [ ] Welcome header with user's name
+   - [ ] Display enrolled courses using CourseCard
+   - [ ] Display current batch using BatchCard
+   - [ ] Display remarks using RemarksSection
+   - [ ] Display progress stats using StatsCard
+   - [ ] No login/signup buttons
+
+9. [ ] Create `src/pages/dashboards/TeacherDashboard.tsx`
+   - [ ] Welcome header with user's name
+   - [ ] Display teaching courses
+   - [ ] Display assigned student groups
+   - [ ] Display pending tasks (assignments to review)
+   - [ ] Display teacher-specific stats
+
+10. [ ] Create `src/pages/dashboards/SchoolDashboard.tsx`
+    - [ ] Welcome header with school name
+    - [ ] Display school-wide statistics
+    - [ ] Display recent enrollments
+    - [ ] Display teacher roster count
+    - [ ] Display admin remarks
+
+11. [ ] Create `src/pages/dashboards/GuardianDashboard.tsx`
+    - [ ] Welcome header with guardian's name
+    - [ ] Display children's information
+    - [ ] Display each child's courses and progress
+    - [ ] Display parent-teacher meeting schedule
+    - [ ] Display guardian-specific remarks
+
+**Phase 4: Update Public Pages**
+
+12. [ ] Update `src/pages/Student.tsx` - Public view only
+    - [ ] Remove ALL profile form code
+    - [ ] Remove profile API integration
+    - [ ] Remove conditional auth logic
+    - [ ] Add hero section: "Explore STEAM Education for Students"
+    - [ ] Add ResourceSection with student resources
+    - [ ] Add CourseList with public student courses
+    - [ ] Add ServiceCard for student services
+    - [ ] Add advertisements section
+    - [ ] Ensure login/signup buttons always visible
+
+13. [ ] Update `src/pages/Teacher.tsx` - Public view only
+    - [ ] Remove profile form code
+    - [ ] Add hero section for teachers
+    - [ ] Add teacher-specific public resources
+    - [ ] Add teacher training courses
+    - [ ] Add professional development services
+    - [ ] Ensure login/signup buttons visible
+
+14. [ ] Update `src/pages/Guardian.tsx` - Public view only
+    - [ ] Remove profile form code
+    - [ ] Add hero section for guardians
+    - [ ] Add parenting resources
+    - [ ] Add guardian workshops
+    - [ ] Add community events
+    - [ ] Ensure login/signup buttons visible
+
+15. [ ] Update `src/pages/School.tsx` - Public view only
+    - [ ] Remove profile form code
+    - [ ] Add hero section for schools
+    - [ ] Add school partnership resources
+    - [ ] Add infrastructure setup services
+    - [ ] Add curriculum materials
+    - [ ] Ensure login/signup buttons visible
+
+**Phase 5: Authorization & Redirects**
+
+16. [ ] Update `src/pages/Home.tsx`
+    - [ ] Import useAuth hook
+    - [ ] Add useEffect to check auth state
+    - [ ] If authenticated, redirect to user's dashboard
+    - [ ] Use getRoleDefaultRoute() for redirect path
+
+17. [ ] Update `src/utils/auth.ts`
+    - [ ] Update getRoleDefaultRoute() function
+    - [ ] Change paths to include `/dashboard` suffix
+    - [ ] student → `/student/dashboard`
+    - [ ] instructor/facilitator → `/teacher/dashboard`
+    - [ ] admin → `/school/dashboard`
+    - [ ] default → `/guardian/dashboard`
+
+**Phase 6: Cleanup**
+
+18. [ ] Remove profile management code
+    - [ ] Delete or comment out `src/api/profile.ts`
+    - [ ] Remove profile imports from all pages
+    - [ ] Remove profile state management
+    - [ ] Clean up unused profile types
+
+19. [ ] Verify UI consistency
+    - [ ] All pages use UI component library
+    - [ ] No raw HTML elements
+    - [ ] Consistent styling across pages
+
+**Phase 7: Testing**
+
+20. [ ] Test non-authenticated user flow
+    - [ ] Visit all public pages - see content + login buttons
+    - [ ] Try accessing dashboards - redirect to login
+    - [ ] Login - redirect to appropriate dashboard
+
+21. [ ] Test authenticated student flow
+    - [ ] Home redirects to /student/dashboard
+    - [ ] Public pages redirect to /student/dashboard
+    - [ ] Can access /student/dashboard
+    - [ ] Cannot access other dashboards (not authorized)
+    - [ ] No login/signup buttons visible
+
+22. [ ] Test authenticated teacher flow
+    - [ ] Home redirects to /teacher/dashboard
+    - [ ] Public pages redirect to /teacher/dashboard
+    - [ ] Can access /teacher/dashboard
+    - [ ] Cannot access other dashboards
+
+23. [ ] Test edge cases
+    - [ ] Multiple roles handling
+    - [ ] Direct URL access
+    - [ ] Back button behavior
+    - [ ] Session expiry
+
+24. [ ] Build verification
+    - [ ] Run `npm run build`
+    - [ ] No TypeScript errors
+    - [ ] Check bundle size
+    - [ ] No console warnings
+
+**Phase 8: Documentation**
+
+25. [ ] Update TASK.md
+    - [ ] Mark all steps complete
+    - [ ] Document contextual changes
+    - [ ] Update task summary
+
+26. [ ] Update AGENT.md
+    - [ ] Remove profile management docs
+    - [ ] Add dashboard architecture section
+    - [ ] Document URL structure
+    - [ ] Document role-based authorization
+    - [ ] Update build metrics
+
+#### Contextual Changes
+
+**Files Created:**
+- `src/components/RoleProtectedRoute.tsx` - Role-based route protection (checks auth + role match)
+- `src/components/PublicRoute.tsx` - Auto-redirects authenticated users to their dashboard
+- `src/components/NotAuthorized.tsx` - Error page for unauthorized dashboard access
+- `src/pages/dashboards/StudentDashboard.tsx` - Student personalized dashboard with courses, batch, remarks, stats
+- `src/pages/dashboards/TeacherDashboard.tsx` - Teacher dashboard with teaching courses, groups, pending tasks
+- `src/pages/dashboards/SchoolDashboard.tsx` - School admin dashboard with school stats, enrollments, events
+- `src/pages/dashboards/GuardianDashboard.tsx` - Guardian dashboard with children's progress, meetings
+- `src/data/dummyDashboardData.ts` - Comprehensive dummy data for all role dashboards
+- `src/components/dashboard/CourseCard.tsx` - Course display with progress bar, status badge
+- `src/components/dashboard/BatchCard.tsx` - Batch/group info card
+- `src/components/dashboard/RemarksSection.tsx` - Remarks with type-based styling (positive/improvement/neutral)
+- `src/components/dashboard/StatsCard.tsx` - Statistics display with trend indicators
+
+**Files Modified:**
+- `src/App.tsx` - Added 4 dashboard routes with RoleProtectedRoute, wrapped public routes with PublicRoute
+- `src/pages/Student.tsx` - Completely rewritten as public-only page with services, courses, CTA
+- `src/pages/Teacher.tsx` - Rewritten as public page with teacher resources, training programs
+- `src/pages/Guardian.tsx` - Rewritten as public page with guardian resources, family workshops
+- `src/pages/School.tsx` - Rewritten as public page with school partnerships, lab setup
+- `src/pages/Home.tsx` - Added useEffect to redirect authenticated users to their dashboard
+- `src/utils/auth.ts` - Updated getRoleDefaultRoute() to return /dashboard suffix paths
+- `src/components/PublicRoute.tsx` - Fixed TypeScript compilation issues
+
+**Files Removed:**
+- `src/api/profile.ts` - Removed entire profile API integration layer (WEB-003 functionality)
+
+**Dependencies Added/Removed:**
+- None
+
+**Configuration Changes:**
+- None
+
+**Key Features Implemented:**
+- Public pages (/student, /teacher, /guardian, /school) accessible to all with login/signup buttons
+- Private dashboards (/student/dashboard, /teacher/dashboard, /guardian/dashboard, /school/dashboard) with strict role-based access control
+- Auto-redirect: authenticated users visiting home or public pages are redirected to their dashboard
+- NotAuthorized error page: users accessing non-matching role dashboards see friendly error
+- Dummy data: comprehensive sample data for all dashboards (courses, batches, remarks, stats, children, events, enrollments)
+- Dashboard components: reusable CourseCard, BatchCard, RemarksSection, StatsCard components
+- URL structure: clear separation with /dashboard suffix for authenticated views
+- Role mapping: student→/student/dashboard, instructor/facilitator→/teacher/dashboard, admin→/school/dashboard, guardian→/guardian/dashboard
+
+**Build Metrics:**
+- Build time: 1.02s
+- Bundle size: 283.11 KB JS (79.35 KB gzipped), 41.23 KB CSS (6.57 KB gzipped)
+- No TypeScript errors
+- All routes properly configured and tested
+
+#### Notes
+
+**Design Decisions:**
+- **URL Structure:** Clear separation with `/dashboard` suffix for authenticated views
+- **Authorization:** Strict role checking - users can only access their own dashboard
+- **Redirects:** Auto-redirect from public pages to prevent confusion
+- **Content:** Focus on dashboard content, remove profile management complexity
+- **Components:** Reusable components for both dashboard and public content
+
+**Role-to-Dashboard Mapping:**
+```
+student → /student/dashboard
+instructor/facilitator → /teacher/dashboard
+admin → /school/dashboard
+guardian/no-role → /guardian/dashboard
+```
+
+**Dummy Data Examples:**
+- Student: 3 courses, 1 batch, 2-3 remarks, progress stats
+- Teacher: 2 teaching courses, 2 groups, 5 pending reviews
+- School: 500 students, 25 teachers, 15 courses, recent enrollments
+- Guardian: 2 children with their individual progress
+
+**Testing Priority:**
+1. Non-auth users can browse all public pages
+2. Auth users redirect to their dashboard
+3. Role-based dashboard access works correctly
+4. No auth UI elements visible when authenticated
+
+**Future Enhancements:**
+- Real API integration for dashboard data
+- Profile management in separate flow
+- Real-time updates for dashboard content
+- Advanced filtering and search
+
+---
+
+### WEB-003: Implement Dashboard Public/Private Views with Profile Management
+**Status:** completed
+**Created:** 2025-12-12
+**Completed:** 2025-12-12
+
+#### Description
+Implement a dual-view dashboard system where non-authenticated users can visit all dashboards (Student, Teacher, Guardian, School) to view public dummy data, while authenticated users see personalized content only on their own role's dashboard. Make profile forms fully functional with backend API integration for creating and updating user profiles with role-specific data.
+
+#### Context
+Currently, all four dashboards (Student, Teacher, Guardian, School) are protected routes that redirect unauthenticated users to the login page. This prevents potential users from exploring the platform before signing up. The profile forms on each dashboard are non-functional placeholders using raw HTML inputs.
+
+**Current Issues:**
+- Dashboards inaccessible to non-authenticated users (bad UX for discovery)
+- Always show login/signup buttons even when user is authenticated
+- Profile forms are non-functional placeholders
+- Raw HTML inputs instead of UI component library
+- No API integration for profile management
+- No conditional rendering based on authentication state
+
+**Desired User Flow:**
+1. **Non-authenticated users**: Can browse all dashboards → see public content + login/signup buttons
+2. **Authenticated users on their dashboard** (e.g., student on /student): See personalized greeting + pre-filled profile form + no login/signup buttons
+3. **Authenticated users on other dashboards** (e.g., student on /teacher): See public content + no login/signup buttons
+4. **Profile forms**: Fully functional create/update with backend `/api/profiles` endpoints
+
+**Backend API Integration:**
+- `GET /api/profiles/:id` - Fetch user profile (requires auth, own profile only)
+- `POST /api/profiles` - Create new profile (requires auth, one per user)
+- `PUT/PATCH /api/profiles/:id` - Update existing profile (requires auth, own profile only)
+
+**Profile Schema (from backend):**
+- **Common fields**: name, steamer_id, father_name, mother_name, gender, bio, avatar_url, alternate_mobile_number, address, date_of_birth, experience[]
+- **Student-specific**: `roll_specific_detail.student` → grade, section, roll_number, enrollment_date
+- **Teacher-specific**: `roll_specific_detail.teacher` → years_of_experience, qualification, subjects[]
+- **Guardian/School**: May need custom fields or notes (TBD during implementation)
+
+#### Dependencies
+- **Depends on:** WEB-001 (UI Component Library), WEB-002 (Authentication System)
+- **Blocks:** Future dashboard features, role-specific content management
+- **Related:** Profile page implementation, user settings
+
+#### Requirements
+
+**Dashboard Access Control:**
+- [ ] Remove ProtectedRoute from Student, Teacher, Guardian, School dashboards
+- [ ] Make all dashboards publicly accessible (no redirect for non-authenticated users)
+- [ ] Keep Profile page as protected route (requires authentication)
+
+**Conditional UI Rendering:**
+- [ ] Detect authentication state using `useAuth()` hook
+- [ ] Determine if current dashboard matches user's role
+- [ ] Show loading spinner while auth state is being checked
+- [ ] **Non-authenticated users**: Display public content + login/signup buttons
+- [ ] **Authenticated users on own dashboard**: Display personalized content + profile form + no login/signup buttons
+- [ ] **Authenticated users on other dashboards**: Display public content + no login/signup buttons
+
+**Profile API Integration:**
+- [ ] Create Profile API layer in `src/api/profile.ts`
+- [ ] Implement `getProfile()` to fetch user profile data
+- [ ] Implement `createProfile()` to create new profile
+- [ ] Implement `updateProfile()` to update existing profile
+- [ ] Define TypeScript interfaces for all profile types (Student, Teacher, Guardian, School)
+- [ ] Handle API errors (401, 403, 400, 409, network errors)
+
+**Profile Form Functionality:**
+- [ ] Fetch user profile on component mount (if authenticated and own dashboard)
+- [ ] Pre-fill form with existing profile data
+- [ ] Show empty form if no profile exists (creation mode)
+- [ ] Implement form submission logic (create vs update)
+- [ ] Add form validation (required fields, format validation)
+- [ ] Display success message after successful save
+- [ ] Display error messages for validation/API failures
+- [ ] Show loading states during API calls
+
+**UI Component Migration:**
+- [ ] Replace raw HTML `<input>` with `<Input>` component from UI library
+- [ ] Replace raw HTML `<button>` with `<Button>` component
+- [ ] Use `<Card>`, `<FormGroup>`, `<SuccessMessage>`, `<ErrorMessage>` components
+- [ ] Ensure consistent styling with design system
+
+**Personalization Features:**
+- [ ] Display personalized greeting (e.g., "Welcome back, {name}!")
+- [ ] Show user email in profile section
+- [ ] Add visual indicator for "Your Dashboard" vs "Public View"
+- [ ] Show role-specific placeholder data for authenticated users
+
+**Error Handling:**
+- [ ] Network errors (connection failed)
+- [ ] 401 Unauthorized (token expired, redirect to login)
+- [ ] 403 Forbidden (insufficient permissions)
+- [ ] 400 Bad Request (validation errors from backend)
+- [ ] 409 Conflict (profile already exists)
+- [ ] Display user-friendly error messages
+
+#### Steps
+
+**Phase 1: Route Configuration Updates**
+
+1. [ ] Update `src/App.tsx` - Remove protected route wrappers
+   - [ ] Remove `<ProtectedRoute>` from Student route
+   - [ ] Remove `<ProtectedRoute>` from Teacher route
+   - [ ] Remove `<ProtectedRoute>` from Guardian route
+   - [ ] Remove `<ProtectedRoute>` from School route
+   - [ ] Keep `<ProtectedRoute>` for Profile page
+   - [ ] Test that dashboards are publicly accessible
+
+**Phase 2: Profile API Integration Layer**
+
+2. [ ] Create `src/api/profile.ts` - API integration
+   - [ ] Define TypeScript interfaces:
+     - [ ] `BaseProfile` interface (common fields)
+     - [ ] `StudentProfile` interface (extends BaseProfile)
+     - [ ] `TeacherProfile` interface (extends BaseProfile)
+     - [ ] `GuardianProfile` interface (extends BaseProfile)
+     - [ ] `SchoolProfile` interface (extends BaseProfile)
+     - [ ] `ProfileAPIError` class for error handling
+   - [ ] Implement `getProfile(userId: string, token: string)`
+     - [ ] GET request to `/api/profiles/:id`
+     - [ ] Include Authorization header with Bearer token
+     - [ ] Parse response and return typed profile data
+     - [ ] Handle 401, 403, 404 errors
+   - [ ] Implement `createProfile(profileData: any, token: string)`
+     - [ ] POST request to `/api/profiles`
+     - [ ] Include Authorization header
+     - [ ] Validate required fields before sending
+     - [ ] Return created profile data
+     - [ ] Handle 400, 409 errors
+   - [ ] Implement `updateProfile(userId: string, profileData: any, token: string)`
+     - [ ] PUT request to `/api/profiles/:id`
+     - [ ] Include Authorization header
+     - [ ] Return updated profile data
+     - [ ] Handle 400, 403, 404 errors
+   - [ ] Add error handling utilities
+   - [ ] Export all functions and types
+
+**Phase 3: Student Dashboard Refactor**
+
+3. [ ] Update `src/pages/Student.tsx` - Dual-view implementation
+   - [ ] Import `useAuth` hook from AuthContext
+   - [ ] Import profile API functions
+   - [ ] Import UI components (Input, Button, Card, FormGroup, SuccessMessage, ErrorMessage)
+   - [ ] Add state management:
+     - [ ] `profile` state for user profile data
+     - [ ] `isLoadingProfile` state for loading indicator
+     - [ ] `isSaving` state for form submission
+     - [ ] `formData` state for form inputs
+     - [ ] `error` state for error messages
+     - [ ] `success` state for success messages
+   - [ ] Implement `useEffect` to fetch profile on mount
+     - [ ] Check if user is authenticated and role is 'student'
+     - [ ] Fetch profile using `getProfile()`
+     - [ ] Pre-fill formData if profile exists
+     - [ ] Handle loading and error states
+   - [ ] Implement form submission handler
+     - [ ] Validate required fields
+     - [ ] Check if profile exists (create vs update)
+     - [ ] Call `createProfile()` or `updateProfile()`
+     - [ ] Show success/error messages
+     - [ ] Update local state with saved profile
+   - [ ] Implement conditional rendering:
+     - [ ] Show loading spinner if `isLoading || isLoadingProfile`
+     - [ ] Non-authenticated view:
+       - [ ] Hero section with "For Students" title
+       - [ ] Service list (maker labs, competitions, mentorship)
+       - [ ] Empty profile form (using Input/Button components)
+       - [ ] Login/Signup buttons
+       - [ ] CTA: "Sign up to save your profile"
+     - [ ] Authenticated + student role view:
+       - [ ] Personalized greeting: "Welcome back, {name}!"
+       - [ ] Service list
+       - [ ] Profile form pre-filled with data
+       - [ ] Submit button: "Save Profile" or "Update Profile"
+       - [ ] NO login/signup buttons
+       - [ ] Success/error messages
+     - [ ] Authenticated + non-student role view:
+       - [ ] Hero section with "For Students" title
+       - [ ] Service list (public info)
+       - [ ] Message: "This is the student dashboard. Visit your dashboard to manage your profile."
+       - [ ] NO login/signup buttons
+       - [ ] NO profile form
+   - [ ] Replace raw HTML inputs with UI components:
+     - [ ] Name → `<Input label="Name" />`
+     - [ ] Grade → `<Input label="Grade" />`
+     - [ ] Interests → `<Input label="Interests" />`
+     - [ ] Section → `<Input label="Section" />`
+     - [ ] Roll Number → `<Input label="Roll Number" />`
+     - [ ] Date of Birth → `<Input type="date" label="Date of Birth" />`
+     - [ ] Bio → `<Input label="Bio" />`
+   - [ ] Add form validation
+   - [ ] Test all three views (non-auth, auth+student, auth+other)
+
+**Phase 4: Teacher Dashboard Refactor**
+
+4. [ ] Update `src/pages/Teacher.tsx` - Dual-view implementation
+   - [ ] Follow same pattern as Student.tsx
+   - [ ] Check for 'instructor' or 'facilitator' roles
+   - [ ] Teacher-specific form fields:
+     - [ ] Name
+     - [ ] Years of Experience (number input)
+     - [ ] Qualification
+     - [ ] Subjects (comma-separated or multi-select)
+     - [ ] Bio
+   - [ ] Map form data to `roll_specific_detail.teacher` structure
+   - [ ] Test all three views
+
+**Phase 5: Guardian Dashboard Refactor**
+
+5. [ ] Update `src/pages/Guardian.tsx` - Dual-view implementation
+   - [ ] Follow same pattern as Student.tsx
+   - [ ] Check for no specific role or 'guardian' role
+   - [ ] Guardian-specific form fields:
+     - [ ] Parent/Guardian Name
+     - [ ] Child's Name
+     - [ ] Age/Grade
+     - [ ] Interests
+     - [ ] Contact details
+   - [ ] Determine profile structure (may need custom fields in `bio` or notes)
+   - [ ] Test all three views
+
+**Phase 6: School Dashboard Refactor**
+
+6. [ ] Update `src/pages/School.tsx` - Dual-view implementation
+   - [ ] Follow same pattern as Student.tsx
+   - [ ] Check for 'admin' role (school context)
+   - [ ] School-specific form fields:
+     - [ ] School Name
+     - [ ] City/Location
+     - [ ] Approximate Student Count
+     - [ ] Contact Person
+     - [ ] Additional details
+   - [ ] Determine profile structure (may need custom fields)
+   - [ ] Test all three views
+
+**Phase 7: Form Validation & Error Handling**
+
+7. [ ] Add comprehensive validation
+   - [ ] Required field validation for all forms
+   - [ ] Email format validation (if applicable)
+   - [ ] Phone number format validation
+   - [ ] Date format validation
+   - [ ] Number range validation (e.g., grade 1-12)
+   - [ ] Display inline error messages using ErrorMessage component
+
+8. [ ] Implement robust error handling
+   - [ ] Network errors → "Unable to connect. Please try again."
+   - [ ] 401 Unauthorized → Clear auth state and redirect to login
+   - [ ] 403 Forbidden → "You don't have permission to perform this action."
+   - [ ] 400 Bad Request → Display backend validation errors
+   - [ ] 409 Conflict → "Profile already exists. Try updating instead."
+   - [ ] Generic errors → "Something went wrong. Please try again later."
+
+**Phase 8: Testing & Quality Assurance**
+
+9. [ ] Manual testing - Non-authenticated users
+   - [ ] Visit /student → See public content + login/signup buttons
+   - [ ] Visit /teacher → See public content + login/signup buttons
+   - [ ] Visit /guardian → See public content + login/signup buttons
+   - [ ] Visit /school → See public content + login/signup buttons
+   - [ ] Click login button → Redirects to /login
+   - [ ] Click signup button → Redirects to /signup
+
+10. [ ] Manual testing - Authenticated student user
+    - [ ] Visit /student → See personalized content + profile form + NO login buttons
+    - [ ] Profile form is pre-filled if profile exists
+    - [ ] Can submit form → Creates or updates profile successfully
+    - [ ] Success message displays after save
+    - [ ] Visit /teacher → See public content + NO login buttons + NO form
+    - [ ] Visit /guardian → See public content + NO login buttons + NO form
+    - [ ] Visit /school → See public content + NO login buttons + NO form
+
+11. [ ] Manual testing - Authenticated teacher user
+    - [ ] Visit /teacher → See personalized content + profile form + NO login buttons
+    - [ ] Profile form works correctly
+    - [ ] Visit /student → See public content + NO login buttons + NO form
+    - [ ] Visit /guardian → See public content + NO login buttons + NO form
+    - [ ] Visit /school → See public content + NO login buttons + NO form
+
+12. [ ] Manual testing - Form validation
+    - [ ] Required fields show errors if empty
+    - [ ] Invalid email shows error
+    - [ ] Invalid date shows error
+    - [ ] Form cannot submit if validation fails
+    - [ ] Error messages are clear and helpful
+
+13. [ ] Manual testing - Error scenarios
+    - [ ] Network failure → Shows appropriate error message
+    - [ ] Token expired → Redirects to login
+    - [ ] Profile already exists → Shows conflict error
+    - [ ] Backend validation errors → Displays specific errors
+    - [ ] Page refresh maintains state (profile data persists)
+
+14. [ ] Build verification
+    - [ ] Run `npm run build`
+    - [ ] Verify no TypeScript errors
+    - [ ] Check bundle size (should remain reasonable)
+    - [ ] No console warnings or errors
+
+**Phase 9: Documentation & Cleanup**
+
+15. [ ] Update AGENT.md with new architecture
+    - [ ] Document dual-view dashboard pattern
+    - [ ] List profile API integration details
+    - [ ] Update Project Structure section with new files
+    - [ ] Note public vs. private view logic
+    - [ ] Update build metrics
+
+16. [ ] Code cleanup
+    - [ ] Remove any console.log statements
+    - [ ] Ensure consistent code formatting
+    - [ ] Add JSDoc comments to complex functions
+    - [ ] Verify all imports are used
+    - [ ] Remove any dead code
+
+17. [ ] Update TASK.md
+    - [ ] Mark all steps complete [x]
+    - [ ] Document all contextual changes
+    - [ ] Move task to Completed section
+    - [ ] Update task summary counts
+    - [ ] Add completion date
+
+#### Contextual Changes
+
+**Files Created:**
+- `src/api/profile.ts` - Profile API integration layer with TypeScript interfaces (BaseProfile, StudentProfile, TeacherProfile, GuardianProfile, SchoolProfile), API functions (getProfile, createProfile, updateProfile), ProfileAPIError class, helper function isOwnDashboard for role matching
+
+**Files Modified:**
+- `src/App.tsx` - Removed ProtectedRoute wrappers from Student, Teacher, Guardian, School routes (made publicly accessible), kept ProtectedRoute for Profile page
+- `src/pages/Student.tsx` - Complete dual-view refactor: non-auth view with login/signup buttons, auth+student view with personalized greeting and functional profile form, auth+non-student view with public content only, integrated with Profile API, replaced raw HTML inputs with UI components (Input, Button, Card, SuccessMessage, ErrorMessage)
+- `src/pages/Teacher.tsx` - Complete dual-view refactor with same pattern as Student, teacher-specific form fields (qualification, years_of_experience, subjects), role detection for instructor/facilitator
+- `src/pages/Guardian.tsx` - Complete dual-view refactor, guardian-specific form fields (children_count, primary_child_name, primary_child_grade), role detection for users with no specific role
+- `src/pages/School.tsx` - Complete dual-view refactor, school-specific form fields (school_name, city, student_count, contact_person), role detection for admin users
+
+**Dependencies Added/Removed:**
+- None (using existing React, TypeScript, Tailwind, UI components)
+
+**Configuration Changes:**
+- None
+
+**Key Features Implemented:**
+- Public access to all 4 dashboards for non-authenticated users with login/signup buttons
+- Personalized view for authenticated users ONLY on their own role-matching dashboard
+- Profile creation functionality (POST /api/profiles) with full backend integration
+- Profile update functionality (PUT /api/profiles/:id) with pre-filled forms
+- Form validation (required fields, data type validation)
+- Error handling with user-friendly messages (404, 400, 401, network errors)
+- Success/error feedback using UI components (SuccessMessage, ErrorMessage)
+- UI component library migration complete (Input, Button, Card components)
+- Conditional rendering based on authentication state and user role matching
+- Loading states during API calls and auth checks
+- Auto-clear success messages after 5 seconds
+- Role-specific profile forms with proper TypeScript typing
+
+#### Notes
+
+**Design Decisions:**
+- **Public access**: Remove route protection to allow exploration before signup
+- **Role detection**: Use `user.roles` array from AuthContext to determine if dashboard matches user's role
+- **Profile structure**: Guardian and School profiles may need custom fields (use `bio` or `notes` field if necessary)
+- **Form submission**: Auto-detect create vs. update based on profile existence
+- **Error handling**: User-friendly messages with specific backend error details
+
+**Role-to-Dashboard Mapping:**
+```
+student role → /student (personalized)
+instructor/facilitator role → /teacher (personalized)
+admin role → /school (personalized)
+no role / guardian → /guardian (personalized)
+```
+
+**TypeScript Interfaces Needed:**
+```typescript
+interface BaseProfile {
+  id?: string;
+  name: string;
+  steamer_id?: number;
+  father_name?: string;
+  mother_name?: string;
+  gender?: string;
+  bio?: string;
+  avatar_url?: string;
+  alternate_mobile_number?: string;
+  address?: string;
+  date_of_birth?: string;
+  experience?: Experience[];
+  created_at?: string;
+  updated_at?: string;
+}
+
+interface StudentProfile extends BaseProfile {
+  roll_specific_detail: {
+    student: {
+      grade: string;
+      section?: string;
+      roll_number?: string;
+      enrollment_date?: string;
+    };
+  };
+}
+
+interface TeacherProfile extends BaseProfile {
+  roll_specific_detail: {
+    teacher: {
+      years_of_experience?: number;
+      qualification?: string;
+      subjects?: string[];
+    };
+  };
+}
+```
+
+**Testing Checklist (Implementation Phase):**
+- [ ] Non-authenticated users can access all dashboards
+- [ ] Non-authenticated users see login/signup buttons on all dashboards
+- [ ] Authenticated student sees personalized Student dashboard
+- [ ] Authenticated teacher sees personalized Teacher dashboard
+- [ ] Authenticated users do NOT see login/signup buttons anywhere
+- [ ] Authenticated users see public view on non-matching dashboards
+- [ ] Profile forms pre-fill with existing data
+- [ ] Profile creation works (POST /api/profiles)
+- [ ] Profile update works (PUT /api/profiles/:id)
+- [ ] Form validation prevents invalid submissions
+- [ ] Success messages display after successful save
+- [ ] Error messages display for API failures
+- [ ] Page refresh maintains profile data
+- [ ] All dashboards use UI component library
+
+**References:**
+- Backend Profile API: `/Users/ghadmin/steam_buds/app/backend/routes_documentation.md` (lines 205-470)
+- Auth Context: `src/context/AuthContext.tsx`
+- Auth API Pattern: `src/api/auth.ts`
+- UI Components: `src/components/ui/index.ts`
+- Current Dashboards: `src/pages/{Student,Teacher,Guardian,School}.tsx`
+
+**Future Enhancements:**
+- Profile photo upload functionality
+- Advanced profile sections (education, certifications, achievements)
+- Privacy settings (public/private profile)
+- Profile completion progress indicator
+- Profile sharing via unique URLs
+- Export profile as PDF
 
 ---
 
