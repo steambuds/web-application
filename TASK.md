@@ -1,17 +1,608 @@
 # STEAM Buds Web App - Task Tracker
 
+## Instructions for AI Agents
+**IMPORTANT:** When working with this file:
+1. Read the **Task Template** and **Task Guidelines** sections first to understand the workflow
+2. Then read **only the specific task** you are working on (do not read all tasks)
+3. Update task status and steps as you progress
+4. Document all contextual changes in real-time
+5. Update AGENT.md when completing tasks
+
+---
+
 ## Task Summary
 
-**Total Tasks:** 1
+**Total Tasks:** 2
 - **Pending:** 0
-- **Planned:** 0
+- **Planned:** 1
 - **In Progress:** 0
 - **Completed:** 1
 - **Blocked:** 0
 
+## Task Template
+
+Use this template when creating new tasks:
+
+```markdown
+## Task WEB-XXX: [Task Title]
+**Status:** pending | planned | in_progress | review | completed | blocked
+**Created:** YYYY-MM-DD
+**Completed:** YYYY-MM-DD (if applicable)
+
+### Description
+[Detailed description of what needs to be done and why]
+
+### Context
+[Any relevant background information, related issues, or dependencies]
+
+### Dependencies
+- **Depends on:** [List task IDs that must be completed first, e.g., WEB-001]
+- **Blocks:** [List task IDs that cannot start until this is complete, e.g., WEB-003]
+- **Related:** [List related task IDs for reference, e.g., WEB-005]
+
+### Requirements
+- Requirement 1
+- Requirement 2
+- Requirement 3
+
+### Steps
+1. [ ] Step 1 description
+2. [ ] Step 2 description
+   - [ ] Sub-step 2.1
+   - [ ] Sub-step 2.2
+3. [ ] Step 3 description
+
+### Contextual Changes
+
+**Files Created:**
+- `path/to/file1.ext` - Description
+- `path/to/file2.ext` - Description
+
+**Files Modified:**
+- `path/to/file3.ext` - What changed
+- `path/to/file4.ext` - What changed
+
+**Dependencies Added/Removed:**
+- Added: `package-name@version` - Purpose
+- Removed: `old-package` - Reason
+
+**Configuration Changes:**
+- Updated `config-file` - Description of changes
+
+**Key Features Implemented:**
+- Feature 1 description
+- Feature 2 description
+
+**Review Notes:**
+- Use this section when task status is `review` to document review findings
+- List any issues found, suggested improvements, or required changes
+- Leave empty until task enters review phase
+
+### Notes
+[Any blockers, discoveries, or important information discovered during implementation]
+```
+
+---
+
+## Task Guidelines
+
+### Task Summary Maintenance
+**Note:** The Task Summary section at the top requires manual updates when task statuses change. Update the counts (Pending, Planned, In Progress, Completed, Blocked) each time a task status changes to keep the summary accurate.
+
+### Task ID Format
+- `WEB-001`, `WEB-002`, etc.
+- Sequential numbering
+- Prefix "WEB" indicates web application tasks
+
+### Task Lifecycle
+
+#### 1. Creating Tasks
+When a new task is created:
+1. Assign next available task ID (WEB-XXX)
+2. Set status to `pending`
+3. Add creation date
+4. Write clear description and context
+5. Add to "Active Tasks" summary at top
+6. Steps section initially empty (filled during planning)
+
+#### 2. Planning Tasks
+When planning a task:
+1. Read `TASK.md` to find the task
+2. Break down into concrete, actionable steps
+3. Add sub-steps where needed
+4. Define requirements clearly
+5. Update status to `planned`
+6. Update task summary at top
+
+#### 3. Executing Tasks
+When working on a task:
+1. Update status to `in_progress`
+2. Update task summary at top
+3. Complete steps sequentially
+4. Check off steps as completed using [x]
+5. Document discoveries in Notes section
+6. Update Contextual Changes as you progress
+
+#### 3. Review Tasks
+When working on a task:
+1. Update status to `review`
+2. Update task summary at top
+3. Complete steps sequentially
+4. Check off steps as completed using [x]
+5. Document discoveries in Notes section
+6. Update Contextual Changes as you progress
+
+#### 4. Completing Tasks
+When finishing a task:
+1. Ensure all steps are checked [x]
+2. Update status to `completed`
+3. Add completion date
+4. Complete all Contextual Changes documentation
+5. **Update AGENT.md** with new context in compact format
+6. Move task from "Active Tasks" to "Completed Tasks" in summary
+7. Update task counts in summary
+
+#### 5. Blocking Tasks
+If a task cannot proceed:
+1. Update status to `blocked`
+2. Document reason clearly in Notes section
+3. Update task summary at top
+4. Create new task for unblocking if needed
+
+### Status Definitions
+- `pending` - Task created, not yet planned
+- `planned` - Steps defined, ready to execute
+- `in_progress` - Currently being worked on
+- `review` - Currently being reviewed
+- `completed` - Finished with context updated in AGENT.md
+- `blocked` - Cannot proceed (reason documented in Notes)
+
+### Best Practices
+- Keep task descriptions clear and focused
+- Break large tasks into smaller sub-tasks when needed
+- Update Contextual Changes in real-time, not after completion
+- Always update AGENT.md when completing tasks
+- Document blockers immediately when encountered
+- Reference related tasks using task IDs
+- Include context for future developers/agents
+
+### Integration with AGENT.md
+- When completing a task, update relevant sections in AGENT.md
+- Add new dependencies to AGENT.md's Tech Stack section
+- Document new files in AGENT.md's Project Structure
+- Update architecture patterns if they change
+- Keep AGENT.md compact - focus on what future agents need to know
+---
 ## Active Tasks
 
-_No active tasks_
+### WEB-002: Implement User Authentication Flow with Role-Based Routing
+**Status:** planned | **Created:** 2025-12-11
+
+#### Description
+Implement a complete user authentication system that integrates with the backend API, supports role-based routing, and manages authentication state across the application. The system should allow users to sign up, log in with role selection, maintain session with tokens, and automatically redirect to their role-specific default page upon login. Focus on login/logout functionality only (profile page implementation is deferred).
+
+#### Context
+Currently, the application uses a **demo authentication system** with keyword-based email routing (e.g., email containing "student" routes to student page). This needs to be replaced with real authentication using the backend API endpoints documented in `/Users/ghadmin/steam_buds/app/backend/routes_documentation.md`. Make sure to verify that everything is working fine after each phase.
+
+**Backend API Endpoints Available:**
+- backend server is running at `http://127.0.0.1:8000`.
+- **TEST CREDENTIALS:** Email: ghanshyam@steambuds.com | Password: Password123
+- **SECURITY NOTE:** These credentials are for development only. Remove before committing to public repository.
+- `POST /api/user` - User Registration (username, email, password)
+- `POST /api/login` - User Login (email, password) → returns `token` + `refresh_token`
+- `DELETE /api/logout` - User Logout (refresh_token)
+- `POST /api/refresh` - Refresh Access Token (refresh_token)
+
+**Available User Roles (from backend):**
+- `admin` - Administrator (full access)
+- `system_user` - System/automated process
+- `instructor` - Teacher role → Teacher page
+- `facilitator` - Community facilitator → Teacher page
+- `student` - Student role → Student page
+- No role / `guardian` - Guardian/Others → Guardian page
+- Note: School role needs clarification (may use admin or custom role)
+
+**Current Application State:**
+- Public pages: Home, About, Contact, R&D, Resources
+- Role pages: Student, Teacher, School, Guardian (currently accessible without auth)
+- Auth pages: Login, Signup (demo keyword routing in place)
+- UI Components: Button, Input, FormGroup available in `@/components/ui`
+- No token storage or session management implemented
+
+**Authentication Flow Requirements:**
+1. **Non-authenticated users** see home page with role selection cards (teacher, student, school, others)
+2. **Role selection** redirects to role-specific login page (e.g., /login/teacher, /login/student)
+3. **Successful login** stores `token` and `refresh_token` in frontend (localStorage or sessionStorage)
+4. **Authenticated state** hides login/signup buttons, shows profile button (top right corner)
+5. **Role-based redirect after login:**
+   - `student` role → `/student` page
+   - `instructor` or `facilitator` role → `/teacher` page
+   - School admin role → `/school` page
+   - No role or guardian → `/guardian` page
+6. **Protected routes** require authentication (Student, Teacher, School, Guardian pages)
+7. **Logout** clears tokens and redirects to home page
+8. **Profile page** is a placeholder/dummy page (detailed implementation deferred to future task)
+
+**Task Size Note:**
+This is a comprehensive task with 9 phases and 26+ steps. Consider breaking into smaller sub-tasks if needed:
+- WEB-002a: Auth Context & API Integration (Phases 1-3)
+- WEB-002b: Protected Routes & UI Updates (Phases 4-6)
+- WEB-002c: Testing & Documentation (Phases 7-9)
+Current structure works for planning, but execution can be split as needed.
+
+#### Dependencies
+- **Depends on:** WEB-001 (UI Component Library - for Button, Input, Card components)
+- **Blocks:** Future profile implementation, role-specific features
+- **Related:** RECOMMENDED_UPDATES.md (Week 2 priorities)
+
+#### Requirements
+
+**Authentication State Management:**
+- [ ] Create AuthContext/AuthProvider for managing authentication state
+- [ ] Store tokens securely in frontend (localStorage with expiry handling)
+- [ ] Store user's role(s) from backend response
+- [ ] Provide authentication status and user role to entire application
+- [ ] Handle token refresh logic using refresh_token
+- [ ] Clear tokens on logout
+
+**Sign Up Flow:**
+- [ ] Update Signup page to use backend `POST /api/user` endpoint
+- [ ] Collect username, email, password from user
+- [ ] Display validation errors from backend
+- [ ] Show success message and redirect to login on successful registration
+
+**Login Flow:**
+- [ ] Update Login page to use backend `POST /api/login` endpoint
+- [ ] Support role-based login pages (optional role parameter for UI hints)
+- [ ] Store returned token and refresh_token in AuthContext
+- [ ] **Fetch user's role(s) from backend** (may need to decode JWT or call user profile endpoint)
+- [ ] **Redirect to role-specific default page:**
+   - Student role → `/student`
+   - Instructor/Facilitator role → `/teacher`
+   - School/admin role → `/school`
+   - No role or guardian → `/guardian`
+- [ ] Display authentication errors (invalid credentials, etc.)
+
+**Role-Based Routing:**
+- [ ] Update Home page to show role selection cards for non-authenticated users
+- [ ] Create role-specific login routes: /login/teacher, /login/student, /login/school, /login/others
+- [ ] Each role login page pre-fills or indicates the intended role
+- [ ] Implement role detection logic from user data/JWT token
+- [ ] Create default page mapping: role → page path
+
+**UI Updates Based on Auth State:**
+- [ ] Hide "Login" and "Sign Up" buttons in Header when user is authenticated
+- [ ] Show "Profile" button in top-right corner when user is authenticated
+- [ ] Update navigation links based on authentication status
+- [ ] Show user's name or username in header (if available)
+
+**Protected Routes:**
+- [ ] Implement route protection HOC or component (ProtectedRoute)
+- [ ] Redirect unauthenticated users to login page when accessing protected routes
+- [ ] Protect Student, Teacher, School, Guardian pages
+- [ ] Preserve intended destination and redirect after successful login (optional enhancement)
+
+**Logout Flow:**
+- [ ] Create logout function that calls `DELETE /api/logout` endpoint
+- [ ] Clear tokens from storage
+- [ ] Reset authentication state
+- [ ] Redirect to home page
+- [ ] Add logout button/option in Header or Profile dropdown
+
+**Profile Page (Dummy/Placeholder):**
+- [ ] Create `/profile` route and Profile page component
+- [ ] Display basic user information (username, email, role)
+- [ ] Show "Profile details coming soon" placeholder
+- [ ] Include logout button
+- [ ] **Note:** Detailed profile implementation deferred to future task
+
+**Error Handling:**
+- [ ] Handle network errors gracefully
+- [ ] Display user-friendly error messages
+- [ ] Handle token expiration and auto-refresh
+- [ ] Handle unauthorized access (401) and forbidden (403) responses
+
+**Security Considerations:**
+- [ ] Never store plain passwords in frontend
+- [ ] Use HTTPS for API calls (verify env.apiUrl uses https in production)
+- [ ] Implement CSRF protection if needed
+- [ ] Clear sensitive data on logout
+- [ ] Handle token expiration securely
+
+#### Steps
+
+**Phase 1: Setup & Infrastructure (Foundation)**
+
+1. [x] Read existing authentication implementation files
+   - [x] Login.tsx (demo auth with email keyword routing)
+   - [x] Signup.tsx (demo role selection)
+   - [x] App.tsx (current routes)
+   - [x] Header.tsx (hardcoded is_logged_in)
+   - [x] Home.tsx (role cards)
+   - [x] env.ts (API URL configuration)
+
+2. [ ] Install dependencies (if needed)
+   - [ ] Check if jwt-decode is needed for token inspection
+   - [ ] Verify axios or fetch for API calls (use fetch, already available)
+
+3. [ ] Update environment configuration
+   - [ ] Verify `.env.development` has correct VITE_API_URL
+   - [ ] Verify `.env.production` has correct VITE_API_URL
+   - [ ] Update env.ts if needed to support auth endpoints
+
+**Phase 2: Authentication Utilities & API Integration**
+
+4. [ ] Create `src/utils/auth.ts` - Token & role utilities
+   - [ ] `saveTokens(token, refreshToken)` - Save to localStorage
+   - [ ] `getAccessToken()` - Retrieve access token
+   - [ ] `getRefreshToken()` - Retrieve refresh token
+   - [ ] `clearTokens()` - Clear all tokens from storage
+   - [ ] `isTokenExpired(token)` - Check if JWT is expired (optional)
+   - [ ] `getUserRoleFromToken(token)` - Extract role from JWT or decode token
+   - [ ] `getRoleDefaultRoute(roles)` - Map role to default page route
+
+5. [ ] Create `src/api/auth.ts` - API integration layer
+   - [ ] `signup(username, email, password)` - POST /api/user
+   - [ ] `login(email, password)` - POST /api/login
+   - [ ] `logout(refreshToken)` - DELETE /api/logout
+   - [ ] `refreshAccessToken(refreshToken)` - POST /api/refresh
+   - [ ] `getCurrentUser()` - Fetch user profile to get roles (may need separate endpoint)
+   - [ ] Add error handling for network failures
+   - [ ] Add proper TypeScript types for API responses
+
+**Phase 3: Auth Context & State Management**
+
+6. [ ] Create `src/context/AuthContext.tsx` - Global auth state
+   - [ ] Define AuthContext interface (user, token, isAuthenticated, isLoading)
+   - [ ] Create AuthProvider component
+   - [ ] Implement `login(email, password)` function
+   - [ ] Implement `signup(username, email, password)` function
+   - [ ] Implement `logout()` function
+   - [ ] Implement `refreshToken()` function
+   - [ ] Load auth state from localStorage on mount (persistence)
+   - [ ] Fetch user profile/roles after token validation
+   - [ ] Export useAuth hook for consuming context
+
+7. [ ] Wrap App with AuthProvider in `src/App.tsx`
+   - [ ] Import AuthProvider
+   - [ ] Wrap Router with AuthProvider
+   - [ ] Ensure auth state is available to all components
+
+**Phase 4: Update Login & Signup Pages**
+
+8. [ ] Update `src/pages/Signup.tsx` - Real signup
+   - [ ] Import useAuth hook
+   - [ ] Add username field (already has name field)
+   - [ ] Connect form to `signup()` from AuthContext
+   - [ ] Add loading state during signup
+   - [ ] Display backend validation errors
+   - [ ] Show success message on successful registration
+   - [ ] Redirect to login page after successful signup (with success message)
+   - [ ] Remove demo routing logic
+
+9. [ ] Update `src/pages/Login.tsx` - Real login with role redirect
+   - [ ] Import useAuth hook
+   - [ ] Connect form to `login()` from AuthContext
+   - [ ] Add loading state during login
+   - [ ] Remove demo `inferRoleFromEmail` function
+   - [ ] After successful login, get user's role(s)
+   - [ ] Implement role-to-route mapping:
+     - [ ] student → /student
+     - [ ] instructor/facilitator → /teacher
+     - [ ] admin → /school (or custom school role)
+     - [ ] no role/guardian → /guardian
+   - [ ] Display authentication errors from backend
+   - [ ] Remove demo tip message
+
+10. [ ] Create role-based login route variants (optional enhancement)
+    - [ ] Create `/login/student`, `/login/teacher`, `/login/school`, `/login/others` routes
+    - [ ] Pass role hint to Login component via URL param
+    - [ ] Display role-specific messaging on login page
+    - [ ] Still use same backend endpoint, just UI customization
+
+**Phase 5: Protected Routes & Route Guards**
+
+11. [ ] Create `src/components/ProtectedRoute.tsx` - Route protection
+    - [ ] Import useAuth hook
+    - [ ] Check if user is authenticated
+    - [ ] If not authenticated, redirect to /login
+    - [ ] Preserve intended destination in location state (optional)
+    - [ ] Show loading spinner while checking auth state
+    - [ ] Allow children to render if authenticated
+
+12. [ ] Update `src/App.tsx` - Add protected routes
+    - [ ] Import ProtectedRoute component
+    - [ ] Wrap Student, Teacher, School, Guardian routes with ProtectedRoute
+    - [ ] Add `/profile` route (protected)
+    - [ ] Keep public routes (Home, About, Contact, R&D, Resources, Login, Signup)
+    - [ ] Test route protection works correctly
+
+**Phase 6: UI Updates (Header, Home, Profile)**
+
+13. [ ] Update `src/components/Header.tsx` - Auth-aware UI
+    - [ ] Import useAuth hook
+    - [ ] Replace hardcoded `is_logged_in` with `isAuthenticated` from context
+    - [ ] Hide Login and Sign up buttons when authenticated
+    - [ ] Show Profile button (top-right) when authenticated
+    - [ ] Optionally show username/name in header
+    - [ ] Add logout button/dropdown menu
+    - [ ] Update mobile menu to reflect auth state
+
+14. [ ] Update `src/pages/Home.tsx` - Role cards behavior
+    - [ ] Import useAuth hook
+    - [ ] For authenticated users: role cards link to their role pages directly
+    - [ ] For non-authenticated users: role cards redirect to role-specific login
+    - [ ] Options:
+      - Option A: Cards link to /login/student, /login/teacher, etc.
+      - Option B: Cards show "Login to access" message
+      - Option C: Cards link directly, ProtectedRoute handles redirect
+    - [ ] Choose and implement one approach
+
+15. [ ] Create `src/pages/Profile.tsx` - Dummy profile page
+    - [ ] Import useAuth hook
+    - [ ] Display user information (username, email, role)
+    - [ ] Show "Profile details coming soon" placeholder message
+    - [ ] Add logout button
+    - [ ] Use Card component from UI library
+    - [ ] Add basic styling and layout
+    - [ ] **Note:** Full profile implementation deferred to future task
+
+**Phase 7: Token Refresh & Error Handling**
+
+16. [ ] Implement automatic token refresh
+    - [ ] Add axios/fetch interceptor for 401 responses (optional)
+    - [ ] Automatically call refreshAccessToken on 401
+    - [ ] Retry original request with new token
+    - [ ] If refresh fails, logout user and redirect to login
+
+17. [ ] Add comprehensive error handling
+    - [ ] Network errors (show user-friendly message)
+    - [ ] 401 Unauthorized (invalid token, redirect to login)
+    - [ ] 403 Forbidden (insufficient permissions)
+    - [ ] 400 Bad Request (validation errors from backend)
+    - [ ] Display errors using ErrorMessage component from UI library
+
+**Phase 8: Testing & Validation**
+
+18. [ ] Manual testing - Sign up flow
+    - [ ] User can sign up with username, email, password
+    - [ ] Validation errors display correctly
+    - [ ] Success message shows after signup
+    - [ ] Redirects to login page
+
+19. [ ] Manual testing - Login flow
+    - [ ] Student user logs in → redirects to /student
+    - [ ] Instructor user logs in → redirects to /teacher
+    - [ ] Facilitator user logs in → redirects to /teacher
+    - [ ] Admin/school user logs in → redirects to /school
+    - [ ] User with no role logs in → redirects to /guardian
+    - [ ] Invalid credentials show error
+
+20. [ ] Manual testing - Auth state
+    - [ ] Tokens stored in localStorage after login
+    - [ ] Login/signup buttons hidden when authenticated
+    - [ ] Profile button appears when authenticated
+    - [ ] Page refresh maintains authentication state
+    - [ ] Protected routes redirect to login when not authenticated
+
+21. [ ] Manual testing - Logout flow
+    - [ ] Logout button works
+    - [ ] Tokens cleared from localStorage
+    - [ ] Redirects to home page
+    - [ ] Login/signup buttons reappear
+
+22. [ ] Manual testing - Edge cases
+    - [ ] Network errors handled gracefully
+    - [ ] Token expiration triggers re-login
+    - [ ] Multiple tabs sync auth state (optional)
+    - [ ] Back button works correctly
+
+**Phase 9: Code Cleanup & Documentation**
+
+23. [ ] Remove demo authentication code
+    - [ ] Remove `inferRoleFromEmail` from Login.tsx
+    - [ ] Remove hardcoded `is_logged_in` from Header.tsx
+    - [ ] Remove demo tip messages
+
+24. [ ] Update TypeScript types
+    - [ ] Define User interface
+    - [ ] Define AuthContextType interface
+    - [ ] Define API response types
+    - [ ] Ensure no TypeScript errors
+
+25. [ ] Build and verify
+    - [ ] Run `npm run build`
+    - [ ] Verify no build errors
+    - [ ] Check bundle size (should remain reasonable)
+
+26. [ ] Update AGENT.md with new context
+    - [ ] Document new authentication architecture
+    - [ ] List new files and their purposes
+    - [ ] Note role-to-page mapping
+    - [ ] Update "Current Priorities" if needed
+
+#### Contextual Changes
+
+**Files to Create:**
+- `src/context/AuthContext.tsx` - Authentication context provider with role management
+- `src/components/ProtectedRoute.tsx` - Route protection wrapper
+- `src/pages/Profile.tsx` - Dummy profile page placeholder
+- `src/utils/auth.ts` - Token storage, role detection, and auth utility functions
+- `src/api/auth.ts` - API calls for authentication endpoints
+
+**Files to Modify:**
+- `src/pages/Login.tsx` - Connect to backend API, implement role-based redirect logic
+- `src/pages/Signup.tsx` - Connect to backend API for registration
+- `src/pages/Home.tsx` - Add role selection cards for non-authenticated users
+- `src/components/Header.tsx` - Show/hide auth buttons, add profile button
+- `src/App.tsx` - Wrap with AuthProvider, add protected routes, add profile route
+- `src/config/env.ts` - Verify API URL configuration
+
+**Dependencies Added/Removed:**
+- _None expected (using existing React Router, no new packages planned)_
+- _May consider adding jwt-decode if needed for token inspection/role extraction_
+
+**Configuration Changes:**
+- Verify `.env.development` and `.env.production` have correct VITE_API_URL
+
+**Key Features to Implement:**
+- Full authentication flow (signup, login, logout)
+- Token-based session management with refresh capability
+- **Role-based redirect to default pages after login**
+- Role detection from backend user data or JWT token
+- Protected routes with redirect logic
+- Dynamic UI updates based on authentication state
+- Secure token storage and handling
+- Error handling and user feedback
+
+#### Notes
+
+**Design Decisions Needed:**
+- Token storage: localStorage vs sessionStorage (localStorage for persistence recommended)
+- **Role detection: From backend user object, JWT token claims, or separate API call?**
+- **Role-to-page mapping: Define clear mapping logic (student→/student, instructor→/teacher, etc.)**
+- Token refresh: Automatic on 401 or proactive before expiry?
+- Login redirect: Role-specific default page (as specified)
+
+**Role-to-Page Mapping:**
+```
+student → /student
+instructor → /teacher
+facilitator → /teacher
+admin (school context) → /school
+no role / guardian → /guardian
+```
+
+**Testing Checklist (Implementation Phase):**
+- [ ] User can sign up successfully
+- [ ] User can log in with valid credentials
+- [ ] **Student user redirects to /student after login**
+- [ ] **Instructor/Facilitator user redirects to /teacher after login**
+- [ ] **School admin redirects to /school after login**
+- [ ] **User with no role redirects to /guardian after login**
+- [ ] Invalid credentials show error message
+- [ ] Tokens are stored after successful login
+- [ ] Login/signup buttons hidden when authenticated
+- [ ] Profile button appears when authenticated
+- [ ] Protected routes redirect to login when not authenticated
+- [ ] User can log out successfully
+- [ ] Tokens cleared after logout
+- [ ] Page refreshes maintain authentication state
+- [ ] Token refresh works when access token expires
+
+**References:**
+- Backend API Documentation: `/backend/routes_documentation.md` (roles defined on lines 953-958)
+- UI Component Library: `src/components/ui/` (Button, Input, Card, etc.)
+- Current Auth Demo: `src/pages/Login.tsx` lines 40-65
+- Environment Config: `src/config/env.ts`
+
+**Related Future Tasks:**
+- Implement full Profile page with user details and settings
+- Add profile edit functionality
+- Implement role-specific features and permissions
+- Add password reset/forgot password flow
+- Add email verification for new signups
+- Handle users with multiple roles (e.g., instructor + admin)
 
 ---
 
@@ -27,6 +618,11 @@ Create a comprehensive, production-ready UI component library based on detailed 
 
 #### Context
 After analyzing the entire codebase, the following UI patterns were identified:
+
+#### Dependencies
+- **Depends on:** None (foundational task)
+- **Blocks:** WEB-002 (Authentication requires UI components)
+- **Related:** RECOMMENDED_UPDATES.md (Week 1 priorities)
 
 **Current State:**
 - 4 button variants (.btn-primary, .btn-secondary, .btn-outline, .btn-accent) used across all pages
@@ -230,136 +826,3 @@ Build a modular component library in `src/components/ui/` that encapsulates all 
 - [ ] No TypeScript errors
 - [ ] No console warnings
 - [ ] Performance (no unnecessary re-renders)
-
----
-
-## Task Template
-
-Use this template when creating new tasks:
-
-```markdown
-## Task WEB-XXX: [Task Title]
-**Status:** pending | planned | in_progress | completed | blocked
-**Created:** YYYY-MM-DD
-**Completed:** YYYY-MM-DD (if applicable)
-
-### Description
-[Detailed description of what needs to be done and why]
-
-### Context
-[Any relevant background information, related issues, or dependencies]
-
-### Requirements
-- Requirement 1
-- Requirement 2
-- Requirement 3
-
-### Steps
-1. [ ] Step 1 description
-2. [ ] Step 2 description
-   - [ ] Sub-step 2.1
-   - [ ] Sub-step 2.2
-3. [ ] Step 3 description
-
-### Contextual Changes
-
-**Files Created:**
-- `path/to/file1.ext` - Description
-- `path/to/file2.ext` - Description
-
-**Files Modified:**
-- `path/to/file3.ext` - What changed
-- `path/to/file4.ext` - What changed
-
-**Dependencies Added/Removed:**
-- Added: `package-name@version` - Purpose
-- Removed: `old-package` - Reason
-
-**Configuration Changes:**
-- Updated `config-file` - Description of changes
-
-**Key Features Implemented:**
-- Feature 1 description
-- Feature 2 description
-
-### Notes
-[Any blockers, discoveries, or important information discovered during implementation]
-```
-
----
-
-## Task Guidelines
-
-### Task ID Format
-- `WEB-001`, `WEB-002`, etc.
-- Sequential numbering
-- Prefix "WEB" indicates web application tasks
-
-### Task Lifecycle
-
-#### 1. Creating Tasks
-When a new task is created:
-1. Assign next available task ID (WEB-XXX)
-2. Set status to `pending`
-3. Add creation date
-4. Write clear description and context
-5. Add to "Active Tasks" summary at top
-6. Steps section initially empty (filled during planning)
-
-#### 2. Planning Tasks
-When planning a task:
-1. Read `TASK.md` to find the task
-2. Break down into concrete, actionable steps
-3. Add sub-steps where needed
-4. Define requirements clearly
-5. Update status to `planned`
-6. Update task summary at top
-
-#### 3. Executing Tasks
-When working on a task:
-1. Update status to `in_progress`
-2. Update task summary at top
-3. Complete steps sequentially
-4. Check off steps as completed using [x]
-5. Document discoveries in Notes section
-6. Update Contextual Changes as you progress
-
-#### 4. Completing Tasks
-When finishing a task:
-1. Ensure all steps are checked [x]
-2. Update status to `completed`
-3. Add completion date
-4. Complete all Contextual Changes documentation
-5. **Update AGENT.md** with new context in compact format
-6. Move task from "Active Tasks" to "Completed Tasks" in summary
-7. Update task counts in summary
-
-#### 5. Blocking Tasks
-If a task cannot proceed:
-1. Update status to `blocked`
-2. Document reason clearly in Notes section
-3. Update task summary at top
-4. Create new task for unblocking if needed
-
-### Status Definitions
-- `pending` - Task created, not yet planned
-- `planned` - Steps defined, ready to execute
-- `in_progress` - Currently being worked on
-- `completed` - Finished with context updated in AGENT.md
-- `blocked` - Cannot proceed (reason documented in Notes)
-
-### Best Practices
-- Keep task descriptions clear and focused
-- Break large tasks into smaller sub-tasks when needed
-- Update Contextual Changes in real-time, not after completion
-- Always update AGENT.md when completing tasks
-- Document blockers immediately when encountered
-- Reference related tasks using task IDs
-- Include context for future developers/agents
-
-### Integration with AGENT.md
-- When completing a task, update relevant sections in AGENT.md
-- Add new dependencies to AGENT.md's Tech Stack section
-- Document new files in AGENT.md's Project Structure
-- Update architecture patterns if they change
-- Keep AGENT.md compact - focus on what future agents need to know
