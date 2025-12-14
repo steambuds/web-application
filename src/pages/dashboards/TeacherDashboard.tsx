@@ -1,107 +1,113 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Heading, Card, Badge } from '../../components/ui';
-import CourseCard from '../../components/dashboard/CourseCard';
-import BatchCard from '../../components/dashboard/BatchCard';
-import StatsCard from '../../components/dashboard/StatsCard';
-import { teacherDummyData } from '../../data/dummyDashboardData';
-import { BookOpen, AlertCircle } from 'lucide-react';
+import { ErrorMessage } from '../../components/ui';
+import { getAccessToken } from '../../utils/auth';
+import * as groupsAPI from '../../api/groups';
+import { Group } from '../../types/groups';
+import { Users } from 'lucide-react';
 
 /**
  * TeacherDashboard Component
- * Personalized dashboard for teachers showing:
- * - Teaching courses
- * - Assigned student groups
- * - Pending tasks (assignments to review, etc.)
- * - Teacher statistics
+ * Dashboard for teachers to view and manage their assigned student groups
  */
 const TeacherDashboard: React.FC = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high':
-        return 'error';
-      case 'medium':
-        return 'warning';
-      case 'low':
-        return 'primary';
-      default:
-        return 'gray';
-    }
+  // State for groups from API
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [groupsLoading, setGroupsLoading] = useState(true);
+  const [groupsError, setGroupsError] = useState<string | null>(null);
+
+  // Fetch groups from API
+  useEffect(() => {
+    const fetchGroups = async () => {
+      setGroupsLoading(true);
+      setGroupsError(null);
+      try {
+        const token = getAccessToken();
+        if (!token) {
+          throw new Error('No access token found');
+        }
+        const data = await groupsAPI.getTeacherGroups(token);
+        setGroups(data);
+      } catch (err) {
+        const errorMessage = err instanceof groupsAPI.GroupsAPIError
+          ? err.message
+          : 'Failed to load groups';
+        setGroupsError(errorMessage);
+        console.error('Error fetching groups:', err);
+      } finally {
+        setGroupsLoading(false);
+      }
+    };
+
+    fetchGroups();
+  }, []);
+
+  const handleGroupClick = (groupId: string) => {
+    navigate(`/teacher/groups/${groupId}/attendance`);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-white py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Welcome Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-br from-hot-pink-500 to-accent-500 rounded-xl">
-              <BookOpen className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <Heading level={1} gradient className="mb-1">
-                Welcome back, {user?.username || 'Teacher'}!
-              </Heading>
-              <p className="text-slate-300">Manage your courses and student groups</p>
-            </div>
-          </div>
+        <div className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold font-display mb-2">
+            Welcome, {user?.username || 'Teacher'}!
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Select a group below to view and manage student attendance
+          </p>
         </div>
 
-        {/* Statistics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {teacherDummyData.stats.map((stat, index) => (
-            <StatsCard key={index} stat={stat} />
-          ))}
-        </div>
-
-        {/* Pending Tasks */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <AlertCircle className="w-6 h-6 text-yellow-400" />
-            <h2 className="text-2xl font-bold text-white">Pending Tasks</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {teacherDummyData.pendingTasks.map((task) => (
-              <Card key={task.id} variant="hover">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="font-semibold text-lg text-white flex-1">{task.title}</h3>
-                  <Badge variant="solid" color={getPriorityColor(task.priority)}>
-                    {task.priority}
-                  </Badge>
-                </div>
-                <p className="text-slate-300 text-sm mb-3">{task.description}</p>
-                <div className="text-sm text-slate-400">
-                  Due: {new Date(task.dueDate).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Teaching Courses */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">Teaching Courses</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {teacherDummyData.courses.map((course) => (
-              <CourseCard key={course.id} course={course} />
-            ))}
-          </div>
-        </div>
-
-        {/* Assigned Groups */}
+        {/* Groups Section */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-4">Assigned Student Groups</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {teacherDummyData.groups.map((group) => (
-              <BatchCard key={group.id} batch={group} />
-            ))}
-          </div>
+          {groupsLoading && (
+            <div className="flex justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          )}
+
+          {groupsError && (
+            <div className="max-w-xl mx-auto">
+              <ErrorMessage variant="banner" message={groupsError} />
+            </div>
+          )}
+
+          {!groupsLoading && !groupsError && groups.length === 0 && (
+            <div className="text-center py-12">
+              <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-6">
+                <Users className="h-10 w-10 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">No Groups Assigned</h3>
+              <p className="text-gray-600">You don't have any student groups assigned yet.</p>
+            </div>
+          )}
+
+          {!groupsLoading && !groupsError && groups.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {groups.map((group) => (
+                <div
+                  key={group.id}
+                  onClick={() => handleGroupClick(group.id)}
+                  className="card group cursor-pointer"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-electric-blue-400 to-cyber-purple-500 flex items-center justify-center text-white mb-4">
+                    <Users className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-1">{group.name}</h3>
+                  <p className="text-sm text-gray-600 mb-2">Grade: {group.grades}</p>
+                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                    {group.about || 'No description'}
+                  </p>
+                  <button className="btn-outline w-full">View Attendance</button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

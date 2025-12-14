@@ -21,6 +21,7 @@ import TeacherDashboard from './pages/dashboards/TeacherDashboard';
 import GuardianDashboard from './pages/dashboards/GuardianDashboard';
 import SchoolDashboard from './pages/dashboards/SchoolDashboard';
 import AdminDashboard from './pages/dashboards/AdminDashboard';
+import GroupAttendancePage from './pages/dashboards/GroupAttendancePage';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 
@@ -79,6 +80,11 @@ function App() {
               <Route path="/teacher/dashboard" element={
                 <RoleProtectedRoute allowedRoles={['instructor', 'facilitator']}>
                   <TeacherDashboard />
+                </RoleProtectedRoute>
+              } />
+              <Route path="/teacher/groups/:groupId/attendance" element={
+                <RoleProtectedRoute allowedRoles={['instructor', 'facilitator']}>
+                  <GroupAttendancePage />
                 </RoleProtectedRoute>
               } />
               <Route path="/guardian/dashboard" element={
