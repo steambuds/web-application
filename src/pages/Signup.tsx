@@ -86,10 +86,6 @@ const Signup: React.FC = () => {
         else if (!nameRegex.test(value)) error = 'Name must contain only letters and be at least 2 characters long.';
         break;
       
-      case 'role':
-        if (!value) error = 'Role is required.';
-        break;
-      
       case 'date_of_birth':
         if (value) {
           const selectedDate = new Date(value);
@@ -266,7 +262,6 @@ const Signup: React.FC = () => {
                   onChange={handleChange}
                   required
                   options={[
-                    { value: '', label: 'Select Role', disabled: true },
                     { value: 'student', label: 'Student' },
                     { value: 'teacher', label: 'Teacher' },
                     { value: 'guardian', label: 'Guardian' },
@@ -304,7 +299,6 @@ const Signup: React.FC = () => {
                   value={formData.gender}
                   onChange={handleChange}
                   options={[
-                    { value: '', label: 'Select Gender', disabled: true },
                     { value: 'male', label: 'Male' },
                     { value: 'female', label: 'Female' },
                     { value: 'other', label: 'Other' }
