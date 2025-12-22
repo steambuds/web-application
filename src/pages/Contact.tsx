@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import contactData from '../config/contact';
-import env from '../config/env';
+import { endpoints } from '../config/endpoints';
 import {
   Mail,
   Phone,
@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
       category: formData.inquiryType
     }
     try {
-      const response = await fetch(env.apiUrl, {
+      const response = await fetch(endpoints.CONTACT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

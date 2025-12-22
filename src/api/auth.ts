@@ -1,4 +1,4 @@
-import env from '../config/env';
+import { endpoints } from '../config/endpoints';
 import { UserData, UserRole } from '../utils/auth';
 
 /**
@@ -98,7 +98,7 @@ export const signup = async (
   email: string,
   password: string
 ): Promise<SignupResponse> => {
-  const response = await fetch(`${env.apiUrl}/api/user`, {
+  const response = await fetch(endpoints.AUTH.SIGNUP, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export const login = async (
   email: string,
   password: string
 ): Promise<LoginResponse> => {
-  const response = await fetch(`${env.apiUrl}/api/login`, {
+  const response = await fetch(endpoints.AUTH.LOGIN, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export const login = async (
  * @param refreshToken - User's refresh token
  */
 export const logout = async (refreshToken: string): Promise<void> => {
-  const response = await fetch(`${env.apiUrl}/api/logout`, {
+  const response = await fetch(endpoints.AUTH.LOGOUT, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ export const logout = async (refreshToken: string): Promise<void> => {
 export const refreshAccessToken = async (
   refreshToken: string
 ): Promise<RefreshResponse> => {
-  const response = await fetch(`${env.apiUrl}/api/refresh`, {
+  const response = await fetch(endpoints.AUTH.REFRESH, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ export const getUserProfile = async (
   userId: string,
   accessToken: string
 ): Promise<UserProfileResponse> => {
-  const response = await fetch(`${env.apiUrl}/api/profiles/${userId}`, {
+  const response = await fetch(endpoints.PROFILES.GET(userId), {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -204,7 +204,7 @@ export const getCurrentUser = async (
   userId: string,
   accessToken: string
 ): Promise<UserData> => {
-  const response = await fetch(`${env.apiUrl}/api/users/${userId}`, {
+  const response = await fetch(endpoints.USERS.GET(userId), {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${accessToken}`,

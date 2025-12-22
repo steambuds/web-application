@@ -1,5 +1,5 @@
 const env = {
-    apiUrl: import.meta.env.VITE_API_URL || "https://api.steambuds.com/api/v1/hello",
+    apiUrl: import.meta.env.VITE_API_URL,
     environment: import.meta.env.MODE || "development",
 };
 

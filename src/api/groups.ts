@@ -5,7 +5,7 @@
  * Follows patterns from auth.ts for consistency
  */
 
-import env from '../config/env';
+import { endpoints } from '../config/endpoints';
 import { Group, StudentAttendanceRecord, BulkAttendanceRequest } from '../types/groups';
 
 /**
@@ -76,7 +76,7 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
 export const getTeacherGroups = async (
   accessToken: string
 ): Promise<Group[]> => {
-  const response = await fetch(`${env.apiUrl}/api/groups`, {
+  const response = await fetch(endpoints.GROUPS.LIST, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -100,7 +100,7 @@ export const getGroupAttendance = async (
   groupId: string,
   accessToken: string
 ): Promise<StudentAttendanceRecord[]> => {
-  const response = await fetch(`${env.apiUrl}/api/groups/${groupId}/attendances`, {
+  const response = await fetch(endpoints.GROUPS.ATTENDANCE(groupId), {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -126,7 +126,7 @@ export const recordGroupAttendance = async (
   attendanceData: BulkAttendanceRequest,
   accessToken: string
 ): Promise<void> => {
-  const response = await fetch(`${env.apiUrl}/api/groups/${groupId}/attendances`, {
+  const response = await fetch(endpoints.GROUPS.ATTENDANCE(groupId), {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,

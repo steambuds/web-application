@@ -51,7 +51,7 @@ const AdminDashboard: React.FC = () => {
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       {/* Welcome Section */}
       <div className="mb-8">
-        <Heading level="h1" gradient className="mb-2">
+        <Heading level={1} gradient className="mb-2">
           System Administration
         </Heading>
         <p className="text-gray-600 text-lg">
@@ -113,7 +113,7 @@ const AdminDashboard: React.FC = () => {
           <Card>
             <div className="flex items-center gap-2 mb-4">
               <Plus className="h-5 w-5 text-primary" />
-              <Heading level="h3">Create New School</Heading>
+              <Heading level={3}>Create New School</Heading>
             </div>
             <form onSubmit={handleCreateSchool}>
               <FormGroup columns={1}>
@@ -156,7 +156,7 @@ const AdminDashboard: React.FC = () => {
 
           {/* Schools List */}
           <Card>
-            <Heading level="h3" className="mb-4">
+            <Heading level={3} className="mb-4">
               Existing Schools ({dummySchools.length})
             </Heading>
             <div className="space-y-3">
@@ -167,7 +167,7 @@ const AdminDashboard: React.FC = () => {
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{school.name}</h4>
-                    <Badge variant="solid" color="green">
+                    <Badge variant="solid" color="success">
                       {school.status}
                     </Badge>
                   </div>
@@ -187,7 +187,7 @@ const AdminDashboard: React.FC = () => {
           <Card>
             <div className="flex items-center gap-2 mb-4">
               <Plus className="h-5 w-5 text-primary" />
-              <Heading level="h3">Create New Student</Heading>
+              <Heading level={3}>Create New Student</Heading>
             </div>
             <form onSubmit={handleCreateStudent}>
               <FormGroup columns={1}>
@@ -240,7 +240,7 @@ const AdminDashboard: React.FC = () => {
 
           {/* Students List */}
           <Card>
-            <Heading level="h3" className="mb-4">
+            <Heading level={3} className="mb-4">
               Existing Students ({dummyStudents.length})
             </Heading>
             <div className="space-y-3">
@@ -251,7 +251,7 @@ const AdminDashboard: React.FC = () => {
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{student.name}</h4>
-                    <Badge variant="outline" color="blue">
+                    <Badge variant="outline" color="primary">
                       {student.grade}
                     </Badge>
                   </div>
@@ -271,7 +271,7 @@ const AdminDashboard: React.FC = () => {
           <Card>
             <div className="flex items-center gap-2 mb-4">
               <Plus className="h-5 w-5 text-primary" />
-              <Heading level="h3">Create New Teacher</Heading>
+              <Heading level={3}>Create New Teacher</Heading>
             </div>
             <form onSubmit={handleCreateTeacher}>
               <FormGroup columns={1}>
@@ -324,7 +324,7 @@ const AdminDashboard: React.FC = () => {
 
           {/* Teachers List */}
           <Card>
-            <Heading level="h3" className="mb-4">
+            <Heading level={3} className="mb-4">
               Existing Teachers ({dummyTeachers.length})
             </Heading>
             <div className="space-y-3">
@@ -335,7 +335,7 @@ const AdminDashboard: React.FC = () => {
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{teacher.name}</h4>
-                    <Badge variant="solid" color="purple">
+                    <Badge variant="solid" color="secondary">
                       {teacher.subject}
                     </Badge>
                   </div>

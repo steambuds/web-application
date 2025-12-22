@@ -1640,3 +1640,17 @@ Build a modular component library in `src/components/ui/` that encapsulates all 
 - [ ] No TypeScript errors
 - [ ] No console warnings
 - [ ] Performance (no unnecessary re-renders)
+
+
+
+
+
+I wants you to update the dashboards to use the centralized API config.
+  The dashboards display things like:
+   - Student: Courses, Batch, Remarks, Stats.
+   - Teacher: Courses, Groups, Pending Tasks.
+   - School: Stats, Enrollments, Events, Remarks.
+   - Guardian: Children, Meetings, Remarks.
+   - Admin: Schools, Students, Teachers.
+
+   udpate the apis those are used in the dashbords only if any dashbord using the dummy data do not update those.
