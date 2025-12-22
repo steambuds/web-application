@@ -88,7 +88,7 @@ function App() {
                 </RoleProtectedRoute>
               } />
               <Route path="/guardian/dashboard" element={
-                <RoleProtectedRoute allowedRoles={['guardian']}>
+                <RoleProtectedRoute allowedRoles={['guardian','other']}>
                   <GuardianDashboard />
                 </RoleProtectedRoute>
               } />

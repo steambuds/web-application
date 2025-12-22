@@ -16,6 +16,8 @@ const Signup: React.FC = () => {
   const today = new Date();
   const defaultDateObj = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
   const defaultDate = defaultDateObj.toISOString().split('T')[0];
+  const defaultGender = 'female';
+  const defaultRole = 'student';
   
   // Calculate max date (2 years ago)
   const maxDateObj = new Date(today.getFullYear() - 2, today.getMonth(), today.getDate());
@@ -27,9 +29,9 @@ const Signup: React.FC = () => {
     verifyPassword: '',
     name: '',
     mobile_number: '',
-    gender: '',
+    gender: defaultGender,
     date_of_birth: defaultDate,
-    role: roleFromState || '' // Default to empty to force selection if not provided
+    role: roleFromState || defaultRole 
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -178,13 +180,12 @@ const Signup: React.FC = () => {
     }
 
     try {
-      // Handle 'others' role by sending null/undefined
-      const roleToSend = formData.role === 'others' ? undefined : formData.role;
 
       await signup({
         email: formData.email,
+        username: formData.email,
         password: formData.password,
-        role: roleToSend,
+        role: formData.role,
         name: formData.name,
         mobile_number: formData.mobile_number,
         gender: formData.gender,
@@ -262,10 +263,11 @@ const Signup: React.FC = () => {
                   onChange={handleChange}
                   required
                   options={[
+                    
                     { value: 'student', label: 'Student' },
                     { value: 'teacher', label: 'Teacher' },
                     { value: 'guardian', label: 'Guardian' },
-                    { value: "guardian", label: 'Others' }
+                    { value: "other", label: 'Others' }
                   ]}
                   disabled={isLoading}
                   error={errors.role}

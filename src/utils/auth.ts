@@ -10,7 +10,7 @@ const USER_DATA_KEY = 'steam_buds_user_data';
 /**
  * User roles from backend
  */
-export type UserRole = 'admin' | 'school_admin' | 'teacher' | 'student' | 'guardian';
+export type UserRole = 'admin' | 'school_admin' | 'teacher' | 'student' | 'guardian'|'other';
 
 /**
  * User data structure
