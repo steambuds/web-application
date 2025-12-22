@@ -1,44 +1,109 @@
 import React from 'react';
-import { Users, Heart, ShieldCheck } from 'lucide-react';
+import { Heart, Users, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button, Card } from '../components/ui';
 
 const Guardian: React.FC = () => {
   return (
-    <div className="bg-white">
-      <section className="bg-gradient-to-br from-electric-blue-50 via-cyber-purple-50 to-hot-pink-50 py-12">
+    <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+      <section className="py-16 pattern-dots">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-4">
-            <Users className="h-8 w-8 text-hot-pink-500" />
-            <h1 className="text-3xl md:text-4xl font-display font-bold">For Parents / Guardians / Others</h1>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 bg-gradient-to-br from-hot-pink-500 to-accent-500 rounded-xl">
+              <Heart className="h-10 w-10 text-white" />
+            </div>
+            <div>
+              <h1 className="text-4xl md:text-5xl font-display font-bold gradient-text mb-2">
+                For Parents & Guardians
+              </h1>
+              <p className="text-xl text-slate-300">
+                Support your child's STEAM journey
+              </p>
+            </div>
           </div>
-          <p className="text-gray-700 max-w-2xl">Support your child’s curiosity with safe, structured, and fun learning experiences.</p>
-          <div className="mt-6 flex gap-3">
-            <Link to="/signup" className="btn-primary">Create your account</Link>
-            <Link to="/login" className="btn-outline">Login</Link>
+          <p className="text-slate-300 max-w-3xl text-lg mb-8">
+            Track progress, connect with teachers, and access resources to support your child's learning.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link to="/signup">
+              <Button variant="primary" size="lg">
+                Create Guardian Account
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button variant="outline" size="lg">
+                Login to Dashboard
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
-          <div className="card">
-            <h2 className="font-display text-2xl font-bold mb-4">Services for Families</h2>
-            <ul className="space-y-3 text-gray-700">
-              <li className="flex items-start gap-2"><Heart className="h-5 w-5 text-electric-blue-500 mt-0.5" /> Private workshops and camps</li>
-              <li className="flex items-start gap-2"><ShieldCheck className="h-5 w-5 text-cyber-purple-500 mt-0.5" /> Safe learning with vetted mentors</li>
-              <li className="flex items-start gap-2"><Users className="h-5 w-5 text-hot-pink-500 mt-0.5" /> Parent communities and events</li>
-            </ul>
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">Guardian Resources</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card variant="gradient">
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-gradient-to-br from-hot-pink-500 to-accent-500 rounded-full mb-4">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Progress Tracking</h3>
+                <p className="text-slate-300">
+                  Monitor your child's learning progress, attendance, and achievements in real-time.
+                </p>
+              </div>
+            </Card>
+
+            <Card variant="gradient">
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-gradient-to-br from-electric-blue-500 to-cyber-purple-500 rounded-full mb-4">
+                  <Calendar className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Parent-Teacher Meetings</h3>
+                <p className="text-slate-300">
+                  Schedule and manage meetings with teachers to discuss your child's progress.
+                </p>
+              </div>
+            </Card>
+
+            <Card variant="gradient">
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-gradient-to-br from-cyber-purple-500 to-electric-blue-500 rounded-full mb-4">
+                  <Heart className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Family Workshops</h3>
+                <p className="text-slate-300">
+                  Join family-friendly STEAM workshops and community events together.
+                </p>
+              </div>
+            </Card>
           </div>
-          <div className="card">
-            <h2 className="font-display text-2xl font-bold mb-4">Learner Profile</h2>
-            <form className="grid grid-cols-1 gap-3">
-              <input className="border rounded-lg px-3 py-2" placeholder="Child's name" />
-              <input className="border rounded-lg px-3 py-2" placeholder="Age / Grade" />
-              <input className="border rounded-lg px-3 py-2" placeholder="Interests" />
-              <button type="button" className="btn-secondary">Save to my account</button>
-              <p className="text-xs text-gray-500 -mt-2">Login or create an account to save.</p>
-            </form>
-          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Card variant="gradient">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Be Part of Your Child's Learning
+            </h2>
+            <p className="text-slate-300 mb-6 text-lg">
+              Create your account to stay connected with your child's STEAM education journey.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link to="/signup">
+                <Button variant="primary" size="lg">
+                  Sign Up Now
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg">
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
+          </Card>
         </div>
       </section>
     </div>
