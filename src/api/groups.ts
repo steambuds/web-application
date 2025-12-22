@@ -67,10 +67,10 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
 
 /**
  * Get teacher's assigned groups
- * Requires instructor or facilitator role
+ * Requires teacher role
  *
  * @param accessToken - JWT access token
- * @returns Array of groups where user is instructor/facilitator
+ * @returns Array of groups where user is a teacher
  * @throws {GroupsAPIError} On API errors
  */
 export const getTeacherGroups = async (

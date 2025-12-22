@@ -78,12 +78,12 @@ function App() {
                 </RoleProtectedRoute>
               } />
               <Route path="/teacher/dashboard" element={
-                <RoleProtectedRoute allowedRoles={['instructor', 'facilitator']}>
+                <RoleProtectedRoute allowedRoles={['teacher']}>
                   <TeacherDashboard />
                 </RoleProtectedRoute>
               } />
               <Route path="/teacher/groups/:groupId/attendance" element={
-                <RoleProtectedRoute allowedRoles={['instructor', 'facilitator']}>
+                <RoleProtectedRoute allowedRoles={['teacher']}>
                   <GroupAttendancePage />
                 </RoleProtectedRoute>
               } />

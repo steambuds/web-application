@@ -10,7 +10,7 @@ const USER_DATA_KEY = 'steam_buds_user_data';
 /**
  * User roles from backend
  */
-export type UserRole = 'admin' | 'school_admin' | 'system_user' | 'instructor' | 'facilitator' | 'student' | 'guardian';
+export type UserRole = 'admin' | 'school_admin' | 'teacher' | 'student' | 'guardian';
 
 /**
  * User data structure
@@ -121,7 +121,7 @@ export const getUserData = (): UserData | null => {
  * Priority order:
  * 1. admin -> /admin/dashboard (system admin)
  * 2. student -> /student/dashboard
- * 3. instructor or facilitator -> /teacher/dashboard
+ * 3. teacher -> /teacher/dashboard
  * 4. school_admin -> /school/dashboard (school administrator)
  * 5. default/guardian -> /guardian/dashboard
  */
@@ -140,8 +140,8 @@ export const getRoleDefaultRoute = (roles: UserRole[]): string => {
     return '/student/dashboard';
   }
 
-  // Check for instructor or facilitator roles
-  if (roles.includes('instructor') || roles.includes('facilitator')) {
+  // Check for teacher roles
+  if (roles.includes('teacher')) {
     return '/teacher/dashboard';
   }
 

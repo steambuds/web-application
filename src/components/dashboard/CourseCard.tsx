@@ -43,10 +43,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
 
       <p className="text-slate-300 text-sm mb-4">{course.description}</p>
 
-      {course.instructor && (
+      {course.teacher && (
         <div className="flex items-center gap-2 text-sm text-slate-400 mb-2">
           <User className="w-4 h-4" />
-          <span>{course.instructor}</span>
+          <span>{course.teacher}</span>
         </div>
       )}
 

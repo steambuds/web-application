@@ -265,7 +265,7 @@ const Signup: React.FC = () => {
                     { value: 'student', label: 'Student' },
                     { value: 'teacher', label: 'Teacher' },
                     { value: 'guardian', label: 'Guardian' },
-                    { value: "", label: 'Others' }
+                    { value: "guardian", label: 'Others' }
                   ]}
                   disabled={isLoading}
                   error={errors.role}

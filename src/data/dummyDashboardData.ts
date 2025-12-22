@@ -8,7 +8,7 @@ export interface Course {
   title: string;
   description: string;
   progress: number; // 0-100
-  instructor?: string;
+  teacher?: string;
   nextSession?: string;
   status: 'active' | 'completed' | 'upcoming';
 }
@@ -61,7 +61,7 @@ export const studentDummyData = {
       title: 'STEAM Robotics',
       description: 'Learn robotics with Arduino and sensors',
       progress: 75,
-      instructor: 'Mr. Sharma',
+      teacher: 'Mr. Sharma',
       nextSession: '2025-12-15 at 10:00 AM',
       status: 'active' as const,
     },
@@ -70,7 +70,7 @@ export const studentDummyData = {
       title: 'Advanced Mathematics',
       description: 'Calculus and Linear Algebra fundamentals',
       progress: 60,
-      instructor: 'Ms. Gupta',
+      teacher: 'Ms. Gupta',
       nextSession: '2025-12-14 at 2:00 PM',
       status: 'active' as const,
     },
@@ -79,7 +79,7 @@ export const studentDummyData = {
       title: 'Science Lab Experiments',
       description: 'Hands-on experiments in physics and chemistry',
       progress: 45,
-      instructor: 'Dr. Patel',
+      teacher: 'Dr. Patel',
       nextSession: '2025-12-16 at 11:00 AM',
       status: 'active' as const,
     },

@@ -46,8 +46,8 @@ const Header: React.FC = () => {
       ];
     }
 
-    // Teacher navigation (instructor or facilitator)
-    if (roles.includes('instructor') || roles.includes('facilitator')) {
+    // Teacher navigation (teacher)
+    if (roles.includes('teacher')) {
       return [
         { to: '/teacher/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
         { to: '/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> },
