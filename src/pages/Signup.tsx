@@ -1,36 +1,199 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Lock } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Mail, Lock, Phone, Calendar, Smile } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { SuccessMessage, ErrorMessage } from '../components/ui';
+import { SuccessMessage, ErrorMessage, Input, Button, Select, Card, FormGroup } from '../components/ui';
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { signup, isLoading } = useAuth();
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  
+  // Get role from location state (passed from Home page)
+  const roleFromState = location.state?.role;
+
+  // Calculate default date (18 years ago)
+  const today = new Date();
+  const defaultDateObj = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+  const defaultDate = defaultDateObj.toISOString().split('T')[0];
+  
+  // Calculate max date (2 years ago)
+  const maxDateObj = new Date(today.getFullYear() - 2, today.getMonth(), today.getDate());
+  const maxDate = maxDateObj.toISOString().split('T')[0];
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    verifyPassword: '',
+    name: '',
+    mobile_number: '',
+    gender: '',
+    date_of_birth: defaultDate,
+    role: roleFromState || '' // Default to empty to force selection if not provided
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [globalError, setGlobalError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+
+  // Refs for debounce and accessing fresh state in timeouts
+  const formDataRef = useRef(formData);
+  const timersRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+
+  // Update role if location state changes
+  useEffect(() => {
+    if (roleFromState) {
+      setFormData(prev => ({ ...prev, role: roleFromState }));
+    }
+  }, [roleFromState]);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    formDataRef.current = formData;
+  }, [formData]);
+
+  const validateField = (name: string, value: string, currentData: typeof formData) => {
+    let error = '';
+
+    switch (name) {
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!value) error = 'Email is required.';
+        else if (!emailRegex.test(value)) error = 'Please enter a valid email address.';
+        break;
+      
+      case 'password':
+        // At least one lowercase, one uppercase, one number
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+        if (!value) error = 'Password is required.';
+        else if (value.length < 8) error = 'Password must be at least 8 characters long.';
+        else if (!passwordRegex.test(value)) error = 'Must contain at least one uppercase, lowercase, and number.';
+        break;
+      
+      case 'verifyPassword':
+        if (!value) error = 'Please confirm your password.';
+        else if (value !== currentData.password) error = 'Passwords do not match.';
+        break;
+      
+      case 'mobile_number':
+        const mobileRegex = /^\+?\d{10,15}$/;
+        if (value && !mobileRegex.test(value)) error = 'Please enter a valid mobile number (10-15 digits).';
+        break;
+      
+      case 'name':
+        const nameRegex = /^[a-zA-Z\s]{2,50}$/;
+        if (!value) error = 'Full Name is required.';
+        else if (!nameRegex.test(value)) error = 'Name must contain only letters and be at least 2 characters long.';
+        break;
+      
+      case 'role':
+        if (!value) error = 'Role is required.';
+        break;
+      
+      case 'date_of_birth':
+        if (value) {
+          const selectedDate = new Date(value);
+          const minAllowedDate = new Date('1900-01-01');
+          
+          // Max allowed date is 2 years ago (re-calculated here for safety)
+          const now = new Date();
+          const maxAllowedDate = new Date(now.getFullYear() - 2, now.getMonth(), now.getDate());
+
+          if (selectedDate < minAllowedDate) {
+            error = 'Date cannot be before 1900.';
+          } else if (selectedDate > maxAllowedDate) {
+            error = 'Date must be at least 2 years in the past.';
+          }
+        }
+        break;
+
+      // Optional fields can be validated if needed, currently just format checks if any
+      default:
+        break;
+    }
+    return error;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    
+    // 1. Update form data immediately
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // 2. Debounce validation
+    if (timersRef.current[name]) {
+      clearTimeout(timersRef.current[name]);
+    }
+
+    timersRef.current[name] = setTimeout(() => {
+      // Use fresh data from ref, but override the field being changed with 'value' 
+      // (in case state update hasn't propagated to ref yet, though it should have in 500ms)
+      const currentData = { ...formDataRef.current, [name]: value };
+      
+      const errorMsg = validateField(name, value, currentData);
+      
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        if (errorMsg) newErrors[name] = errorMsg;
+        else delete newErrors[name];
+        return newErrors;
+      });
+
+      // Special case: If password changes, re-validate verifyPassword if it has value
+      if (name === 'password' && currentData.verifyPassword) {
+        const verifyError = validateField('verifyPassword', currentData.verifyPassword, currentData);
+        setErrors(prev => {
+          const newErrors = { ...prev };
+          if (verifyError) newErrors['verifyPassword'] = verifyError;
+          else delete newErrors['verifyPassword'];
+          return newErrors;
+        });
+      }
+    }, 500);
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
+    setGlobalError(null);
     setSuccess(false);
 
-    // Client-side validation
-    if (!username || !email || !password) {
-      setError('Please complete all fields.');
-      return;
-    }
+    // Validate all fields
+    const newErrors: Record<string, string> = {};
+    let hasError = false;
 
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters long.');
+    // List of fields to validate
+    const fieldsToValidate = ['name', 'email', 'role', 'mobile_number', 'date_of_birth', 'password', 'verifyPassword'];
+    
+    fieldsToValidate.forEach(field => {
+      // @ts-ignore - indexing by string key
+      const value = formData[field];
+      const errorMsg = validateField(field, value, formData);
+      if (errorMsg) {
+        newErrors[field] = errorMsg;
+        hasError = true;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (hasError) {
+      setGlobalError('Please fix the errors above.');
       return;
     }
 
     try {
-      await signup(username, email, password);
+      // Handle 'others' role by sending null/undefined
+      const roleToSend = formData.role === 'others' ? undefined : formData.role;
+
+      await signup({
+        email: formData.email,
+        password: formData.password,
+        role: roleToSend,
+        name: formData.name,
+        mobile_number: formData.mobile_number,
+        gender: formData.gender,
+        date_of_birth: formData.date_of_birth
+      });
       setSuccess(true);
 
       // Redirect to login after a brief delay
@@ -40,88 +203,159 @@ const Signup: React.FC = () => {
         });
       }, 2000);
     } catch (err) {
-      // Error is already set by AuthContext
-      setError(err instanceof Error ? err.message : 'Signup failed. Please try again.');
+      setGlobalError(err instanceof Error ? err.message : 'Signup failed. Please try again.');
     }
   };
 
+  // Capitalize role for display
+  const getDisplayRole = () => {
+    if (!formData.role) return 'New Member';
+    if (formData.role === 'others') return 'Member';
+    return formData.role.charAt(0).toUpperCase() + formData.role.slice(1).replace('_', ' ');
+  };
+
+  const displayRole = getDisplayRole();
+
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4 py-12 bg-gradient-to-br from-electric-blue-50 via-cyber-purple-50 to-hot-pink-50">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        <h1 className="text-2xl font-bold font-display text-center mb-2">Create your account</h1>
-        <p className="text-center text-sm text-gray-600 mb-6">Join STEAM Buds and start your learning journey</p>
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-electric-blue-50 via-cyber-purple-50 to-hot-pink-50">
+      <div className="w-full max-w-2xl">
+        <Card className="shadow-xl">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold font-display text-gray-900 mb-2">Create your account</h1>
+            <p className="text-gray-600">
+              Join STEAM Buds as a <span className="font-semibold text-primary-600">{displayRole}</span>
+            </p>
+          </div>
 
-        {success ? (
-          <SuccessMessage
-            title="Success!"
-            message="Account created successfully! Redirecting to login..."
-          />
-        ) : (
-          <form onSubmit={onSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-              <div className="relative">
-                <User className="h-4 w-4 text-gray-400 absolute left-3 top-3" />
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full border rounded-lg py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-electric-blue-400"
-                  placeholder="Your username"
+          {success ? (
+            <SuccessMessage
+              title="Success!"
+              message="Account created successfully! Redirecting to login..."
+            />
+          ) : (
+            <form onSubmit={onSubmit} className="space-y-6">
+              
+              <FormGroup columns={2}>
+                <Input
+                  label="Full Name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  iconLeft={<Smile className="h-4 w-4" />}
+                  placeholder="Shyam Ish"
                   required
                   disabled={isLoading}
+                  error={errors.name}
                 />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <div className="relative">
-                <Mail className="h-4 w-4 text-gray-400 absolute left-3 top-3" />
-                <input
+                <Input
+                  label="Email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border rounded-lg py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-electric-blue-400"
-                  placeholder="you@example.com"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  iconLeft={<Mail className="h-4 w-4" />}
+                  placeholder="dev@steambuds.com"
                   required
                   disabled={isLoading}
+                  error={errors.email}
                 />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-              <div className="relative">
-                <Lock className="h-4 w-4 text-gray-400 absolute left-3 top-3" />
-                <input
+                <Select
+                  label="Role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  required
+                  options={[
+                    { value: '', label: 'Select Role', disabled: true },
+                    { value: 'student', label: 'Student' },
+                    { value: 'teacher', label: 'Teacher' },
+                    { value: 'guardian', label: 'Guardian' },
+                    { value: "", label: 'Others' }
+                  ]}
+                  disabled={isLoading}
+                  error={errors.role}
+                />
+                <Input
+                  label="Mobile Number"
+                  type="tel"
+                  name="mobile_number"
+                  value={formData.mobile_number}
+                  onChange={handleChange}
+                  iconLeft={<Phone className="h-4 w-4" />}
+                  placeholder="+91 9828770365"
+                  disabled={isLoading}
+                  error={errors.mobile_number}
+                />
+                <Input
+                  label="Date of Birth"
+                  type="date"
+                  name="date_of_birth"
+                  value={formData.date_of_birth}
+                  onChange={handleChange}
+                  iconLeft={<Calendar className="h-4 w-4" />}
+                  disabled={isLoading}
+                  error={errors.date_of_birth}
+                  min="1900-01-01"
+                  max={maxDate}
+                />
+                <Select
+                  label="Gender"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  options={[
+                    { value: '', label: 'Select Gender', disabled: true },
+                    { value: 'male', label: 'Male' },
+                    { value: 'female', label: 'Female' },
+                    { value: 'other', label: 'Other' }
+                  ]}
+                  disabled={isLoading}
+                  error={errors.gender}
+                />
+                <Input
+                  label="Password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full border rounded-lg py-2.5 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-electric-blue-400"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  iconLeft={<Lock className="h-4 w-4" />}
                   placeholder="At least 8 characters"
                   required
                   disabled={isLoading}
+                  error={errors.password}
                 />
-              </div>
-              <p className="mt-1 text-xs text-gray-500">Must be at least 8 characters long</p>
-            </div>
+                <Input
+                  label="Verify Password"
+                  type="password"
+                  name="verifyPassword"
+                  value={formData.verifyPassword}
+                  onChange={handleChange}
+                  iconLeft={<Lock className="h-4 w-4" />}
+                  placeholder="Confirm password"
+                  required
+                  disabled={isLoading}
+                  error={errors.verifyPassword}
+                />
+              </FormGroup>
 
-            {error && <ErrorMessage message={error} />}
+              {globalError && <ErrorMessage message={globalError} />}
 
-            <button
-              type="submit"
-              className="w-full btn-primary"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Creating account...' : 'Create account'}
-            </button>
-          </form>
-        )}
+              <Button
+                type="submit"
+                variant="primary"
+                fullWidth
+                size="lg"
+                loading={isLoading}
+              >
+                Create Account
+              </Button>
+            </form>
+          )}
 
-        <p className="mt-6 text-center text-sm">
-          Already have an account? <Link className="text-electric-blue-600 font-semibold" to="/login">Login</Link>
-        </p>
+          <p className="mt-6 text-center text-sm text-gray-600">
+            Already have an account? <Link className="text-primary-600 font-semibold hover:underline" to="/login">Login</Link>
+          </p>
+        </Card>
       </div>
     </div>
   );

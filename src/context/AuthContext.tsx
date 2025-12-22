@@ -22,7 +22,7 @@ interface AuthContextType {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  signup: (username: string, email: string, password: string) => Promise<void>;
+  signup: (data: authAPI.SignupData) => Promise<void>;
   logout: () => Promise<void>;
   refreshToken: () => Promise<void>;
   clearError: () => void;
@@ -153,13 +153,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   /**
    * Signup function
    */
-  const signup = async (username: string, email: string, password: string): Promise<void> => {
+  const signup = async (data: authAPI.SignupData): Promise<void> => {
     setIsLoading(true);
     setError(null);
 
     try {
       // Call signup API
-      await authAPI.signup(username, email, password);
+      await authAPI.signup(data);
       // Note: Don't auto-login after signup, redirect to login page instead
     } catch (err) {
       const errorMessage = err instanceof authAPI.AuthAPIError

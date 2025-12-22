@@ -88,26 +88,31 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
 };
 
 /**
- * User registration
- * @param username - User's username
- * @param email - User's email address
- * @param password - User's password
+ * Signup data interface
  */
-export const signup = async (
-  username: string,
-  email: string,
-  password: string
-): Promise<SignupResponse> => {
+export interface SignupData {
+  username?: string;
+  email: string;
+  password: string;
+  role?: string;
+  name?: string;
+  mobile_number?: string;
+  gender?: string;
+  address?: string;
+  date_of_birth?: string;
+}
+
+/**
+ * User registration
+ * @param data - Signup data object
+ */
+export const signup = async (data: SignupData): Promise<SignupResponse> => {
   const response = await fetch(endpoints.AUTH.SIGNUP, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: JSON.stringify(data),
   });
 
   return handleResponse<SignupResponse>(response);

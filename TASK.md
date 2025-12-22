@@ -219,15 +219,17 @@ The build is failing due to missing `jwt-decode` dependency which is used in `sr
 **Completed:** 2025-12-22
 
 #### Description
-Update the dashboards to use the centralized API configuration (`src/config/endpoints.ts`).
-The dashboards display things like:
-- Student: Courses, Batch, Remarks, Stats.
-- Teacher: Courses, Groups, Pending Tasks.
-- School: Stats, Enrollments, Events, Remarks.
-- Guardian: Children, Meetings, Remarks.
-- Admin: Schools, Students, Teachers.
+Update the dashboards to use the centralized API configuration (`src/config/endpoints.ts`). The dashboards display things like: Student: Courses, Batch, Remarks, Stats. Teacher: Courses, Groups, Pending Tasks. School: Stats, Enrollments, Events, Remarks. Guardian: Children, Meetings, Remarks. Admin: Schools, Students, Teachers. Update the APIs those are used in the dashboards only if any dashboard using the dummy data do not update those.
 
-Update the APIs those are used in the dashboards only if any dashboard using the dummy data do not update those.
+#### Contextual Changes
+**Files Modified:**
+- `src/api/auth.ts` - Updated signup to support role, name, mobile, etc.
+- `src/context/AuthContext.tsx` - Updated signup to support new data structure.
+- `src/pages/Signup.tsx` - Overhauled to support new fields and role pre-selection.
+- `src/pages/Student.tsx` - Updated signup link to pass role.
+- `src/pages/Teacher.tsx` - Updated signup link to pass role.
+- `src/pages/Guardian.tsx` - Updated signup link to pass role.
+- `src/pages/School.tsx` - Updated signup link to pass role.
 
 #### Notes
 Verified that:
