@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 4
+**Total Tasks:** 6
 - **Pending:** 0
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 4
+- **Completed:** 6
 - **Blocked:** 0
 
 ## Task Template
@@ -175,11 +175,68 @@ If a task cannot proceed:
 ---
 ## Active Tasks
 
-(No active tasks)
+### BUILD-001: Fix missing build dependencies
+**Status:** pending
+**Created:** 2025-12-22
+
+#### Description
+The build is failing due to missing `jwt-decode` dependency which is used in `src/utils/auth.ts`. This task is to install the missing dependency and ensure the build passes.
+
+### WEB-005: Update dashboards to use centralized API config
+**Status:** pending
+**Created:** 2025-12-22
+
+#### Description
+Update the dashboards to use the centralized API configuration (`src/config/endpoints.ts`).
+The dashboards display things like:
+- Student: Courses, Batch, Remarks, Stats.
+- Teacher: Courses, Groups, Pending Tasks.
+- School: Stats, Enrollments, Events, Remarks.
+- Guardian: Children, Meetings, Remarks.
+- Admin: Schools, Students, Teachers.
+
+Update the APIs those are used in the dashboards only if any dashboard using the dummy data do not update those.
 
 ---
 
 ## Completed Tasks
+
+### BUILD-001: Fix missing build dependencies
+**Status:** completed
+**Created:** 2025-12-22
+**Completed:** 2025-12-22
+
+#### Description
+The build is failing due to missing `jwt-decode` dependency which is used in `src/utils/auth.ts`. This task is to install the missing dependency and ensure the build passes.
+
+#### Contextual Changes
+**Dependencies Added/Removed:**
+- Added: `jwt-decode`
+
+### WEB-005: Update dashboards to use centralized API config
+**Status:** completed
+**Created:** 2025-12-22
+**Completed:** 2025-12-22
+
+#### Description
+Update the dashboards to use the centralized API configuration (`src/config/endpoints.ts`).
+The dashboards display things like:
+- Student: Courses, Batch, Remarks, Stats.
+- Teacher: Courses, Groups, Pending Tasks.
+- School: Stats, Enrollments, Events, Remarks.
+- Guardian: Children, Meetings, Remarks.
+- Admin: Schools, Students, Teachers.
+
+Update the APIs those are used in the dashboards only if any dashboard using the dummy data do not update those.
+
+#### Notes
+Verified that:
+- Student Dashboard uses dummy data (no update needed).
+- Admin Dashboard uses dummy data (no update needed).
+- Teacher Dashboard uses `groupsAPI` which uses `endpoints.ts` (already consistent).
+- Group Attendance Page uses `groupsAPI` which uses `endpoints.ts` (already consistent).
+- Contact page uses `endpoints.ts`.
+- Auth API uses `endpoints.ts`.
 
 ### WEB-004: Fix Dashboard Flow - Public Pages & Private Dashboards with Role Authorization
 **Status:** completed
