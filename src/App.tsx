@@ -24,11 +24,13 @@ import AdminDashboard from './pages/dashboards/AdminDashboard';
 import GroupAttendancePage from './pages/dashboards/GroupAttendancePage';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <AnalyticsTracker />
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">

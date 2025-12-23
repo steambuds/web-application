@@ -43,7 +43,7 @@ const Contact: React.FC = () => {
       category: formData.inquiryType
     }
     try {
-      const response = await fetch(endpoints.CONTACT, {
+      const response = await fetch(endpoints.HELLO.CREATE, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

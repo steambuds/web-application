@@ -32,7 +32,7 @@ export const endpoints = {
     CREATE: `${BASE_URL}/api/hello`,
     DELETE: (id: string) => `${BASE_URL}/api/hello/${id}`,
   },
-  CONTACT: `${BASE_URL}/api/hello`, // Mapping contact form to hello endpoint based on previous usage
+  TRACK_VISIT: `${BASE_URL}/api/track_visit`,
 };
 
 export default endpoints;
