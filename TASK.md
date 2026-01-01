@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 6
-- **Pending:** 0
+**Total Tasks:** 16
+- **Pending:** 10 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012, WEB-013)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 6
+- **Completed:** 6 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005)
 - **Blocked:** 0
 
 ## Task Template
@@ -196,6 +196,229 @@ The dashboards display things like:
 - Admin: Schools, Students, Teachers.
 
 Update the APIs those are used in the dashboards only if any dashboard using the dummy data do not update those.
+
+### WEB-006: Security Hardening and Code Quality Improvements
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Improve application security and code quality based on code review findings. This includes removing hardcoded test credentials, implementing CSRF protection, adding proper error boundaries, and improving logging practices.
+
+#### Context
+Code review of changes between commit b250d670a95d95d6a7773ed8fd2edbac2de5b7fc and current HEAD revealed several security and code quality issues that need to be addressed before production deployment.
+
+**Key Findings:**
+1. Test credentials exposed in AGENT.md (ghanshyam@steambuds.com / Password123)
+2. console.log used in AnalyticsTracker.tsx instead of proper logging
+3. No error boundaries to catch React component errors
+4. Missing CSRF protection on forms
+5. No client-side rate limiting for API calls
+6. Some async operations missing loading/error states
+
+#### Requirements
+- Remove all hardcoded test credentials from documentation
+- Implement proper logging service (replace console.log)
+- Add React error boundaries for critical components
+- Implement CSRF token handling for forms
+- Add client-side rate limiting for API endpoints
+- Ensure all async operations have proper error handling
+- Add session timeout mechanism
+- Implement secure token rotation strategy
+
+### WEB-007: Testing Infrastructure and Test Coverage
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Set up comprehensive testing infrastructure including unit tests, integration tests, and E2E tests for critical application flows. Currently, the application has no automated tests, which poses risks for regression and quality assurance.
+
+#### Context
+The application has grown significantly with authentication, attendance management, dashboards, and analytics features. Without automated tests, it's difficult to ensure code changes don't break existing functionality.
+
+**Critical Flows to Test:**
+1. Authentication flow (signup, login, logout, token refresh)
+2. Role-based routing and authorization
+3. Dashboard access control
+4. Form validation (signup, contact, admin forms)
+5. API integration layers
+6. Protected route behavior
+
+#### Requirements
+- Set up testing framework (Vitest or Jest + React Testing Library)
+- Write unit tests for utility functions (src/utils/auth.ts)
+- Write component tests for UI library (src/components/ui/*)
+- Write integration tests for authentication flow
+- Write E2E tests for critical user journeys
+- Set up test coverage reporting (target: 70%+ coverage)
+- Add pre-commit hook to run tests
+- Configure CI/CD pipeline for automated testing
+
+### WEB-008: Performance Optimization and Code Splitting
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Optimize application performance through code splitting, lazy loading, and bundle size reduction. Current bundle size is 283KB (79KB gzipped), which can be improved for better initial load times.
+
+#### Context
+The application loads all routes and components upfront, even those requiring authentication. Implementing route-based code splitting and lazy loading can significantly improve initial page load performance, especially on mobile networks.
+
+**Performance Opportunities:**
+1. Code splitting for dashboard routes (they're behind auth)
+2. Lazy loading for heavy components (AttendanceCalendarView, AdminDashboard)
+3. Image optimization (team photos, logos)
+4. Bundle analysis and tree-shaking optimization
+5. Implement service worker for caching
+
+#### Requirements
+- Implement React.lazy() for dashboard routes
+- Add Suspense boundaries with loading fallbacks
+- Analyze bundle with vite-bundle-visualizer
+- Optimize images (compress, use WebP format)
+- Implement font subsetting for Inter/Poppins
+- Add service worker for static asset caching
+- Measure and document performance improvements (Lighthouse score)
+- Target: <200KB initial bundle, <2s Time to Interactive
+
+### WEB-009: Accessibility Improvements (WCAG 2.1 AA Compliance)
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Improve application accessibility to meet WCAG 2.1 AA standards. Current implementation has gaps in ARIA labels, keyboard navigation, focus management, and screen reader support.
+
+#### Context
+As an educational platform, accessibility is critical to ensure all users, including those with disabilities, can effectively use the application. The UI component library was built with some accessibility features, but comprehensive audit and improvements are needed.
+
+**Known Accessibility Gaps:**
+1. Missing ARIA labels on interactive elements
+2. Incomplete keyboard navigation (tab order, focus traps in modals)
+3. Missing focus indicators on some components
+4. No skip-to-content link
+5. Form error announcements not screen reader friendly
+6. Color contrast issues in some badge variants
+
+#### Requirements
+- Conduct full accessibility audit (use axe DevTools)
+- Add ARIA labels to all interactive elements
+- Implement proper focus management in dialogs/modals
+- Add skip-to-content navigation link
+- Ensure all forms have proper labels and error announcements
+- Fix color contrast issues (target WCAG AA: 4.5:1 for text)
+- Test with screen readers (NVDA, JAWS, VoiceOver)
+- Add keyboard navigation tests
+- Document accessibility features in component library
+
+### WEB-010: Monitoring, Logging, and Error Tracking
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Implement production-grade monitoring, logging, and error tracking infrastructure to identify and debug issues in production. Replace console.log statements with structured logging and add error tracking service integration.
+
+#### Context
+Current implementation uses console.log for debugging and has no centralized error tracking. For production deployment, we need proper observability to monitor application health, track errors, and debug user-reported issues.
+
+**Current Logging Issues:**
+1. AnalyticsTracker.tsx uses console.log/console.error
+2. No structured logging format
+3. No error tracking service (Sentry, LogRocket, etc.)
+4. No performance monitoring
+5. No user session replay for debugging
+
+#### Requirements
+- Implement structured logging service
+- Integrate error tracking service (Sentry recommended)
+- Add performance monitoring (Core Web Vitals)
+- Set up user session replay for critical errors
+- Create logging utility with log levels (debug, info, warn, error)
+- Add contextual information to error reports (user ID, route, browser)
+- Set up alerting for critical errors
+- Create error dashboard for monitoring
+- Document logging best practices for team
+
+### WEB-011: Attendance Feature Enhancements
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Review and enhance the newly added attendance management feature (PR #12) based on code review. The attendance feature includes calendar view, status tracking, and student management, but needs additional improvements for production readiness.
+
+#### Context
+The attendance feature was added in PR #12 with components:
+- `AttendanceCalendarView.tsx` - Calendar-based attendance view
+- `AttendanceStatusBadge.tsx` - Status indicator component
+- `StudentAttendanceRow.tsx` - Individual student attendance row
+- `src/api/groups.ts` - API integration for groups and attendance
+- `/teacher/groups/:id/attendance` - Teacher attendance page
+
+**Review Findings:**
+1. Need bulk attendance actions (mark all present/absent)
+2. Missing attendance statistics (monthly summary, trends)
+3. No export functionality (CSV, PDF reports)
+4. Missing attendance history view
+5. No attendance notifications for guardians
+6. Limited date range selection
+
+#### Requirements
+- Add bulk attendance operations (select all, mark all)
+- Implement attendance statistics dashboard
+- Add export functionality (CSV/PDF)
+- Create attendance history view
+- Add date range filter/picker
+- Implement guardian notifications for absences
+- Add attendance edit/correction workflow
+- Optimize API calls (batch updates instead of individual)
+- Add loading skeletons for calendar view
+
+### WEB-012: Analytics and Tracking Enhancements
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Enhance the analytics tracking implementation added in commit 33b961f. Current implementation tracks page visits with 3-hour throttling, but needs additional analytics events and integration with analytics platforms.
+
+#### Context
+AnalyticsTracker component was added to track page visits with sessionStorage-based throttling (3 hours). However, for comprehensive analytics, we need to track user interactions, conversions, and integrate with analytics platforms like Google Analytics or Mixpanel.
+
+**Current Implementation:**
+- Tracks page visits via POST to TRACK_VISIT endpoint
+- Uses sessionStorage for throttling (3 hours)
+- Checks every 10 minutes via interval
+- Basic error handling with console.error
+
+**Enhancement Opportunities:**
+1. Track user interactions (button clicks, form submissions)
+2. Track conversion events (signup, login, contact form)
+3. Integrate Google Analytics 4 or Mixpanel
+4. Add user journey tracking (funnel analysis)
+5. Track feature usage (dashboard views, attendance actions)
+6. Add performance metrics (page load times, API latency)
+
+#### Requirements
+- Integrate Google Analytics 4 or Mixpanel
+- Add event tracking for key interactions
+- Track conversion funnel (visitor → signup → dashboard)
+- Implement custom events for feature usage
+- Add performance tracking (Web Vitals)
+- Create analytics dashboard (top pages, user flows)
+- Implement privacy-compliant tracking (GDPR, cookie consent)
+- Add analytics documentation for team
+### WEB-013: Create Resource Article from PPT
+**Status:** pending
+**Created:** 2026-01-01
+
+#### Description
+Create a new article page based on the content of a PowerPoint presentation (`teacher_ppt.pdf`). The page should be formatted as an article and include necessary images. The user requested the page to be in `@src/resource_page/**`.
+
+#### Context
+The user provided a `teacher_ppt.pdf` file, but the agent cannot read binary files directly. We need to obtain the content (text/images) from the user or a converted file (PDF) to proceed. The new page will likely need to be integrated into the existing routing system, possibly under `src/pages/resources/` or a new route.
+
+#### Requirements
+- Extract content from PPT (currently blocked)
+- Design article layout using UI components
+- Create new route/page
+- Integrate into Resources section
 
 ---
 

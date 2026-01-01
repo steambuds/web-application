@@ -25,6 +25,9 @@ import GroupAttendancePage from './pages/dashboards/GroupAttendancePage';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import AnalyticsTracker from './components/AnalyticsTracker';
+import EducationMyths from './resource_page/EducationMyths';
+import PedagogicalExcellence from './resource_page/PedagogicalExcellence';
+import WhatMakesGoodTeacher from './resource_page/WhatMakesGoodTeacher';
 
 function App() {
   return (
@@ -37,6 +40,9 @@ function App() {
             <Routes>
               {/* Public routes */}
               <Route path="/resources" element={<Resources />} />
+              <Route path="/resources/education-myths" element={<EducationMyths />} />
+              <Route path="/resources/pedagogical-excellence" element={<PedagogicalExcellence />} />
+              <Route path="/resources/what-makes-good-teacher" element={<WhatMakesGoodTeacher />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/rnd" element={<RnD />} />
