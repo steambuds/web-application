@@ -77,7 +77,7 @@ const Home: React.FC = () => {
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform">
                 <Users className="h-7 w-7" />
               </div>
-              <h3 className="font-semibold">Parent / Guardian / Others</h3>
+              <h3 className="font-semibold">Guardian / Others</h3>
               <p className="text-sm text-gray-600 mt-1">Private workshops and support</p>
             </Link>
           </div>
