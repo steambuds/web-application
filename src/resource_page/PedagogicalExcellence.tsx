@@ -4,7 +4,6 @@ import {
   Hammer,
   Palette,
   Search,
-  MessageCircle,
   Briefcase,
   CheckCircle,
   TrendingUp,
@@ -18,7 +17,6 @@ import {
   GradientText,
   IconBox,
   TwoColumnSection,
-  Button
 } from '../components/ui';
 
 const PedagogicalExcellence = () => {
@@ -322,19 +320,6 @@ const PedagogicalExcellence = () => {
             </Card>
           </div>
         </section>
-
-        {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
-          <MessageCircle className="w-12 h-12 mx-auto mb-6 text-purple-400" />
-          <Heading level={2} className="text-white mb-4">Questions & Discussion</Heading>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            Ensuring every lesson resonates, challenges, and produces tangible growth.
-          </p>
-          <Button variant="primary" size="lg">
-            Download Framework PDF
-          </Button>
-        </div>
-
       </div>
     </div>
   );

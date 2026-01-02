@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import mythOfEducationImg from '../images/myth_of_education.jpeg';
 import pedagogicalExcellenceImg from '../images/pedagogical_excellence.jpeg';
 import goodTeacherImg from '../images/good_teacher.jpeg';
+import homeworkTeacherImg from '../images/homework_teacher.jpeg';
+import teacherNepImg from '../images/teacher_nep.jpeg';
 
 /**
  * Article data for teacher resources
@@ -20,6 +22,27 @@ const TEACHER_ARTICLES = [
     route: '/resources/pedagogical-excellence',
     readTime: '12 min read'
   },
+  {
+    id: 'nep-2020-teacher-guide',
+    title: 'NEP 2020: Teacher\'s Playbook',
+    description: 'Move beyond "finishing the syllabus" to ensuring understanding—key shifts for educators.',
+    thumbnail: teacherNepImg,
+    badge: 'Policy Implementation',
+    badgeColor: 'primary' as const,
+    route: '/resources/nep-2020-teacher-guide',
+    readTime: '12 min read'
+  },
+  {
+    id: 'homework-guide-teachers',
+    title: 'Rethinking Homework',
+    description: 'Design assignments that promote equity, autonomy, and genuine learning—without the burnout.',
+    thumbnail: homeworkTeacherImg,
+    badge: 'Teaching Strategy',
+    badgeColor: 'secondary' as const,
+    route: '/resources/homework-guide-teachers',
+    readTime: '10 min read'
+  },
+  
   {
     id: 'education-myths',
     title: 'The Biggest Myth of Education',
