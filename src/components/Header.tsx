@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, BookOpen } from 'lucide-react';
+import { Menu, X, Home } from 'lucide-react';
 import logoImage from '../images/steambuds_logo.svg';
 import { Button } from './ui';
 import { useAuth } from '../context/AuthContext';
@@ -12,15 +12,12 @@ const Header: React.FC = () => {
 
   // Public navigation links
   const navLinksHome: Array<{ to: string; label: string; icon?: React.ReactNode }> = [
-    { to: '/resources', label: 'Resources' },
-    { to: '/rnd', label: 'R&D' },
     { to: '/about', label: 'About Us' },
     { to: '/contact', label: 'Contact' },
   ];
 
   const navLinks: Array<{ to: string; label: string; icon?: React.ReactNode }> = [
     { to: '/', label: 'Home' },
-    { to: '/resources', label: 'Resources' },
     { to: '/about', label: 'About Us' },
     { to: '/contact', label: 'Contact' },
   ];
@@ -42,7 +39,6 @@ const Header: React.FC = () => {
     if (roles.includes('student')) {
       return [
         { to: '/student/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        { to: '/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> },
       ];
     }
 
@@ -50,7 +46,6 @@ const Header: React.FC = () => {
     if (roles.includes('teacher')) {
       return [
         { to: '/teacher/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        { to: '/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> },
       ];
     }
 
@@ -58,14 +53,12 @@ const Header: React.FC = () => {
     if (roles.includes('school_admin')) {
       return [
         { to: '/school/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        { to: '/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> },
       ];
     }
 
     // Guardian navigation (default for users with no specific role)
     return [
       { to: '/guardian/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-      { to: '/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> },
     ];
   }, [isAuthenticated, user]);
 

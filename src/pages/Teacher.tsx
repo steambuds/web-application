@@ -149,13 +149,13 @@ const Teacher: React.FC = () => {
                   onClick={() => navigate(article.route)}
                 >
                   {/* Thumbnail - Image */}
-                  <div className={`w-full rounded-lg mb-4 overflow-hidden ${
+                  <div className={`w-full rounded-lg mb-4 overflow-hidden bg-gray-50 flex items-center justify-center ${
                     isFeatured ? 'h-48 sm:h-64 lg:h-96' : 'h-48'
                   }`}>
                     <img
                       src={article.thumbnail}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
 

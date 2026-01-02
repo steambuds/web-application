@@ -306,11 +306,11 @@ const School: React.FC = () => {
                 onClick={() => navigate(article.route)}
               >
                 {/* Thumbnail - Image */}
-                <div className="w-full h-40 rounded-lg mb-3 overflow-hidden">
+                <div className="w-full h-40 rounded-lg mb-3 overflow-hidden bg-gray-50 flex items-center justify-center">
                   <img
                     src={article.thumbnail}
                     alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 

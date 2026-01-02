@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import homeworkParentImg from '../images/homework_parent.jpeg';
 import beyondTextbookImg from '../images/beyond_textbook.jpeg';
 import parentNepImg from '../images/parent_nep.jpeg';
+import markSkillParentImg from '../images/mark_skill_parent.jpeg';
 
 /**
  * Article data for guardian resources
@@ -19,6 +20,16 @@ const GUARDIAN_ARTICLES = [
     badgeColor: 'accent' as const,
     route: '/resources/homework-guide-parents',
     readTime: '8 min read'
+  },
+  {
+    id: 'marks-vs-skills-parenting',
+    title: 'Marks AND Skills: The Balancing Act',
+    description: 'Why choosing between "Good Grades" and "Real Skills" is a false dilemma—how to prepare for the future.',
+    thumbnail: markSkillParentImg,
+    badge: 'Parenting Guide',
+    badgeColor: 'secondary' as const,
+    route: '/resources/marks-vs-skills-parenting',
+    readTime: '10 min read'
   },
   {
     id: 'nep-2020-parent-guide',
@@ -225,11 +236,11 @@ const Guardian: React.FC = () => {
                     onClick={() => navigate(article.route)}
                   >
                     {/* Thumbnail */}
-                    <div className="w-full h-40 rounded-lg overflow-hidden">
+                    <div className="w-full h-40 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
                       <img
                         src={article.thumbnail}
                         alt={article.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
 

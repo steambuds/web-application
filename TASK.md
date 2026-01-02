@@ -13,10 +13,10 @@
 ## Task Summary
 
 **Total Tasks:** 16
-- **Pending:** 10 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012, WEB-013)
+- **Pending:** 9 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 6 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005)
+- **Completed:** 7 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013)
 - **Blocked:** 0
 
 ## Task Template
@@ -404,25 +404,39 @@ AnalyticsTracker component was added to track page visits with sessionStorage-ba
 - Create analytics dashboard (top pages, user flows)
 - Implement privacy-compliant tracking (GDPR, cookie consent)
 - Add analytics documentation for team
-### WEB-013: Create Resource Article from PPT
-**Status:** pending
-**Created:** 2026-01-01
-
-#### Description
-Create a new article page based on the content of a PowerPoint presentation (`teacher_ppt.pdf`). The page should be formatted as an article and include necessary images. The user requested the page to be in `@src/resource_page/**`.
-
-#### Context
-The user provided a `teacher_ppt.pdf` file, but the agent cannot read binary files directly. We need to obtain the content (text/images) from the user or a converted file (PDF) to proceed. The new page will likely need to be integrated into the existing routing system, possibly under `src/pages/resources/` or a new route.
-
-#### Requirements
-- Extract content from PPT (currently blocked)
-- Design article layout using UI components
-- Create new route/page
-- Integrate into Resources section
 
 ---
 
 ## Completed Tasks
+
+### WEB-013: Create Resource Article from PPT
+**Status:** completed
+**Created:** 2026-01-01
+**Completed:** 2026-01-02
+
+#### Description
+Create a new article page based on the content of a PowerPoint presentation (`teacher_ppt.pdf`). The page should be formatted as an article and include necessary images. The user requested the page to be in `@src/resource_page/**`.
+
+#### Contextual Changes
+**Files Created:**
+- `src/resource_page/StudyLessLearnMore.tsx` - "Study Less, Learn More: The Science of 'Smart' Studying"
+- `src/resource_page/AICheatingGuide.tsx` - "Is AI Cheating? How to Use ChatGPT as a Tutor, Not a Writer"
+- `src/resource_page/MathMindsetGuide.tsx` - "Why 'I'm Not a Math Person' is a Lie (Neuroplasticity)"
+- `src/resource_page/DopamineDetoxGuide.tsx` - "The Dopamine War: Reclaiming Your Focus from Reels & Shorts"
+- `src/resource_page/MarksVsSkillsGuide.tsx` - "Marks vs. Skills: Building a Portfolio That Actually Matters" (Student)
+- `src/resource_page/MarksVsSkillsParentGuide.tsx` - "Marks AND Skills: The Balancing Act" (Parent)
+
+**Files Modified:**
+- `src/App.tsx` - Added routes for all 6 new articles.
+- `src/pages/Resources.tsx` - Added cards for all 6 new articles to the Knowledge Hub.
+
+**Key Features Implemented:**
+- Five new student-focused resource articles.
+- One new parent-focused resource article.
+- Integrated all articles into the routing and Resources page UI.
+
+#### Notes
+The user provided the content for each article interactively, replacing the original plan to extract from a PPT. The original PPT extraction task was pivoted to creating these specific articles based on user prompts.
 
 ### BUILD-001: Fix missing build dependencies
 **Status:** completed

@@ -33,6 +33,12 @@ import HomeworkGuideTeachers from './resource_page/HomeworkGuideTeachers';
 import HolisticDevelopmentGuide from './resource_page/HolisticDevelopmentGuide';
 import NEP2020ParentGuide from './resource_page/NEP2020ParentGuide';
 import NEP2020TeacherGuide from './resource_page/NEP2020TeacherGuide';
+import StudyLessLearnMore from './resource_page/StudyLessLearnMore';
+import AICheatingGuide from './resource_page/AICheatingGuide';
+import MathMindsetGuide from './resource_page/MathMindsetGuide';
+import DopamineDetoxGuide from './resource_page/DopamineDetoxGuide';
+import MarksVsSkillsGuide from './resource_page/MarksVsSkillsGuide';
+import MarksVsSkillsParentGuide from './resource_page/MarksVsSkillsParentGuide';
 
 function App() {
   return (
@@ -53,6 +59,12 @@ function App() {
               <Route path="/resources/holistic-development" element={<HolisticDevelopmentGuide />} />
               <Route path="/resources/nep-2020-parent-guide" element={<NEP2020ParentGuide />} />
               <Route path="/resources/nep-2020-teacher-guide" element={<NEP2020TeacherGuide />} />
+              <Route path="/resources/study-less-learn-more" element={<StudyLessLearnMore />} />
+              <Route path="/resources/is-ai-cheating" element={<AICheatingGuide />} />
+              <Route path="/resources/math-mindset" element={<MathMindsetGuide />} />
+              <Route path="/resources/dopamine-detox" element={<DopamineDetoxGuide />} />
+              <Route path="/resources/marks-vs-skills" element={<MarksVsSkillsGuide />} />
+              <Route path="/resources/marks-vs-skills-parenting" element={<MarksVsSkillsParentGuide />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/rnd" element={<RnD />} />
