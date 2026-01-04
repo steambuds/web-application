@@ -83,7 +83,6 @@ export const isAppModePath = (pathname: string): boolean => {
   const appModePaths = [
     '/student/dashboard/activities',
     '/student/dashboard/resources',
-    '/student',
     '/teacher/dashboard/resources',
     '/guardian/dashboard/resources',
     '/school/dashboard/resources'

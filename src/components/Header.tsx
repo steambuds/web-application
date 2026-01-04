@@ -54,24 +54,38 @@ const Header: React.FC = () => {
 
     // Student navigation
     if (roles.includes('student')) {
-      if (location.pathname.startsWith('/student/dashboard')) {
-        // On student dashboard: show About, Contact + toggle (Resources OR Activities)
+      if (location.pathname.includes('/student/dashboard/resources') ||
+          location.pathname.includes('/student/dashboard/activities')) {
+        // On resources or activities view: show My Dashboard + toggle only
         const isOnActivities = location.pathname.includes('/activities');
         return [
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+          { to: '/student/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
           // Show the alternate view (Resources if on Activities, Activities if on Resources)
           isOnActivities
             ? { to: '/student/dashboard/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> }
             : { to: '/student/dashboard/activities', label: 'Activities', icon: <Activity className="h-4 w-4" /> }
         ];
       }
+      if (location.pathname.startsWith('/student/dashboard')) {
+        // On main dashboard: show About + Contact (no My Dashboard button)
+        return [
+          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
+          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+        ];
+      }
       return [{ to: '/student/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
     }
 
-    // Teacher navigation - show About, Contact on dashboard
+    // Teacher navigation
     if (roles.includes('teacher')) {
+      if (location.pathname.includes('/teacher/dashboard/resources')) {
+        // On resources view: show My Dashboard only
+        return [
+          { to: '/teacher/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
+        ];
+      }
       if (location.pathname.startsWith('/teacher/dashboard')) {
+        // On main dashboard: show About + Contact (no My Dashboard button)
         return [
           { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
           { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
@@ -83,15 +97,13 @@ const Header: React.FC = () => {
     // Guardian navigation
     if (roles.includes('guardian') || roles.includes('other')) {
       if (location.pathname.includes('/guardian/dashboard/resources')) {
-        // On resources view: show Home button to go back to dashboard
+        // On resources view: show My Dashboard only
         return [
-          { to: '/guardian/dashboard', label: 'Home', icon: <Home className="h-4 w-4" /> },
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+          { to: '/guardian/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
         ];
       }
       if (location.pathname.startsWith('/guardian/dashboard')) {
-        // On main dashboard: show About, Contact (no Home button)
+        // On main dashboard: show About, Contact (no My Dashboard button)
         return [
           { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
           { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
@@ -103,15 +115,13 @@ const Header: React.FC = () => {
     // School admin navigation
     if (roles.includes('school_admin')) {
       if (location.pathname.includes('/school/dashboard/resources')) {
-        // On resources view: show Home button to go back to dashboard
+        // On resources view: show My Dashboard only
         return [
-          { to: '/school/dashboard', label: 'Home', icon: <Home className="h-4 w-4" /> },
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+          { to: '/school/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
         ];
       }
       if (location.pathname.startsWith('/school/dashboard')) {
-        // On main dashboard: show About, Contact (no Home button)
+        // On main dashboard: show About, Contact (no My Dashboard button)
         return [
           { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
           { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
@@ -174,9 +184,9 @@ const Header: React.FC = () => {
             // Public navigation
             <nav className="flex space-x-3 md:space-x-6">
               {location.pathname === '/' ? (
-                // Home page navigation (About Us, Contact)
+                // Home page navigation (About Us, Contact) - filter out current page
                 <>
-                  {PUBLIC_NAV_LINKS_HOME.map((link) => (
+                  {PUBLIC_NAV_LINKS_HOME.filter(link => link.to !== location.pathname).map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
@@ -190,9 +200,9 @@ const Header: React.FC = () => {
                   ))}
                 </>
               ) : (
-                // Other public pages (Home, About Us, Contact)
+                // Other public pages (Home, About Us, Contact) - filter out current page
                 <>
-                  {PUBLIC_NAV_LINKS.map((link) => (
+                  {PUBLIC_NAV_LINKS.filter(link => link.to !== location.pathname).map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
@@ -244,9 +254,11 @@ const Header: React.FC = () => {
             </div>
 
             {/* Standard Mobile menu button - Only show if authenticated AND no mobile action */}
-            {/* Hide on guardian/school dashboard (only shows About/Contact which are already visible) */}
+            {/* Hide on main dashboards (only shows About/Contact which are already visible) */}
             {isAuthenticated && !mobileAction &&
-             !(location.pathname === '/guardian/dashboard' ||
+             !(location.pathname === '/student/dashboard' ||
+               location.pathname === '/teacher/dashboard' ||
+               location.pathname === '/guardian/dashboard' ||
                location.pathname === '/school/dashboard' ||
                (location.pathname.startsWith('/guardian/dashboard') &&
                 !location.pathname.includes('/resources')) ||
@@ -272,7 +284,7 @@ const Header: React.FC = () => {
             <div className="flex flex-col space-y-3">
               {(isAuthenticated
                 ? getRoleSpecificNavLinks
-                : (location.pathname === '/' ? PUBLIC_NAV_LINKS_HOME : PUBLIC_NAV_LINKS)
+                : (location.pathname === '/' ? PUBLIC_NAV_LINKS_HOME : PUBLIC_NAV_LINKS).filter(link => link.to !== location.pathname)
               ).map((link) => (
                 <Link
                   key={link.to}
