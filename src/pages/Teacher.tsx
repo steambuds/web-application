@@ -1,7 +1,9 @@
-import { ArrowRight, Lock } from 'lucide-react';
+import { Lock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Card, Badge } from '../components/ui';
+import { Button } from '../components/ui';
 import { useAuth } from '../context/AuthContext';
+import ConfettiBackground from '../components/ConfettiBackground';
+import ArticleCard from '../components/ArticleCard';
 import mythOfEducationImg from '../images/myth_of_education.jpeg';
 import pedagogicalExcellenceImg from '../images/pedagogical_excellence.jpeg';
 import goodTeacherImg from '../images/good_teacher.jpeg';
@@ -80,42 +82,7 @@ const Teacher: React.FC = () => {
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
       {/* Confetti Effect */}
-      <div className="absolute inset-x-0 top-0 h-screen pointer-events-none overflow-hidden">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 opacity-70"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: '-10px',
-              backgroundColor: [
-                '#3b82f6', // blue
-                '#8b5cf6', // purple
-                '#ec4899', // pink
-                '#f59e0b', // amber
-                '#10b981', // green
-                '#ef4444', // red
-              ][Math.floor(Math.random() * 6)],
-              borderRadius: Math.random() > 0.5 ? '50%' : '0',
-              animation: `confetti-fall ${3 + Math.random() * 4}s linear ${Math.random() * 2}s infinite`,
-              transform: `rotate(${Math.random() * 360}deg)`,
-            }}
-          />
-        ))}
-      </div>
-
-      <style>{`
-        @keyframes confetti-fall {
-          0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-          }
-        }
-      `}</style>
+      <ConfettiBackground />
 
       {/* Clean Header */}
       <section className="pt-16 pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -140,55 +107,13 @@ const Teacher: React.FC = () => {
             {visibleArticles.map((article, index) => {
               const isFeatured = index === 0;
               return (
-                <Card
+                <ArticleCard
                   key={article.id}
-                  variant="hover"
-                  className={`flex flex-col cursor-pointer group bg-white ${
-                    isFeatured ? 'lg:col-span-2 lg:row-span-2' : ''
-                  }`}
+                  article={article}
                   onClick={() => navigate(article.route)}
-                >
-                  {/* Thumbnail - Image */}
-                  <div className={`w-full rounded-lg mb-4 overflow-hidden bg-gray-50 flex items-center justify-center ${
-                    isFeatured ? 'h-48 sm:h-64 lg:h-96' : 'h-48'
-                  }`}>
-                    <img
-                      src={article.thumbnail}
-                      alt={article.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex flex-col flex-grow">
-                    {/* Badge */}
-                    <Badge variant="outline" color={article.badgeColor} className="mb-3 w-fit">
-                      {article.badge}
-                    </Badge>
-
-                    {/* Title */}
-                    <h3 className={`font-bold mb-3 group-hover:text-primary transition-colors text-gray-900 ${
-                      isFeatured ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-lg'
-                    }`}>
-                      {article.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className={`text-gray-600 mb-4 flex-grow ${
-                      isFeatured ? 'text-sm sm:text-base line-clamp-2 sm:line-clamp-3' : 'text-sm line-clamp-2'
-                    }`}>
-                      {article.description}
-                    </p>
-
-                    {/* Footer */}
-                    <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
-                      <span>{article.readTime}</span>
-                      <span className="flex items-center gap-1 text-primary font-medium group-hover:gap-2 transition-all">
-                        Read <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
-                  </div>
-                </Card>
+                  className={isFeatured ? 'lg:col-span-2 lg:row-span-2' : ''}
+                  imageHeight={isFeatured ? 'h-48 sm:h-64 lg:h-96' : 'h-48'}
+                />
               );
             })}
           </div>

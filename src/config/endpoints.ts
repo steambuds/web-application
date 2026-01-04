@@ -13,15 +13,6 @@ export const endpoints = {
   USERS: {
     LIST: `${BASE_URL}/api/users`,
     GET: (id: string) => `${BASE_URL}/api/users/${id}`,
-    ROLES: (id: string) => `${BASE_URL}/api/users/${id}/roles`,
-    ROLE_REMOVE: (id: string, role: string) => `${BASE_URL}/api/users/${id}/roles/${role}`,
-  },
-  PROFILES: {
-    LIST: `${BASE_URL}/api/profiles`,
-    GET: (id: string) => `${BASE_URL}/api/profiles/${id}`,
-    CREATE: `${BASE_URL}/api/profiles`,
-    UPDATE: (id: string) => `${BASE_URL}/api/profiles/${id}`,
-    DELETE: (id: string) => `${BASE_URL}/api/profiles/${id}`,
   },
   GROUPS: {
     LIST: `${BASE_URL}/api/groups`,

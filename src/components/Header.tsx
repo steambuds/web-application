@@ -14,6 +14,14 @@ interface NavLink {
   icon?: React.ReactNode;
 }
 
+const DASHBOARD_ROUTES = {
+  student: '/student/dashboard',
+  teacher: '/teacher/dashboard',
+  guardian: '/guardian/dashboard',
+  school: '/school/dashboard',
+  admin: '/admin/dashboard'
+};
+
 // Public navigation links
 const PUBLIC_NAV_LINKS_HOME: NavLink[] = [
   { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
@@ -25,6 +33,65 @@ const PUBLIC_NAV_LINKS: NavLink[] = [
   { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
   { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
 ];
+
+const getStudentNavLinks = (pathname: string): NavLink[] => {
+  if (pathname.includes('/student/dashboard/resources') ||
+      pathname.includes('/student/dashboard/activities')) {
+    const isOnActivities = pathname.includes('/activities');
+    return [
+      { to: DASHBOARD_ROUTES.student, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
+      isOnActivities
+        ? { to: `${DASHBOARD_ROUTES.student}/resources`, label: 'Resources', icon: <BookOpen className="h-4 w-4" /> }
+        : { to: `${DASHBOARD_ROUTES.student}/activities`, label: 'Activities', icon: <Activity className="h-4 w-4" /> }
+    ];
+  }
+  if (pathname.startsWith(DASHBOARD_ROUTES.student)) {
+    return [
+      { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
+      { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+    ];
+  }
+  return [{ to: DASHBOARD_ROUTES.student, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+};
+
+const getTeacherNavLinks = (pathname: string): NavLink[] => {
+  if (pathname.includes('/teacher/dashboard/resources')) {
+    return [{ to: DASHBOARD_ROUTES.teacher, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+  }
+  if (pathname.startsWith(DASHBOARD_ROUTES.teacher)) {
+    return [
+      { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
+      { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+    ];
+  }
+  return [{ to: DASHBOARD_ROUTES.teacher, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+};
+
+const getGuardianNavLinks = (pathname: string): NavLink[] => {
+  if (pathname.includes('/guardian/dashboard/resources')) {
+    return [{ to: DASHBOARD_ROUTES.guardian, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+  }
+  if (pathname.startsWith(DASHBOARD_ROUTES.guardian)) {
+    return [
+      { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
+      { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+    ];
+  }
+  return [{ to: DASHBOARD_ROUTES.guardian, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+};
+
+const getSchoolNavLinks = (pathname: string): NavLink[] => {
+  if (pathname.includes('/school/dashboard/resources')) {
+    return [{ to: DASHBOARD_ROUTES.school, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+  }
+  if (pathname.startsWith(DASHBOARD_ROUTES.school)) {
+    return [
+      { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
+      { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
+    ];
+  }
+  return [{ to: DASHBOARD_ROUTES.school, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
+};
 
 /**
  * Header Component
@@ -46,93 +113,45 @@ const Header: React.FC = () => {
     }
 
     const roles = user.roles;
+    if (roles.includes('admin')) return [];
+    if (roles.includes('student')) return getStudentNavLinks(location.pathname);
+    if (roles.includes('teacher')) return getTeacherNavLinks(location.pathname);
+    if (roles.includes('guardian') || roles.includes('other')) return getGuardianNavLinks(location.pathname);
+    if (roles.includes('school_admin')) return getSchoolNavLinks(location.pathname);
 
-    // System admin - no navigation links (dashboard only)
-    if (roles.includes('admin')) {
-      return [];
-    }
-
-    // Student navigation
-    if (roles.includes('student')) {
-      if (location.pathname.includes('/student/dashboard/resources') ||
-          location.pathname.includes('/student/dashboard/activities')) {
-        // On resources or activities view: show My Dashboard + toggle only
-        const isOnActivities = location.pathname.includes('/activities');
-        return [
-          { to: '/student/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-          // Show the alternate view (Resources if on Activities, Activities if on Resources)
-          isOnActivities
-            ? { to: '/student/dashboard/resources', label: 'Resources', icon: <BookOpen className="h-4 w-4" /> }
-            : { to: '/student/dashboard/activities', label: 'Activities', icon: <Activity className="h-4 w-4" /> }
-        ];
-      }
-      if (location.pathname.startsWith('/student/dashboard')) {
-        // On main dashboard: show About + Contact (no My Dashboard button)
-        return [
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
-        ];
-      }
-      return [{ to: '/student/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
-    }
-
-    // Teacher navigation
-    if (roles.includes('teacher')) {
-      if (location.pathname.includes('/teacher/dashboard/resources')) {
-        // On resources view: show My Dashboard only
-        return [
-          { to: '/teacher/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        ];
-      }
-      if (location.pathname.startsWith('/teacher/dashboard')) {
-        // On main dashboard: show About + Contact (no My Dashboard button)
-        return [
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
-        ];
-      }
-      return [{ to: '/teacher/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
-    }
-
-    // Guardian navigation
-    if (roles.includes('guardian') || roles.includes('other')) {
-      if (location.pathname.includes('/guardian/dashboard/resources')) {
-        // On resources view: show My Dashboard only
-        return [
-          { to: '/guardian/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        ];
-      }
-      if (location.pathname.startsWith('/guardian/dashboard')) {
-        // On main dashboard: show About, Contact (no My Dashboard button)
-        return [
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
-        ];
-      }
-      return [{ to: '/guardian/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
-    }
-
-    // School admin navigation
-    if (roles.includes('school_admin')) {
-      if (location.pathname.includes('/school/dashboard/resources')) {
-        // On resources view: show My Dashboard only
-        return [
-          { to: '/school/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> },
-        ];
-      }
-      if (location.pathname.startsWith('/school/dashboard')) {
-        // On main dashboard: show About, Contact (no My Dashboard button)
-        return [
-          { to: '/about', label: 'About', icon: <Info className="h-4 w-4" /> },
-          { to: '/contact', label: 'Contact', icon: <Mail className="h-4 w-4" /> },
-        ];
-      }
-      return [{ to: '/school/dashboard', label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
-    }
-
-    // Default - no special navigation (use public page links)
     return PUBLIC_NAV_LINKS;
   }, [isAuthenticated, user, location.pathname]);
+
+  const shouldShowMobileMenu = useMemo(() => {
+    if (!isAuthenticated || mobileAction) return false;
+    
+    // Hide standard mobile menu on dashboard pages (except resources/activities where needed)
+    // Actually, logic is: hide if on main dashboard page
+    const pathname = location.pathname;
+    const isMainDashboard = 
+      pathname === DASHBOARD_ROUTES.student ||
+      pathname === DASHBOARD_ROUTES.teacher ||
+      pathname === DASHBOARD_ROUTES.guardian ||
+      pathname === DASHBOARD_ROUTES.school;
+      
+    // Also hide for some sub-routes if they are "main" dashboard views?
+    // Original logic:
+    // (location.pathname.startsWith('/guardian/dashboard') && !location.pathname.includes('/resources'))
+    // This means hide for /guardian/dashboard AND /guardian/dashboard/something ELSE than resources?
+    // Actually, the original logic hid the menu on dashboard pages because they already show About/Contact in the navbar,
+    // and there are no other links to show in the hamburger menu.
+    
+    // Let's simplify: Show mobile menu button ONLY if there are links to show that might be hidden?
+    // Or just respect the original complex logic for now.
+    
+    if (isMainDashboard) return false;
+    
+    // Special cases from original code
+    if (pathname.startsWith(DASHBOARD_ROUTES.guardian) && !pathname.includes('/resources')) return false;
+    if (pathname.startsWith(DASHBOARD_ROUTES.school) && !pathname.includes('/resources')) return false;
+    
+    return true;
+  }, [isAuthenticated, mobileAction, location.pathname]);
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -253,17 +272,8 @@ const Header: React.FC = () => {
               )}
             </div>
 
-            {/* Standard Mobile menu button - Only show if authenticated AND no mobile action */}
-            {/* Hide on main dashboards (only shows About/Contact which are already visible) */}
-            {isAuthenticated && !mobileAction &&
-             !(location.pathname === '/student/dashboard' ||
-               location.pathname === '/teacher/dashboard' ||
-               location.pathname === '/guardian/dashboard' ||
-               location.pathname === '/school/dashboard' ||
-               (location.pathname.startsWith('/guardian/dashboard') &&
-                !location.pathname.includes('/resources')) ||
-               (location.pathname.startsWith('/school/dashboard') &&
-                !location.pathname.includes('/resources'))) && (
+            {/* Standard Mobile menu button - Only show if authenticated AND no mobile action AND shouldShowMobileMenu */}
+            {shouldShowMobileMenu && (
               <button
                 className="md:hidden p-2"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}

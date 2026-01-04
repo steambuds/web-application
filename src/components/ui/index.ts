@@ -44,9 +44,6 @@ export type { SuccessMessageProps } from './SuccessMessage';
 export { default as ErrorMessage } from './ErrorMessage';
 export type { ErrorMessageProps } from './ErrorMessage';
 
-export { default as Dialog } from './Dialog';
-export type { DialogProps } from './Dialog';
-
 // Layout Components
 export { default as FeatureList } from './FeatureList';
 export type { FeatureListProps, FeatureItem } from './FeatureList';

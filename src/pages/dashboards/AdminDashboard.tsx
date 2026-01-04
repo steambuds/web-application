@@ -5,12 +5,61 @@ import { School, Users, GraduationCap, Plus, Check } from 'lucide-react';
 
 type EntityType = 'school' | 'student' | 'teacher';
 
+// Reusable Tab Content Component
+interface AdminTabContentProps {
+  createTitle: string;
+  onCreate: (e: React.FormEvent) => void;
+  listTitle: string;
+  listCount: number;
+  renderList: () => React.ReactNode;
+  children: React.ReactNode; // Form fields
+}
+
+const AdminTabContent: React.FC<AdminTabContentProps> = ({
+  createTitle,
+  onCreate,
+  listTitle,
+  listCount,
+  renderList,
+  children
+}) => {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Create Form */}
+      <Card>
+        <div className="flex items-center gap-2 mb-4">
+          <Plus className="h-5 w-5 text-primary" />
+          <Heading level={3}>{createTitle}</Heading>
+        </div>
+        <form onSubmit={onCreate}>
+          <FormGroup columns={1}>
+            {children}
+            <Button type="submit" variant="primary" className="w-full">
+              {createTitle}
+            </Button>
+          </FormGroup>
+        </form>
+      </Card>
+
+      {/* List */}
+      <Card>
+        <Heading level={3} className="mb-4">
+          {listTitle} ({listCount})
+        </Heading>
+        <div className="space-y-3">
+          {renderList()}
+        </div>
+      </Card>
+    </div>
+  );
+};
+
 const AdminDashboard: React.FC = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<EntityType>('school');
   const [successMessage, setSuccessMessage] = useState<string>('');
 
-  // Dummy data for existing entities
+  // Dummy data
   const dummySchools = [
     { id: '1', name: 'Delhi Public School', location: 'New Delhi', status: 'Active', students: 500 },
     { id: '2', name: 'Ryan International School', location: 'Mumbai', status: 'Active', students: 750 },
@@ -29,23 +78,17 @@ const AdminDashboard: React.FC = () => {
     { id: '3', name: 'Dr. Sunita Gupta', email: 'sunita@example.com', school: 'DAV Public School', subject: 'Physics' },
   ];
 
-  const handleCreateSchool = (e: React.FormEvent) => {
+  const handleCreate = (type: string) => (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMessage('School created successfully!');
+    setSuccessMessage(`${type} created successfully!`);
     setTimeout(() => setSuccessMessage(''), 3000);
   };
 
-  const handleCreateStudent = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSuccessMessage('Student created successfully!');
-    setTimeout(() => setSuccessMessage(''), 3000);
-  };
-
-  const handleCreateTeacher = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSuccessMessage('Teacher created successfully!');
-    setTimeout(() => setSuccessMessage(''), 3000);
-  };
+  const tabs = [
+    { id: 'school', label: 'Schools', icon: <School className="h-5 w-5" /> },
+    { id: 'student', label: 'Students', icon: <Users className="h-5 w-5" /> },
+    { id: 'teacher', label: 'Teachers', icon: <GraduationCap className="h-5 w-5" /> },
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -70,282 +113,123 @@ const AdminDashboard: React.FC = () => {
       {/* Tabs */}
       <div className="mb-6 border-b border-gray-200">
         <div className="flex gap-4">
-          <button
-            onClick={() => setActiveTab('school')}
-            className={`pb-3 px-4 font-medium transition-colors border-b-2 flex items-center gap-2 ${
-              activeTab === 'school'
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-600 hover:text-primary'
-            }`}
-          >
-            <School className="h-5 w-5" />
-            Schools
-          </button>
-          <button
-            onClick={() => setActiveTab('student')}
-            className={`pb-3 px-4 font-medium transition-colors border-b-2 flex items-center gap-2 ${
-              activeTab === 'student'
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-600 hover:text-primary'
-            }`}
-          >
-            <Users className="h-5 w-5" />
-            Students
-          </button>
-          <button
-            onClick={() => setActiveTab('teacher')}
-            className={`pb-3 px-4 font-medium transition-colors border-b-2 flex items-center gap-2 ${
-              activeTab === 'teacher'
-                ? 'border-primary text-primary'
-                : 'border-transparent text-gray-600 hover:text-primary'
-            }`}
-          >
-            <GraduationCap className="h-5 w-5" />
-            Teachers
-          </button>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as EntityType)}
+              className={`pb-3 px-4 font-medium transition-colors border-b-2 flex items-center gap-2 ${
+                activeTab === tab.id
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-gray-600 hover:text-primary'
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* School Tab */}
       {activeTab === 'school' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Create School Form */}
-          <Card>
-            <div className="flex items-center gap-2 mb-4">
-              <Plus className="h-5 w-5 text-primary" />
-              <Heading level={3}>Create New School</Heading>
-            </div>
-            <form onSubmit={handleCreateSchool}>
-              <FormGroup columns={1}>
-                <Input
-                  label="School Name"
-                  type="text"
-                  placeholder="Enter school name"
-                  required
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="admin@school.com"
-                  required
-                />
-                <Input
-                  label="Phone Number"
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  required
-                />
-                <Input
-                  label="Location"
-                  type="text"
-                  placeholder="City, State"
-                  required
-                />
-                <Input
-                  label="Address"
-                  type="text"
-                  placeholder="Full address"
-                  required
-                />
-                <Button type="submit" variant="primary" className="w-full">
-                  Create School
-                </Button>
-              </FormGroup>
-            </form>
-          </Card>
-
-          {/* Schools List */}
-          <Card>
-            <Heading level={3} className="mb-4">
-              Existing Schools ({dummySchools.length})
-            </Heading>
-            <div className="space-y-3">
+        <AdminTabContent
+          createTitle="Create New School"
+          onCreate={handleCreate('School')}
+          listTitle="Existing Schools"
+          listCount={dummySchools.length}
+          renderList={() => (
+            <>
               {dummySchools.map((school) => (
-                <div
-                  key={school.id}
-                  className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors"
-                >
+                <div key={school.id} className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{school.name}</h4>
-                    <Badge variant="solid" color="success">
-                      {school.status}
-                    </Badge>
+                    <Badge variant="solid" color="success">{school.status}</Badge>
                   </div>
                   <p className="text-sm text-gray-600 mb-1">📍 {school.location}</p>
                   <p className="text-sm text-gray-600">👥 {school.students} students</p>
                 </div>
               ))}
-            </div>
-          </Card>
-        </div>
+            </>
+          )}
+        >
+          <Input label="School Name" type="text" placeholder="Enter school name" required />
+          <Input label="Email" type="email" placeholder="admin@school.com" required />
+          <Input label="Phone Number" type="tel" placeholder="+91 XXXXX XXXXX" required />
+          <Input label="Location" type="text" placeholder="City, State" required />
+          <Input label="Address" type="text" placeholder="Full address" required />
+        </AdminTabContent>
       )}
 
       {/* Student Tab */}
       {activeTab === 'student' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Create Student Form */}
-          <Card>
-            <div className="flex items-center gap-2 mb-4">
-              <Plus className="h-5 w-5 text-primary" />
-              <Heading level={3}>Create New Student</Heading>
-            </div>
-            <form onSubmit={handleCreateStudent}>
-              <FormGroup columns={1}>
-                <Input
-                  label="Student Name"
-                  type="text"
-                  placeholder="Enter student name"
-                  required
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="student@example.com"
-                  required
-                />
-                <Input
-                  label="Phone Number"
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  required
-                />
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    School
-                  </label>
-                  <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    required
-                  >
-                    <option value="">Select a school</option>
-                    {dummySchools.map((school) => (
-                      <option key={school.id} value={school.id}>
-                        {school.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <Input
-                  label="Grade"
-                  type="text"
-                  placeholder="e.g., Grade 10"
-                  required
-                />
-                <Button type="submit" variant="primary" className="w-full">
-                  Create Student
-                </Button>
-              </FormGroup>
-            </form>
-          </Card>
-
-          {/* Students List */}
-          <Card>
-            <Heading level={3} className="mb-4">
-              Existing Students ({dummyStudents.length})
-            </Heading>
-            <div className="space-y-3">
+        <AdminTabContent
+          createTitle="Create New Student"
+          onCreate={handleCreate('Student')}
+          listTitle="Existing Students"
+          listCount={dummyStudents.length}
+          renderList={() => (
+            <>
               {dummyStudents.map((student) => (
-                <div
-                  key={student.id}
-                  className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors"
-                >
+                <div key={student.id} className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{student.name}</h4>
-                    <Badge variant="outline" color="primary">
-                      {student.grade}
-                    </Badge>
+                    <Badge variant="outline" color="primary">{student.grade}</Badge>
                   </div>
                   <p className="text-sm text-gray-600 mb-1">📧 {student.email}</p>
                   <p className="text-sm text-gray-600">🏫 {student.school}</p>
                 </div>
               ))}
-            </div>
-          </Card>
-        </div>
+            </>
+          )}
+        >
+          <Input label="Student Name" type="text" placeholder="Enter student name" required />
+          <Input label="Email" type="email" placeholder="student@example.com" required />
+          <Input label="Phone Number" type="tel" placeholder="+91 XXXXX XXXXX" required />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">School</label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+              <option value="">Select a school</option>
+              {dummySchools.map((school) => <option key={school.id} value={school.id}>{school.name}</option>)}
+            </select>
+          </div>
+          <Input label="Grade" type="text" placeholder="e.g., Grade 10" required />
+        </AdminTabContent>
       )}
 
       {/* Teacher Tab */}
       {activeTab === 'teacher' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Create Teacher Form */}
-          <Card>
-            <div className="flex items-center gap-2 mb-4">
-              <Plus className="h-5 w-5 text-primary" />
-              <Heading level={3}>Create New Teacher</Heading>
-            </div>
-            <form onSubmit={handleCreateTeacher}>
-              <FormGroup columns={1}>
-                <Input
-                  label="Teacher Name"
-                  type="text"
-                  placeholder="Enter teacher name"
-                  required
-                />
-                <Input
-                  label="Email"
-                  type="email"
-                  placeholder="teacher@example.com"
-                  required
-                />
-                <Input
-                  label="Phone Number"
-                  type="tel"
-                  placeholder="+91 XXXXX XXXXX"
-                  required
-                />
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    School
-                  </label>
-                  <select
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    required
-                  >
-                    <option value="">Select a school</option>
-                    {dummySchools.map((school) => (
-                      <option key={school.id} value={school.id}>
-                        {school.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <Input
-                  label="Subject/Specialization"
-                  type="text"
-                  placeholder="e.g., Mathematics, Science"
-                  required
-                />
-                <Button type="submit" variant="primary" className="w-full">
-                  Create Teacher
-                </Button>
-              </FormGroup>
-            </form>
-          </Card>
-
-          {/* Teachers List */}
-          <Card>
-            <Heading level={3} className="mb-4">
-              Existing Teachers ({dummyTeachers.length})
-            </Heading>
-            <div className="space-y-3">
+        <AdminTabContent
+          createTitle="Create New Teacher"
+          onCreate={handleCreate('Teacher')}
+          listTitle="Existing Teachers"
+          listCount={dummyTeachers.length}
+          renderList={() => (
+            <>
               {dummyTeachers.map((teacher) => (
-                <div
-                  key={teacher.id}
-                  className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors"
-                >
+                <div key={teacher.id} className="p-4 border border-gray-200 rounded-lg hover:border-primary transition-colors">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-gray-900">{teacher.name}</h4>
-                    <Badge variant="solid" color="secondary">
-                      {teacher.subject}
-                    </Badge>
+                    <Badge variant="solid" color="secondary">{teacher.subject}</Badge>
                   </div>
                   <p className="text-sm text-gray-600 mb-1">📧 {teacher.email}</p>
                   <p className="text-sm text-gray-600">🏫 {teacher.school}</p>
                 </div>
               ))}
-            </div>
-          </Card>
-        </div>
+            </>
+          )}
+        >
+          <Input label="Teacher Name" type="text" placeholder="Enter teacher name" required />
+          <Input label="Email" type="email" placeholder="teacher@example.com" required />
+          <Input label="Phone Number" type="tel" placeholder="+91 XXXXX XXXXX" required />
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">School</label>
+            <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" required>
+              <option value="">Select a school</option>
+              {dummySchools.map((school) => <option key={school.id} value={school.id}>{school.name}</option>)}
+            </select>
+          </div>
+          <Input label="Subject/Specialization" type="text" placeholder="e.g., Mathematics, Science" required />
+        </AdminTabContent>
       )}
     </div>
   );

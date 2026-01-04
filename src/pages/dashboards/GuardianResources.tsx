@@ -22,11 +22,15 @@ export interface GuardianResourcesRef {
  * Exposes openMobileMenu method for parent components
  */
 const GuardianResources = forwardRef<GuardianResourcesRef, GuardianResourcesProps>(({ isPublic = false }, ref) => {
-  const [searchParams] = useSearchParams();
-  const articleParam = searchParams.get('article');
-  const [selectedArticleId, setSelectedArticleId] = useState<string>(
-    articleParam && GUARDIAN_ARTICLES.find(a => a.id === articleParam) ? articleParam : GUARDIAN_ARTICLES[0].id
-  );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const articleIdParam = searchParams.get('id');
+  
+  // Use the ID from URL if valid, otherwise default to first article
+  const initialArticleId = articleIdParam && GUARDIAN_ARTICLES.find(a => a.id === articleIdParam) 
+    ? articleIdParam 
+    : GUARDIAN_ARTICLES[0].id;
+
+  const [selectedArticleId, setSelectedArticleId] = useState<string>(initialArticleId);
   const [isListOpen, setIsListOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTitle, setMobileAction, setHideDefaultNav } = useHeaderAction();
@@ -35,8 +39,16 @@ const GuardianResources = forwardRef<GuardianResourcesRef, GuardianResourcesProp
   const selectedArticle = GUARDIAN_ARTICLES.find(a => a.id === selectedArticleId);
   const SelectedArticleComponent = selectedArticle?.component;
 
+  // Sync state with URL param changes
+  useEffect(() => {
+    if (articleIdParam && GUARDIAN_ARTICLES.find(a => a.id === articleIdParam)) {
+      setSelectedArticleId(articleIdParam);
+    }
+  }, [articleIdParam]);
+
   const handleArticleSelect = (id: string) => {
-    setSelectedArticleId(id);
+    // Update URL instead of just local state
+    setSearchParams({ id });
     setIsMobileMenuOpen(false);
   };
 

@@ -13,7 +13,6 @@ import Contact from './pages/Contact';
 import RnD from './pages/R&D';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Resources from './pages/Resources';
 import Student from './pages/Student';
 import Teacher from './pages/Teacher';
 import Guardian from './pages/Guardian';
@@ -58,7 +57,6 @@ const AppLayout = () => {
       <main className={isAppMode ? "flex-grow overflow-hidden" : "flex-grow"}>
         <Routes>
           {/* Public routes */}
-          <Route path="/resources" element={<Resources />} />
           <Route path="/resources/pedagogical-excellence" element={<PedagogicalExcellence />} />
           <Route path="/resources/good-teacher" element={<WhatMakesGoodTeacher />} />
           <Route path="/resources/education-myths" element={<EducationMyths />} />

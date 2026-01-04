@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowRight, Lightbulb, Users, BookOpen, Send } from 'lucide-react';
-import { useState } from 'react';
-import { Button, Card, Badge, Input, Textarea } from '../../components/ui';
+import { BookOpen, Lightbulb, Send, Users } from 'lucide-react';
+import { Button, Card, Input, Textarea } from '../../components/ui';
 import { SCHOOL_ARTICLES } from '../../config/studentContent';
 import SchoolResources from './SchoolResources';
-import env from '../../config/env';
+import ConfettiBackground from '../../components/ConfettiBackground';
+import ArticleCard from '../../components/ArticleCard';
+import { useSchoolContactForm } from '../../hooks/useSchoolContactForm';
 
 /**
  * SchoolDashboard Component
@@ -17,48 +18,9 @@ import env from '../../config/env';
 const SchoolDashboard = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { formData, handleChange, isSubmitting, submitStatus, handleSubmit } = useSchoolContactForm();
 
   const isResourcesView = location.pathname.includes('/resources');
-
-  // Form state
-  const [formData, setFormData] = useState({
-    schoolName: '',
-    contactPerson: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      const response = await fetch(`${env.apiUrl}/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.contactPerson,
-          email: formData.email,
-          message: `School: ${formData.schoolName}\nPhone: ${formData.phone}\n\n${formData.message}`
-        })
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ schoolName: '', contactPerson: '', email: '', phone: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   // If on resources view, show SchoolResources component
   if (isResourcesView) {
@@ -73,42 +35,7 @@ const SchoolDashboard = () => {
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
       {/* Confetti Effect */}
-      <div className="absolute inset-x-0 top-0 h-screen pointer-events-none overflow-hidden">
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 opacity-70"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: '-10px',
-              backgroundColor: [
-                '#3b82f6', // blue
-                '#8b5cf6', // purple
-                '#ec4899', // pink
-                '#f59e0b', // amber
-                '#10b981', // green
-                '#ef4444', // red
-              ][Math.floor(Math.random() * 6)],
-              borderRadius: Math.random() > 0.5 ? '50%' : '0',
-              animation: `confetti-fall ${3 + Math.random() * 4}s linear ${Math.random() * 2}s infinite`,
-              transform: `rotate(${Math.random() * 360}deg)`,
-            }}
-          />
-        ))}
-      </div>
-
-      <style>{`
-        @keyframes confetti-fall {
-          0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(100vh) rotate(720deg);
-            opacity: 0;
-          }
-        }
-      `}</style>
+      <ConfettiBackground />
 
       {/* Clean Header */}
       <section className="pt-12 pb-6 px-4 sm:px-6 lg:px-8 relative z-10">
@@ -146,14 +73,14 @@ const SchoolDashboard = () => {
                     label="School Name"
                     placeholder="Your institution's name"
                     value={formData.schoolName}
-                    onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
+                    onChange={(e) => handleChange('schoolName', e.target.value)}
                     required
                   />
                   <Input
                     label="Your Name"
                     placeholder="Principal/Admin name"
                     value={formData.contactPerson}
-                    onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
+                    onChange={(e) => handleChange('contactPerson', e.target.value)}
                     required
                   />
                 </div>
@@ -164,7 +91,7 @@ const SchoolDashboard = () => {
                     type="email"
                     placeholder="your.email@school.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => handleChange('email', e.target.value)}
                     required
                   />
                   <Input
@@ -172,7 +99,7 @@ const SchoolDashboard = () => {
                     type="tel"
                     placeholder="+91 98765 43210"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => handleChange('phone', e.target.value)}
                     required
                   />
                 </div>
@@ -182,7 +109,7 @@ const SchoolDashboard = () => {
                   placeholder="What would you like to explore? Lab setup, teacher training, curriculum integration, or something else?"
                   rows={3}
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) => handleChange('message', e.target.value)}
                   required
                 />
 
@@ -251,46 +178,12 @@ const SchoolDashboard = () => {
           {/* All Cards Same Size */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {SCHOOL_ARTICLES.map((article) => (
-              <Card
+              <ArticleCard
                 key={article.id}
-                variant="hover"
-                className="flex flex-col cursor-pointer group bg-white"
-                onClick={() => navigate(`/school/dashboard/resources?article=${article.id}`)}
-              >
-                {/* Thumbnail - Image */}
-                <div className="w-full h-40 rounded-lg mb-3 overflow-hidden bg-gray-50 flex items-center justify-center">
-                  <img
-                    src={article.thumbnail}
-                    alt={article.title}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-grow">
-                  {/* Badge */}
-                  <Badge variant="outline" color={article.badgeColor} className="mb-2 w-fit text-xs">
-                    {article.badge}
-                  </Badge>
-
-                  {/* Title */}
-                  <h3 className="font-bold text-base mb-2 group-hover:text-primary transition-colors text-gray-900">
-                    {article.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-gray-600 text-sm mb-3 flex-grow line-clamp-2">
-                    {article.description}
-                  </p>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-end text-xs text-primary font-medium pt-3 border-t border-gray-100">
-                    <span className="flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Read <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </div>
-                </div>
-              </Card>
+                article={article}
+                onClick={() => navigate(`/school/dashboard/resources?id=${article.id}`)}
+                imageHeight="h-40"
+              />
             ))}
           </div>
         </div>

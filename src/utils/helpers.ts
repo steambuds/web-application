@@ -33,24 +33,7 @@ export const getNavLinkClassName = (
   return `${baseClasses} ${activeClasses} ${additionalClasses}`.trim();
 };
 
-/**
- * Build card selection className (for articles, activities, etc.)
- * @param isSelected - Whether the card is selected
- * @param isLocked - Whether the card is locked
- * @returns Complete className string
- */
-export const getCardClassName = (
-  isSelected: boolean,
-  isLocked: boolean
-): string => {
-  const baseClasses = 'cursor-pointer transition-all border relative';
-  const selectedClasses = isSelected
-    ? 'bg-primary/5 border-primary shadow-sm'
-    : 'border-transparent hover:bg-gray-50';
-  const lockedClasses = isLocked ? 'opacity-60' : '';
 
-  return `${baseClasses} ${selectedClasses} ${lockedClasses}`.trim();
-};
 
 /**
  * Build badge className based on color variant

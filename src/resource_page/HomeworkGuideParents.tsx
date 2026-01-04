@@ -162,9 +162,9 @@ const HomeworkGuideParents = () => {
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             This week, try cutting one tuition class or setting a strict "homework stop time" at 8 PM. Observe the change in your child's mood and energy.
           </p>
-          <Button variant="primary" size="lg">
+          {/* <Button variant="primary" size="lg">
             Read: The Science of Play
-          </Button>
+          </Button> */}
         </div>
 
       </div>

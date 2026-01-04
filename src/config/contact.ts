@@ -1,7 +1,9 @@
+import { BRAND_EMAIL, BRAND_PHONE } from '../constants/brand';
+
 const contactData = {
     name: "STEAM Buds",
-    email: "hello@steambuds.in",
-    mobile: "+91 9828 770 365",
+    email: BRAND_EMAIL,
+    mobile: BRAND_PHONE,
     fullAddress: "Second Floor, 1/23, old rajendranagar, new delhi, 110060",
     address: {
         flat: "1/23",

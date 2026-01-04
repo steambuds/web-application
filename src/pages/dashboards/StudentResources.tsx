@@ -1,6 +1,6 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { GraduationCap, X, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useHeaderAction } from '../../context/HeaderActionContext';
 import { Button } from '../../components/ui';
 import { STUDENT_ARTICLES, FREE_RESOURCES_COUNT } from '../../config/studentContent';
@@ -22,7 +22,15 @@ export interface StudentResourcesRef {
  * Exposes openMobileMenu method for parent components
  */
 const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(({ isPublic = false }, ref) => {
-  const [selectedArticleId, setSelectedArticleId] = useState<string>(STUDENT_ARTICLES[0].id);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const articleIdParam = searchParams.get('id');
+  
+  // Use the ID from URL if valid, otherwise default to first article
+  const initialArticleId = articleIdParam && STUDENT_ARTICLES.find(a => a.id === articleIdParam) 
+    ? articleIdParam 
+    : STUDENT_ARTICLES[0].id;
+
+  const [selectedArticleId, setSelectedArticleId] = useState<string>(initialArticleId);
   const [isListOpen, setIsListOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTitle, setMobileAction, setHideDefaultNav } = useHeaderAction();
@@ -31,8 +39,16 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
   const selectedArticle = STUDENT_ARTICLES.find(a => a.id === selectedArticleId);
   const SelectedArticleComponent = selectedArticle?.component;
 
+  // Sync state with URL param changes
+  useEffect(() => {
+    if (articleIdParam && STUDENT_ARTICLES.find(a => a.id === articleIdParam)) {
+      setSelectedArticleId(articleIdParam);
+    }
+  }, [articleIdParam]);
+
   const handleArticleSelect = (id: string) => {
-    setSelectedArticleId(id);
+    // Update URL instead of just local state
+    setSearchParams({ id });
     setIsMobileMenuOpen(false);
   };
 
