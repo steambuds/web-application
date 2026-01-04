@@ -9,15 +9,7 @@ import {
   Heart,
   BookOpen
 } from 'lucide-react';
-import {
-  Card,
-  Heading,
-  Badge,
-  GradientText,
-  IconBox,
-  TwoColumnSection,
-  Button
-} from '../components/ui';
+import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
 const HomeworkGuideParents = () => {
   return (

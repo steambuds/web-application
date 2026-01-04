@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, BookOpen, Users, Building2, LogIn, Library, User } from 'lucide-react';
+import { GraduationCap, BookOpen, Users, Building2, LogIn, User } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getRoleDefaultRoute } from '../utils/auth';
 import logoImage from '../images/steambuds_logo.svg';
