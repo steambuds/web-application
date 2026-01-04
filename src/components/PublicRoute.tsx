@@ -23,6 +23,7 @@ const PublicRoute: React.FC<PublicRouteProps> = ({ children }) => {
   }
 
   if (isAuthenticated && user) {
+    // Redirect all authenticated users to their dashboards
     const dashboardRoute = getRoleDefaultRoute(user.roles || []);
     return <Navigate to={dashboardRoute} replace />;
   }

@@ -18,7 +18,7 @@ const GUARDIAN_ARTICLES = [
     thumbnail: homeworkParentImg,
     badge: 'Parenting Guide',
     badgeColor: 'accent' as const,
-    route: '/resources/homework-guide-parents',
+    route: '/resources/parents-homework-guide',
     readTime: '8 min read'
   },
   {

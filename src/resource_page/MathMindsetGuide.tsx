@@ -22,7 +22,7 @@ const MathMindsetGuide = () => {
     <div className="min-h-screen bg-gray-50 pb-16">
       {/* Hero Header */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="w-full max-w-none mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Badge variant="outline" color="primary" className="mb-4">Student Guide</Badge>
           <Heading level={1} className="mb-4">
             <GradientText>Why "I'm Not a Math Person" is a Lie</GradientText>
@@ -33,7 +33,7 @@ const MathMindsetGuide = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+      <div className="w-full max-w-none mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
 
         {/* Section 1: The Myth of the "Math Gene" */}
         <section>
