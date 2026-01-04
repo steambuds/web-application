@@ -57,28 +57,28 @@ const Home: React.FC = () => {
                 <GraduationCap className="h-5 w-5 md:h-7 md:w-7" />
               </div>
               <h3 className="font-semibold text-sm md:text-base">Student</h3>
-              <p className="text-xs md:text-sm text-gray-600 mt-1">Explore labs, projects, and competitions</p>
+              <p className="text-xs md:text-sm text-gray-600 mt-1">Skill building, Project guidance</p>
             </Link>
             <Link to="/teacher" className="card text-center group p-3 md:p-6">
               <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-secondary to-accent text-white flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-105 transition-transform">
                 <BookOpen className="h-5 w-5 md:h-7 md:w-7" />
               </div>
               <h3 className="font-semibold text-sm md:text-base">Teacher</h3>
-              <p className="text-xs md:text-sm text-gray-600 mt-1">Kits, lesson plans, and PD</p>
+              <p className="text-xs md:text-sm text-gray-600 mt-1">Lesson plans, Training</p>
             </Link>
             <Link to="/school" className="card text-center group p-3 md:p-6">
               <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-accent to-primary text-white flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-105 transition-transform">
                 <Building2 className="h-5 w-5 md:h-7 md:w-7" />
               </div>
               <h3 className="font-semibold text-sm md:text-base">School</h3>
-              <p className="text-xs md:text-sm text-gray-600 mt-1">Lab setup, teachers, curriculum</p>
+              <p className="text-xs md:text-sm text-gray-600 mt-1">Teacher Training, Curriculum</p>
             </Link>
             <Link to="/guardian" className="card text-center group p-3 md:p-6">
               <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-105 transition-transform">
                 <Users className="h-5 w-5 md:h-7 md:w-7" />
               </div>
               <h3 className="font-semibold text-sm md:text-base">Guardian</h3>
-              <p className="text-xs md:text-sm text-gray-600 mt-1">Private workshops and support</p>
+              <p className="text-xs md:text-sm text-gray-600 mt-1">Tuition, Education guidance</p>
             </Link>
           </div>
         </div>
