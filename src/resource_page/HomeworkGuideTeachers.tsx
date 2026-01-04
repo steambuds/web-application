@@ -6,15 +6,7 @@ import {
   Target,
   PenTool
 } from 'lucide-react';
-import {
-  Card,
-  Heading,
-  Badge,
-  GradientText,
-  IconBox,
-  TwoColumnSection,
-  Button
-} from '../components/ui';
+import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
 const HomeworkGuideTeachers = () => {
   return (
@@ -157,9 +149,9 @@ const HomeworkGuideTeachers = () => {
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             Next time you assign homework, ask: "Can my student do this alone? Is it necessary? Will it take less than 20 minutes?"
           </p>
-          <Button variant="primary" size="lg">
+          {/* <Button variant="primary" size="lg">
             Download Assessment Rubric
-          </Button>
+          </Button> */}
         </div>
 
       </div>

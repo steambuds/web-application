@@ -180,26 +180,6 @@ export const refreshAccessToken = async (
 };
 
 /**
- * Get user profile by ID
- * @param userId - User's ID
- * @param accessToken - JWT access token
- */
-export const getUserProfile = async (
-  userId: string,
-  accessToken: string
-): Promise<UserProfileResponse> => {
-  const response = await fetch(endpoints.PROFILES.GET(userId), {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
-
-  return handleResponse<UserProfileResponse>(response);
-};
-
-/**
  * Get current user's full data (profile + roles)
  * This is a convenience method that gets user details from users endpoint
  * @param userId - User's ID

@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 16
+**Total Tasks:** 21
 - **Pending:** 9 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 7 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013)
+- **Completed:** 12 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018)
 - **Blocked:** 0
 
 ## Task Template
@@ -408,6 +408,143 @@ AnalyticsTracker component was added to track page visits with sessionStorage-ba
 ---
 
 ## Completed Tasks
+
+### WEB-018: Update Home Navigation for Mobile
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Updated the Home page to show both Login and Sign Up buttons in a single row on mobile devices, replacing the "Select option to see resources" link with a direct "Sign Up" button.
+
+#### Contextual Changes
+**Files Modified:**
+- `src/pages/Home.tsx` - Replaced the resources anchor link with a Sign Up link using `flex-row` layout for mobile compatibility. Removed unused `Library` import and added `User` import.
+- `src/resource_page/EducationMyths.tsx` - Removed unused imports and fixed missing UI component imports.
+- `src/resource_page/HomeworkGuideParents.tsx` - Removed unused imports and fixed missing UI component imports.
+- `src/resource_page/HomeworkGuideTeachers.tsx` - Removed unused imports and fixed missing UI component imports.
+
+**Key Features Implemented:**
+- Optimized mobile navigation layout on the landing page.
+- Cleaned up unused code in resource pages.
+
+#### Notes
+This improves the call-to-action visibility on mobile devices.
+
+### WEB-017: Optimize Home Page Mobile Layout
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Optimized the Home page layout for mobile devices to ensure both the hero section (info) and the roles selection section are visible on a single screen without scrolling. This improves the user experience for first-time mobile visitors.
+
+#### Contextual Changes
+**Files Modified:**
+- `src/pages/Home.tsx` - Reduced padding, adjusted font sizes, resizing images, and changed the grid layout from 1 column to 2 columns on mobile.
+
+**Key Features Implemented:**
+- Compact mobile layout for the landing page.
+- 2-column grid for role cards on mobile.
+- Reduced visual noise and spacing for smaller screens.
+
+#### Notes
+This change directly addresses user feedback regarding mobile visibility.
+
+### WEB-016: Remove Resources Page and Update Home Navigation
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Removed the dedicated Resources page (`/resources`) as per user request. Updated the Home page to direct users to select their relevant role option to view resources instead of linking to a generic resources page.
+
+#### Contextual Changes
+**Files Deleted:**
+- `src/pages/Resources.tsx` - The dedicated resources page.
+
+**Files Modified:**
+- `src/App.tsx` - Removed the import and route for `Resources.tsx`.
+- `src/pages/Home.tsx` - Replaced the "Public Resources" link with a "Select option to see resources" button that scrolls to the role selection section.
+
+**Key Features Implemented:**
+- Streamlined navigation by removing the intermediate resources page.
+- Directs users to role-specific content immediately from the home page.
+
+#### Notes
+This aligns with the strategy of guiding users to personalized content based on their role (Student, Teacher, School, Guardian).
+
+### WEB-015: Fix Dashboard Resource Navigation and Query Params
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Fix the issue where selecting a resource in dashboard views did not update the URL or the selected article dynamically. Also change the query parameter from `article` to `id` for consistency.
+
+#### Contextual Changes
+**Files Modified:**
+- `src/pages/dashboards/StudentResources.tsx` - Updated to use `id` query param and sync with URL.
+- `src/pages/dashboards/TeacherResources.tsx` - Updated to use `id` query param and sync with URL.
+- `src/pages/dashboards/GuardianResources.tsx` - Updated to use `id` query param and sync with URL.
+- `src/pages/dashboards/SchoolResources.tsx` - Updated to use `id` query param and sync with URL.
+- `src/pages/dashboards/StudentDashboard.tsx` - Updated navigation links to use `?id=`.
+- `src/pages/dashboards/TeacherDashboard.tsx` - Updated navigation links to use `?id=`.
+- `src/pages/dashboards/GuardianDashboard.tsx` - Updated navigation links to use `?id=`.
+- `src/pages/dashboards/SchoolDashboard.tsx` - Updated navigation links to use `?id=`.
+
+**Key Features Implemented:**
+- Dashboard resource viewers now react to URL changes dynamically.
+- Navigation links now correctly set the `id` query parameter.
+- Standardized query parameter name to `id` across all dashboard resource views.
+
+#### Notes
+This ensures that bookmarking or sharing a dashboard resource URL works as expected, and internal navigation updates the view correctly.
+
+### WEB-014: Code Refactoring and Cleanup
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Refactor the codebase to improve readability, remove unused code, and reduce duplication. This includes extracting reusable components for repetitive UI patterns, creating custom hooks for form logic, and cleaning up unused files and exports.
+
+#### Contextual Changes
+**Files Created:**
+- `src/components/ConfettiBackground.tsx` - Reusable confetti animation component.
+- `src/components/ui/FeatureIconBox.tsx` - Standardized icon + text feature block.
+- `src/components/ArticleCard.tsx` - Unified article card component.
+- `src/components/DashboardSidebar.tsx` - Reusable sidebar component for dashboards.
+- `src/hooks/useSchoolContactForm.ts` - Custom hook for school contact form logic.
+- `src/constants/brand.ts` - Centralized brand constants (email, phone, colors).
+
+**Files Modified:**
+- `src/pages/dashboards/StudentDashboard.tsx` - Refactored to use new components.
+- `src/pages/dashboards/TeacherDashboard.tsx` - Refactored to use new components.
+- `src/pages/dashboards/GuardianDashboard.tsx` - Refactored to use new components.
+- `src/pages/dashboards/SchoolDashboard.tsx` - Refactored to use new components and hook.
+- `src/pages/dashboards/AdminDashboard.tsx` - Refactored to use reusable tab content component.
+- `src/pages/Student.tsx` - Refactored to use new components.
+- `src/pages/Teacher.tsx` - Refactored to use new components.
+- `src/pages/Guardian.tsx` - Refactored to use new components.
+- `src/pages/School.tsx` - Refactored to use new components and hook.
+- `src/components/Header.tsx` - Simplified navigation logic.
+- `src/config/endpoints.ts` - Removed unused endpoints.
+- `src/api/auth.ts` - Removed unused functions.
+- `src/utils/helpers.ts` - Removed unused functions.
+- `src/components/ui/index.ts` - Removed unused exports.
+
+**Files Deleted:**
+- `src/components/ui/Dialog.tsx` - Unused component.
+- `src/helpers.ts` - Unused file.
+
+**Key Features Implemented:**
+- Reduced code duplication by extracting common UI patterns into components.
+- Improved maintainability by centralizing brand constants and form logic.
+- Cleaned up unused code and files to reduce bundle size and confusion.
+
+#### Notes
+Successfully removed ~500+ lines of duplicated code and unused files while maintaining full functionality. Build verified successfully.
 
 ### WEB-013: Create Resource Article from PPT
 **Status:** completed

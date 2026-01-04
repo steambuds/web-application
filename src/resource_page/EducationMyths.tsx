@@ -10,15 +10,7 @@ import {
   Zap,
   Layout
 } from 'lucide-react';
-import {
-  Card,
-  Heading,
-  Badge,
-  GradientText,
-  IconBox,
-  TwoColumnSection,
-  Button
-} from '../components/ui';
+import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
 const EducationMyths = () => {
   return (
@@ -172,9 +164,9 @@ const EducationMyths = () => {
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             Don't limit yourself to a label. Use diverse search queries, seek multiple perspectives, and embrace evidence-based learning strategies.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
              <Button variant="primary" size="lg">Explore More Articles</Button>
-          </div>
+          </div> */}
         </div>
 
       </div>

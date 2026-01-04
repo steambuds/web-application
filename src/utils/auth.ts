@@ -122,8 +122,8 @@ export const getUserData = (): UserData | null => {
  * 1. admin -> /admin/dashboard (system admin)
  * 2. student -> /student/dashboard
  * 3. teacher -> /teacher/dashboard
- * 4. school_admin -> /school/dashboard (school administrator)
- * 5. default/guardian -> /guardian/dashboard
+ * 4. school_admin -> /school/dashboard
+ * 5. guardian -> /guardian/dashboard
  */
 export const getRoleDefaultRoute = (roles: UserRole[]): string => {
   if (!roles || roles.length === 0) {
@@ -150,7 +150,12 @@ export const getRoleDefaultRoute = (roles: UserRole[]): string => {
     return '/school/dashboard';
   }
 
-  // Default to guardian page
+  // Check for guardian role
+  if (roles.includes('guardian') || roles.includes('other')) {
+    return '/guardian/dashboard';
+  }
+
+  // Default to guardian dashboard
   return '/guardian/dashboard';
 };
 

@@ -1,124 +1,119 @@
-import React from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Heading, Card } from '../../components/ui';
-import StatsCard from '../../components/dashboard/StatsCard';
-import RemarksSection from '../../components/dashboard/RemarksSection';
-import { guardianDummyData } from '../../data/dummyDashboardData';
-import { Heart, Users, Calendar } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Brain, Heart, Target, Users, Zap } from 'lucide-react';
+import { GUARDIAN_ARTICLES } from '../../config/studentContent';
+import GuardianResources from './GuardianResources';
+import ConfettiBackground from '../../components/ConfettiBackground';
+import DashboardSidebar from '../../components/DashboardSidebar';
+import ArticleCard from '../../components/ArticleCard';
 
 /**
  * GuardianDashboard Component
- * Personalized dashboard for guardians showing:
- * - Children's information and progress
- * - Upcoming parent-teacher meetings
- * - Teacher remarks about children
- * - Guardian statistics
+ *
+ * Main container for authenticated guardian dashboard
+ * Routes:
+ * - /guardian/dashboard → Shows enrollment messaging and resource cards
+ * - /guardian/dashboard/resources → Shows GuardianResources (sidebar + article viewer)
  */
-const GuardianDashboard: React.FC = () => {
-  const { user } = useAuth();
+const GuardianDashboard = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Welcome Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-to-br from-hot-pink-500 to-accent-500 rounded-xl">
-              <Heart className="w-8 h-8 text-white" />
-            </div>
-            <div>
-              <Heading level={1} gradient className="mb-1">
-                Welcome, {user?.username || 'Guardian'}!
-              </Heading>
-              <p className="text-slate-300">Track your children's learning progress</p>
-            </div>
-          </div>
-        </div>
+  const isResourcesView = location.pathname.includes('/resources');
 
-        {/* Statistics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          {guardianDummyData.stats.map((stat, index) => (
-            <StatsCard key={index} stat={stat} />
-          ))}
-        </div>
-
-        {/* Children's Progress */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Users className="w-6 h-6 text-electric-blue-400" />
-            <h2 className="text-2xl font-bold text-white">Children's Progress</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {guardianDummyData.children.map((child) => (
-              <Card key={child.id} variant="gradient">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-gradient-to-br from-electric-blue-500 to-cyber-purple-500 rounded-xl">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-xl text-white mb-1">{child.name}</h3>
-                    <p className="text-slate-300 mb-3">{child.grade}</p>
-
-                    {/* Progress Bar */}
-                    <div className="mb-3">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-slate-400">Overall Progress</span>
-                        <span className="text-sm font-semibold text-electric-blue-400">
-                          {child.progress}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-electric-blue-500 to-cyber-purple-500 rounded-full transition-all duration-300"
-                          style={{ width: `${child.progress}%` }}
-                        />
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-slate-400">{child.recentActivity}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Upcoming Meetings */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Calendar className="w-6 h-6 text-hot-pink-400" />
-            <h2 className="text-2xl font-bold text-white">Upcoming Meetings</h2>
-          </div>
-          <Card variant="flat">
-            <div className="space-y-4">
-              {guardianDummyData.upcomingMeetings.map((meeting) => (
-                <div
-                  key={meeting.id}
-                  className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-slate-700 last:border-0 gap-2"
-                >
-                  <div>
-                    <p className="font-semibold text-white">{meeting.title}</p>
-                    <p className="text-sm text-slate-400">with {meeting.teacher}</p>
-                  </div>
-                  <div className="text-sm text-slate-300">
-                    {new Date(meeting.date).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}{' '}
-                    at {meeting.time}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-
-        {/* Teacher Remarks */}
-        <div>
-          <RemarksSection remarks={guardianDummyData.remarks} title="Teacher Feedback" />
-        </div>
+  // If on resources view, show GuardianResources component
+  if (isResourcesView) {
+    return (
+      <div className="h-full bg-white">
+        <GuardianResources isPublic={false} />
       </div>
+    );
+  }
+
+  const sidebarFeatures = [
+    {
+      icon: <Brain className="w-4 h-4 text-primary" />,
+      title: "Creative Thinking",
+      description: "Problem-solving over memorization"
+    },
+    {
+      icon: <Users className="w-4 h-4 text-primary" />,
+      title: "Interpersonal Skills",
+      description: "Collaboration & communication"
+    },
+    {
+      icon: <Target className="w-4 h-4 text-primary" />,
+      title: "Resilient Personality",
+      description: "Life skills, not just exam skills"
+    },
+    {
+      icon: <Heart className="w-4 h-4 text-primary" />,
+      title: "Emotional Intelligence",
+      description: "Self-awareness & empathy"
+    }
+  ];
+
+  // Default dashboard view - enrollment messaging and resource cards
+  return (
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Confetti Effect */}
+      <ConfettiBackground />
+
+      {/* Header */}
+      <section className="pt-12 pb-6 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-2">
+            Be the Guardian of Your Child's Future
+          </h1>
+          <p className="text-base text-gray-600">
+            Shaping the next generation of innovators, thinkers, and problem-solvers
+          </p>
+        </div>
+      </section>
+
+      {/* Main Content: 2-Column Layout */}
+      <section className="pb-8 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Enrollment Messaging - First on mobile, Right on desktop (1/3 width) */}
+            <DashboardSidebar
+              title="Beyond Bookish Learning"
+              description="Don't let your child become just a kitabi kida (bookworm). Our NEP-aligned programs develop:"
+              features={sidebarFeatures}
+              contactPhone="+91 9828 770 365"
+              ctaText="Enroll Your Child"
+            >
+              <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 mb-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Zap className="w-5 h-5 text-primary" />
+                  <h3 className="font-bold text-sm text-gray-900">NEP 2020 Aligned</h3>
+                </div>
+                <p className="text-xs text-gray-700">
+                  We follow India's National Education Policy, focusing on <strong>holistic development</strong> and making students ready for real-world challenges—not just exams.
+                </p>
+              </div>
+            </DashboardSidebar>
+
+            {/* Resources - Second on mobile, Left on desktop (2/3 width) */}
+            <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-1">Resources for Parents</h2>
+                <p className="text-sm text-gray-600">Evidence-based insights to support your child's growth</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {GUARDIAN_ARTICLES.map((article) => (
+                  <ArticleCard
+                    key={article.id}
+                    article={article}
+                    onClick={() => navigate(`/guardian/dashboard/resources?id=${article.id}`)}
+                    imageHeight="h-40"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
