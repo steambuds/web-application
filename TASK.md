@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 20
+**Total Tasks:** 21
 - **Pending:** 9 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 11 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017)
+- **Completed:** 12 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018)
 - **Blocked:** 0
 
 ## Task Template
@@ -408,6 +408,28 @@ AnalyticsTracker component was added to track page visits with sessionStorage-ba
 ---
 
 ## Completed Tasks
+
+### WEB-018: Update Home Navigation for Mobile
+**Status:** completed
+**Created:** 2026-01-04
+**Completed:** 2026-01-04
+
+#### Description
+Updated the Home page to show both Login and Sign Up buttons in a single row on mobile devices, replacing the "Select option to see resources" link with a direct "Sign Up" button.
+
+#### Contextual Changes
+**Files Modified:**
+- `src/pages/Home.tsx` - Replaced the resources anchor link with a Sign Up link using `flex-row` layout for mobile compatibility. Removed unused `Library` import and added `User` import.
+- `src/resource_page/EducationMyths.tsx` - Removed unused imports and fixed missing UI component imports.
+- `src/resource_page/HomeworkGuideParents.tsx` - Removed unused imports and fixed missing UI component imports.
+- `src/resource_page/HomeworkGuideTeachers.tsx` - Removed unused imports and fixed missing UI component imports.
+
+**Key Features Implemented:**
+- Optimized mobile navigation layout on the landing page.
+- Cleaned up unused code in resource pages.
+
+#### Notes
+This improves the call-to-action visibility on mobile devices.
 
 ### WEB-017: Optimize Home Page Mobile Layout
 **Status:** completed
