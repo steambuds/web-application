@@ -4,7 +4,9 @@ import {
   Users,
   Zap,
   Target,
-  PenTool
+  PenTool,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
@@ -33,7 +35,7 @@ const HomeworkGuideTeachers = () => {
             <Heading level={2}>Quality Over Quantity</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            The traditional belief that "more practice equals better mastery" has a breaking point. Research indicates a point of diminishing returns.
+            The traditional belief that "more practice equals better mastery" has a breaking point. Research indicates a point of diminishing returns. The key is <strong>authentic</strong> and <strong>purposeful</strong> design.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -45,10 +47,10 @@ const HomeworkGuideTeachers = () => {
                 <div>
                   <h3 className="font-bold text-xl mb-2">The 10-Minute Rule</h3>
                   <p className="text-gray-600">
-                    A widely accepted standard is 10 minutes of homework per grade level per night. (e.g., 10 mins for 1st grade, 60 mins for 6th grade).
+                    A widely accepted standard endorsed by the NEA is 10 minutes of homework per grade level per night. (e.g., 10 mins for 1st grade, 60 mins for 6th grade).
                   </p>
                   <p className="text-sm text-blue-600 mt-2 font-semibold">
-                    Are your assignments fitting this timeframe for the average student?
+                    Are your assignments fitting this timeframe for the <em>average</em> student (not just the fastest one)?
                   </p>
                 </div>
               </div>
@@ -62,7 +64,7 @@ const HomeworkGuideTeachers = () => {
                 <div>
                   <h3 className="font-bold text-xl mb-2">The 4-Hour Ceiling</h3>
                   <p className="text-gray-600">
-                    For high schoolers, benefits plateau after about 4 hours per week. Beyond that, stress increases and performance often degrades due to lack of sleep.
+                    For high schoolers, benefits plateau after about 4 hours per week (across all subjects). Beyond that, stress increases and performance often degrades due to lack of sleep.
                   </p>
                 </div>
               </div>
@@ -90,7 +92,7 @@ const HomeworkGuideTeachers = () => {
                   </p>
                 </div>
                 <p className="text-gray-600">
-                  <strong>Solution:</strong> Design tasks that can be completed without parental help or expensive resources.
+                  <strong>Solution:</strong> Design tasks that can be completed without parental help or expensive resources. Use "Inverted Classroom" methods where the hard application work happens in class.
                 </p>
               </div>
             }
@@ -109,8 +111,11 @@ const HomeworkGuideTeachers = () => {
         <section className="pt-12 border-t border-gray-200">
            <div className="flex items-center gap-3 mb-6">
             <IconBox icon={<PenTool className="h-5 w-5" />} color="accent" />
-            <Heading level={2}>Designing Better Assignments</Heading>
-          </div>
+            <Heading level={2}>Designing Authentic Assignments</Heading>
+           </div>
+           <p className="text-gray-700 text-lg mb-8">
+             Authentic resources—real-world materials like news articles, podcasts, or data sets—make homework meaningful.
+           </p>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse rounded-lg overflow-hidden shadow-sm">
@@ -130,28 +135,65 @@ const HomeworkGuideTeachers = () => {
                 <tr className="border-b border-gray-100">
                   <td className="p-4 text-red-600 font-medium">Copying Definitions</td>
                   <td className="p-4 text-green-600 font-medium">Find Real-World Examples</td>
-                  <td className="p-4 text-gray-600">Connects learning to life context.</td>
+                  <td className="p-4 text-gray-600">Connects learning to life context using authentic resources.</td>
                 </tr>
                 <tr>
                   <td className="p-4 text-red-600 font-medium">"Finish Classwork"</td>
                   <td className="p-4 text-green-600 font-medium">Inverted Classroom (Prep)</td>
-                  <td className="p-4 text-gray-600">Uses home time for low-cognitive prep, class time for high-cognitive work.</td>
+                  <td className="p-4 text-gray-600">Uses home time for low-cognitive prep (reading/watching), class time for high-cognitive work.</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Research & Toolkits</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Explore frameworks for designing better homework.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.edutopia.org/topic/homework" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Edutopia: Homework Strategies <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Articles on innovative homework policies and practices.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.challengesuccess.org/schools/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Challenge Success School Program <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Research-based strategies to improve student well-being and engagement.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Target className="w-12 h-12 mx-auto mb-6 text-green-400" />
           <Heading level={2} className="text-white mb-4">Audit Your Assignments</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            Next time you assign homework, ask: "Can my student do this alone? Is it necessary? Will it take less than 20 minutes?"
+            Next time you assign homework, ask: "Can my student do this alone? Is it necessary? Will it take less than 20 minutes? Is it authentic?"
           </p>
-          {/* <Button variant="primary" size="lg">
-            Download Assessment Rubric
-          </Button> */}
         </div>
 
       </div>

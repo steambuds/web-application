@@ -7,7 +7,8 @@ import {
   BarChart,
   PenTool,
   Layers,
-  GraduationCap
+  GraduationCap,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -43,7 +44,7 @@ const NEP2020TeacherGuide = () => {
             <Heading level={2}>From Rote to Competency</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            The heart of NEP 2020 is <strong>Competency-Based Education (CBE)</strong>. It's not about what a student <em>knows</em> (memorized facts), but what they can <em>do</em> with that knowledge.
+            The heart of NEP 2020 is <strong>Competency-Based Education (CBE)</strong>. It's not about what a student <em>knows</em> (memorized facts), but what they can <em>do</em> with that knowledge. This aligns with modern pedagogical research on <strong>Deep Learning</strong>.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -171,16 +172,53 @@ const NEP2020TeacherGuide = () => {
           />
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Professional Development</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Resources to upgrade your teaching practice.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://cbseacademic.nic.in/manuals.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 CBSE Teacher Manuals <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Official guides on Experiential Learning, Art Integration, and more.
+               </p>
+             </a>
+
+             <a 
+               href="https://diksha.gov.in/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 DIKSHA Platform <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 National digital infrastructure for teachers with training courses and resources.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <GraduationCap className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
           <Heading level={2} className="text-white mb-4">Your Action Plan</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             Start small. Pick one lesson next week to turn into an experiential activity. Move one test from written to project-based.
           </p>
-          {/* <Button variant="primary" size="lg">
-            Download Lesson Plan Templates
-          </Button> */}
         </div>
 
       </div>

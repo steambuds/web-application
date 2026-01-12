@@ -6,7 +6,9 @@ import {
   Star,
   TrendingUp,
   FolderOpen,
-  Layers
+  Layers,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -42,7 +44,7 @@ const MarksVsSkillsGuide = () => {
             <Heading level={2}>The Resume is Dead(ish)</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            In the past, a 98% score was the golden ticket. Today, companies (like Google and Tesla) and top universities care less about what you <em>memorized</em> and more about what you have <em>created</em>.
+            In the past, a 98% score was the golden ticket. Today, companies (like Google, Tesla, and startups) and top universities care less about what you <em>memorized</em> and more about what you have <em>created</em>. This shift is often called the <strong>"Skills-Based Hiring"</strong> revolution.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -94,7 +96,7 @@ const MarksVsSkillsGuide = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold mb-4">You Already Have Content</h3>
                 <p className="text-gray-600">
-                  A portfolio isn't just for artists. It's a record of your curiosity.
+                  A portfolio isn't just for artists. It's a record of your curiosity. It documents your <strong>"Project-Based Learning"</strong> journey.
                 </p>
                 <div className="space-y-4 mt-4">
                    <div className="flex items-center gap-3">
@@ -131,7 +133,7 @@ const MarksVsSkillsGuide = () => {
             <Heading level={2}>The Skills Exams Can't Measure</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Technical skills get you the interview. Soft skills get you the job (and the promotion).
+            Technical skills get you the interview. Soft skills (often called <strong>"Power Skills"</strong>) get you the job and the promotion.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -141,7 +143,7 @@ const MarksVsSkillsGuide = () => {
                  <h3>Resilience</h3>
                </div>
                <p className="text-sm text-gray-600">
-                 Can you handle failure? When your code breaks or your painting looks wrong, do you quit or pivot?
+                 Can you handle failure? When your code breaks or your painting looks wrong, do you quit or pivot? This is "Grit."
                </p>
             </div>
             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
@@ -165,8 +167,48 @@ const MarksVsSkillsGuide = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Read About the Future of Work</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            See what the world's leading organizations say about the skills you need.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.weforum.org/agenda/2023/05/future-of-jobs-2023-skills/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 World Economic Forum: Future of Jobs <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 The top 10 skills employers are looking for (Spoiler: Analytical thinking and creative thinking top the list).
+               </p>
+             </a>
+
+             <a 
+               href="https://www.linkedin.com/business/talent/blog/talent-strategy/global-talent-trends" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 LinkedIn Global Talent Trends <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Insights into how "Skills-First" hiring is changing the job market.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-green-600 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-green-600 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <FolderOpen className="w-12 h-12 mx-auto mb-6 text-green-200" />
           <Heading level={2} className="text-white mb-4">Start Your Portfolio Today</Heading>
           <p className="text-green-100 text-lg max-w-2xl mx-auto mb-8">

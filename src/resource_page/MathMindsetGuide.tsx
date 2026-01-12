@@ -6,7 +6,9 @@ import {
   CheckCircle,
   Zap,
   Target,
-  Smile
+  Smile,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -42,7 +44,7 @@ const MathMindsetGuide = () => {
             <Heading level={2}>The Brain is a Muscle</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            For decades, people believed intelligence was fixed at birth. Modern neuroscience (specifically <strong>Neuroplasticity</strong>) has proven this wrong. Your brain is physically changeable, like a muscle.
+            For decades, people believed intelligence was fixed at birth. Modern neuroscience (specifically <strong>Neuroplasticity</strong>) has proven this wrong. Your brain is physically changeable, like a muscle. When you struggle, you aren't hitting a wall; you are building a bridge.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -88,7 +90,7 @@ const MathMindsetGuide = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold mb-4">A Three-Letter Magic Word</h3>
                 <p className="text-gray-600">
-                  Carol Dweck, a Stanford psychologist, found that adding "yet" to the end of a negative sentence changes your brain's chemistry.
+                  <strong>Carol Dweck</strong>, a Stanford psychologist, found that adding "yet" to the end of a negative sentence changes your brain's chemistry.
                 </p>
                 <div className="bg-purple-50 p-6 rounded-xl space-y-4">
                    <div className="flex items-center gap-3">
@@ -133,7 +135,7 @@ const MathMindsetGuide = () => {
               <div>
                 <h3 className="text-2xl font-bold text-yellow-900 mb-2">The Spark of Growth</h3>
                 <p className="text-yellow-800 text-lg">
-                  Research shows that your brain grows <strong>more</strong> when you make a mistake than when you get an answer right easily.
+                  Research by <strong>Jo Boaler</strong> (Stanford University) shows that your brain grows <strong>more</strong> when you make a mistake than when you get an answer right easily. This is because mistakes trigger deep cognitive processing.
                 </p>
               </div>
             </div>
@@ -161,8 +163,48 @@ const MathMindsetGuide = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Tools for Growth</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+             Authentic resources to help you build a mathematical mindset.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.youcubed.org/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 YouCubed (Stanford) <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Resources from Jo Boaler to inspire math success for all students.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.mindsetworks.com/science/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 The Science of Growth Mindset <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Understand the neuroscience behind why your brain can change.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Smile className="w-12 h-12 mx-auto mb-6 text-green-400" />
           <Heading level={2} className="text-white mb-4">You Are a Math Person</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">

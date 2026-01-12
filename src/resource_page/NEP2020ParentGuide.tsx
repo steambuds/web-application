@@ -6,7 +6,8 @@ import {
   Zap,
   Globe,
   Puzzle,
-  GraduationCap
+  GraduationCap,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -25,7 +26,7 @@ const NEP2020ParentGuide = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Badge variant="outline" color="primary" className="mb-4">Policy Explained</Badge>
           <Heading level={1} className="mb-4">
-            <GradientText>No More Rote Learning?(NEP 2020)</GradientText>
+            <GradientText>No More Rote Learning? (NEP 2020)</GradientText>
           </Heading>
           <p className="text-xl text-gray-600 max-w-3xl">
             The National Education Policy 2020 promises a revolution. But why isn't it happening in every classroom yet? And where do you fit in?
@@ -42,7 +43,7 @@ const NEP2020ParentGuide = () => {
             <Heading level={2}>What NEP 2020 Actually Says</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Moving away from "rote learning" (memorization) to "competency-based learning." The goal is not just to pass exams, but to learn how to think.
+            Moving away from "rote learning" (memorization) to <strong>"Competency-Based Learning."</strong> The goal is not just to pass exams, but to learn how to think. This aligns with global standards like the <strong>UN Sustainable Development Goals (SDG 4)</strong>.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -162,16 +163,53 @@ const NEP2020ParentGuide = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Official Sources</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Read the full policy and expert analysis.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.education.gov.in/sites/upload_files/mhrd/files/NEP_Final_English_0.pdf" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Ministry of Education: NEP 2020 PDF <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 The original policy document. Dense but definitive.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.observerindia.com/content/nep-2020-a-critical-analysis" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Expert Analysis on NEP <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Authentic articles breaking down the pros and cons of implementation.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <GraduationCap className="w-12 h-12 mx-auto mb-6 text-blue-400" />
           <Heading level={2} className="text-white mb-4">Be The Change</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             The policy is on paper, but the practice starts at home. Don't wait for the system to change; start upgrading your child's learning environment today.
           </p>
-          {/* <Button variant="primary" size="lg">
-            Join Our Parents Community
-          </Button> */}
         </div>
 
       </div>

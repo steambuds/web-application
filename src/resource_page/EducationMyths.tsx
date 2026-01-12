@@ -8,7 +8,9 @@ import {
   Search,
   CheckCircle,
   Zap,
-  Layout
+  Layout,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
@@ -23,7 +25,7 @@ const EducationMyths = () => {
             <GradientText>The Biggest Myth of Education</GradientText>
           </Heading>
           <p className="text-xl text-gray-600 max-w-3xl">
-            Why "Learning Styles" (VARK) might be holding students back, and what science says actually works.
+            Why "Learning Styles" (VARK) might be holding students back, and what science says actually works for long-term retention.
           </p>
         </div>
       </div>
@@ -37,7 +39,7 @@ const EducationMyths = () => {
             <Heading level={2}>The Myth of Learning Styles</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            The idea that individuals have a preferred way of learning—Visual, Auditory, Reading/Writing, or Kinesthetic (VARK)—is one of the most stubborn myths in education.
+            The idea that individuals have a preferred way of learning—Visual, Auditory, Reading/Writing, or Kinesthetic (VARK)—is one of the most stubborn myths in education. It is what scientists call a <strong>"Neuromyth."</strong>
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -62,7 +64,7 @@ const EducationMyths = () => {
           <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl">
             <h3 className="font-bold text-red-900 text-lg mb-2">The Reality</h3>
             <p className="text-red-800">
-              There is <span className="font-bold">no scientific basis</span> for students naturally clustering into these distinct groups. Rigorous studies have shown no significant improvement in learning outcomes when instruction matches a student's self-proclaimed learning style.
+              There is <span className="font-bold">no scientific basis</span> for students naturally clustering into these distinct groups. Rigorous studies have shown no significant improvement in learning outcomes when instruction matches a student's self-proclaimed learning style. In fact, labeling a student as "just an auditory learner" can limit their potential.
             </p>
           </div>
         </section>
@@ -82,7 +84,7 @@ const EducationMyths = () => {
                    People often find learning styles convincing because they <strong>already believe</strong> it to be true. They interpret their experiences to fit this belief.
                  </p>
                  <p className="text-gray-600">
-                   For example, a "visual learner" might learn better from a diagram not because they are visual, but because <span className="font-semibold text-purple-600">diagrams are effective for everyone</span> when explaining spatial concepts.
+                   For example, a "visual learner" might learn better from a diagram not because they are visual, but because <span className="font-semibold text-purple-600">diagrams are effective for everyone</span> when explaining spatial concepts like geography or anatomy.
                  </p>
                  <div className="bg-purple-100 p-4 rounded-lg mt-4">
                    <p className="text-sm text-purple-800 italic">
@@ -116,12 +118,12 @@ const EducationMyths = () => {
                   <Layout className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-xl mb-2">Multimedia Effect</h3>
+                  <h3 className="font-bold text-xl mb-2">Dual Coding (Multimedia)</h3>
                   <p className="text-gray-600 mb-4">
                     Multimodal approaches—where words and pictures are presented together—are more effective for <strong>everyone</strong>.
                   </p>
                   <p className="text-sm text-gray-500">
-                    Combining narration with visuals (like in a video) boosts retention far more than either alone, regardless of "style".
+                    Combining narration with visuals (like in a video) boosts retention far more than either alone, regardless of "style". This is because the brain has two separate channels for processing information (visual and verbal).
                   </p>
                 </div>
               </div>
@@ -140,15 +142,15 @@ const EducationMyths = () => {
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Active thinking
+                      <strong>Active Recall:</strong> Testing yourself.
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Problem-solving
+                      <strong>Spaced Repetition:</strong> Reviewing over time.
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Imagining different scenarios
+                      <strong>Metacognition:</strong> Thinking about how you think.
                     </li>
                   </ul>
                 </div>
@@ -157,16 +159,53 @@ const EducationMyths = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Evidence-Based Reading</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Explore the science that debunks this myth and offers better alternatives.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.frontiersin.org/articles/10.3389/fpsyg.2020.602451/full" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Frontiers in Psychology <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Stop propagating the learning styles myth. A research paper explaining the lack of evidence.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.aft.org/ae/summer2013/dunlosky_rawson_marsh_nathan_willingham" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Strengthening the Student Toolbox <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 A comprehensive review of study strategies that actually work (like practice testing and distributed practice).
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Zap className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
           <Heading level={2} className="text-white mb-4">Think Critically</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            Don't limit yourself to a label. Use diverse search queries, seek multiple perspectives, and embrace evidence-based learning strategies.
+            Don't limit yourself to a label like "visual learner." Use diverse strategies, seek multiple perspectives, and embrace evidence-based learning. Your brain is more flexible than you think.
           </p>
-          {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
-             <Button variant="primary" size="lg">Explore More Articles</Button>
-          </div> */}
         </div>
 
       </div>

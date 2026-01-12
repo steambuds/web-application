@@ -24,6 +24,16 @@ const GUARDIAN_ARTICLES = [
     readTime: '8 min read'
   },
   {
+    id: 'skills-plus-academics',
+    title: 'Why Skills + Academics = True Success',
+    description: 'A Guide for Parents: Academic knowledge is the engine, but skills are the fuel.',
+    thumbnail: markSkillParentImg,
+    badge: 'Parenting Guide',
+    badgeColor: 'success' as const,
+    route: '/resources/skills-plus-academics',
+    readTime: '9 min read'
+  },
+  {
     id: 'marks-vs-skills-parenting',
     title: 'Marks AND Skills: The Balancing Act',
     description: 'Why choosing between "Good Grades" and "Real Skills" is a false dilemma—how to prepare for the future.',

@@ -5,7 +5,9 @@ import {
   TrendingUp,
   AlertTriangle,
   CheckCircle,
-  GraduationCap
+  GraduationCap,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -41,7 +43,7 @@ const MarksVsSkillsParentGuide = () => {
             <Heading level={2}>The Rules Have Changed</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Twenty years ago, a 95% score guaranteed a good job. Today, it merely guarantees an interview. To get the job (and keep it), your child needs something more.
+            Twenty years ago, a 95% score guaranteed a good job. Today, it merely guarantees an interview. To get the job (and keep it), your child needs something more. This is the era of the <strong>"T-Shaped Individual"</strong>—someone with deep expertise in one area (the vertical bar) and broad skills across many others (the horizontal bar).
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -85,7 +87,7 @@ const MarksVsSkillsParentGuide = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold mb-4">The "Paper Tiger" Trap</h3>
                 <p className="text-gray-600">
-                  Students who focus 100% on grades often suffer from "Fragile Excellence." They are perfect on paper but crumble when faced with real-world ambiguity where there is no textbook answer.
+                  Students who focus 100% on grades often suffer from <strong>"Fragile Excellence."</strong> They are perfect on paper but crumble when faced with real-world ambiguity where there is no textbook answer.
                 </p>
                 <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500 mt-4">
                   <p className="text-red-900">
@@ -162,8 +164,48 @@ const MarksVsSkillsParentGuide = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Read More</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Understand the changing landscape of education and work.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.forbes.com/sites/bernardmarr/2022/08/05/the-top-10-skills-employers-are-looking-for-in-2023/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Forbes: Top Skills Employers Want <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Why adaptability and critical thinking are becoming more valuable than technical degrees.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.ted.com/talks/sal_khan_let_s_teach_for_mastery_not_test_scores?language=en" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Sal Khan (Khan Academy) TED Talk <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 "Let's teach for mastery, not test scores." A powerful argument for understanding over grades.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Scale className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
           <Heading level={2} className="text-white mb-4">The Best of Both Worlds</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">

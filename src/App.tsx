@@ -40,6 +40,7 @@ import MathMindsetGuide from './resource_page/MathMindsetGuide';
 import DopamineDetoxGuide from './resource_page/DopamineDetoxGuide';
 import MarksVsSkillsGuide from './resource_page/MarksVsSkillsGuide';
 import MarksVsSkillsParentGuide from './resource_page/MarksVsSkillsParentGuide';
+import SkillsPlusAcademicsGuide from './resource_page/SkillsPlusAcademicsGuide';
 
 /**
  * AppLayout Component
@@ -71,6 +72,7 @@ const AppLayout = () => {
           <Route path="/resources/dopamine-detox" element={<DopamineDetoxGuide />} />
           <Route path="/resources/marks-vs-skills" element={<MarksVsSkillsGuide />} />
           <Route path="/resources/marks-vs-skills-parenting" element={<MarksVsSkillsParentGuide />} />
+          <Route path="/resources/skills-plus-academics" element={<SkillsPlusAcademicsGuide />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/rnd" element={<RnD />} />

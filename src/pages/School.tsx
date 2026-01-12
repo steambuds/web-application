@@ -26,6 +26,16 @@ const SCHOOL_ARTICLES = [
     readTime: '12 min read'
   },
   {
+    id: 'nep-2020-teacher-guide',
+    title: 'NEP 2020: Teacher\'s Playbook',
+    description: 'Move beyond "finishing the syllabus" to ensuring understanding—key shifts for educators.',
+    thumbnail: teacherNepImg,
+    badge: 'Policy Implementation',
+    badgeColor: 'primary' as const,
+    route: '/resources/nep-2020-teacher-guide',
+    readTime: '12 min read'
+  },
+  {
     id: 'homework-guide-teachers',
     title: 'Rethinking Homework',
     description: 'Design assignments that promote equity, autonomy, and genuine learning—without the burnout.',
@@ -36,14 +46,14 @@ const SCHOOL_ARTICLES = [
     readTime: '10 min read'
   },
   {
-    id: 'nep-2020-teacher-guide',
-    title: 'NEP 2020: Teacher\'s Playbook',
-    description: 'Move beyond "finishing the syllabus" to ensuring understanding—key shifts for educators.',
-    thumbnail: teacherNepImg,
-    badge: 'Policy Implementation',
-    badgeColor: 'primary' as const,
-    route: '/resources/nep-2020-teacher-guide',
-    readTime: '12 min read'
+    id: 'skills-plus-academics',
+    title: 'Why Skills + Academics = True Success',
+    description: 'A key resource for schools to align parents with holistic education goals.',
+    thumbnail: pedagogicalExcellenceImg,
+    badge: 'Parent Engagement',
+    badgeColor: 'success' as const,
+    route: '/resources/skills-plus-academics',
+    readTime: '9 min read'
   },
   {
     id: 'education-myths',

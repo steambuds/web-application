@@ -6,7 +6,8 @@ import {
   BookOpen,
   Target,
   CheckCircle,
-  TrendingUp
+  TrendingUp,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -48,7 +49,7 @@ const StudyLessLearnMore = () => {
           <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl mb-8">
              <h3 className="font-bold text-red-900 text-lg mb-2">The Illusion of Competence</h3>
              <p className="text-red-800">
-               When you reread, your brain recognizes the text and says "I know this." But recognizing is not the same as being able to retrieve it during an exam.
+               When you reread, your brain recognizes the text and says "I know this." But recognizing is not the same as being able to retrieve it during an exam. This is the difference between <strong>Passive Review</strong> and <strong>Active Retrieval</strong>.
              </p>
           </div>
         </section>
@@ -79,7 +80,7 @@ const StudyLessLearnMore = () => {
                     <CheckCircle className="w-5 h-5 text-green-500 mt-1" />
                     <div>
                       <strong className="block text-gray-900">Practice Testing</strong>
-                      <span className="text-gray-600">Testing is not just for grading; it's a learning tool. It strengthens neural pathways 10x more than re-reading.</span>
+                      <span className="text-gray-600">Testing is not just for grading; it's a learning tool. Research by <strong>Dunlosky et al.</strong> (2013) rates practice testing as one of the most effective study techniques.</span>
                     </div>
                   </div>
                 </div>
@@ -103,7 +104,7 @@ const StudyLessLearnMore = () => {
             <Heading level={2}>Concept 2: Spaced Repetition</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            You will forget 50% of what you learned within 24 hours unless you review it. But you don't need to review it every day. You need to review it just as you are about to forget it.
+            You will forget 50% of what you learned within 24 hours unless you review it. But you don't need to review it every day. You need to review it just as you are about to forget it. This combats the <strong>"Forgetting Curve"</strong>.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -156,8 +157,48 @@ const StudyLessLearnMore = () => {
           </div>
         </section>
 
+        {/* Section 5: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Master the Art of Learning</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Resources to help you study like a pro.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.coursera.org/learn/learning-how-to-learn" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Learning How to Learn (Coursera) <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 The world's most popular online course on study techniques by Dr. Barbara Oakley.
+               </p>
+             </a>
+
+             <a 
+               href="https://fs.blog/learning/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Farnam Street: Accelerated Learning <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Articles on mental models and learning strategies for lifelong learners.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 md:p-12 text-center mt-8">
           <BookOpen className="w-12 h-12 mx-auto mb-6 text-blue-500" />
           <Heading level={2} className="text-blue-900 mb-4">Work Smarter, Not Harder</Heading>
           <p className="text-blue-800 text-lg max-w-2xl mx-auto mb-8">

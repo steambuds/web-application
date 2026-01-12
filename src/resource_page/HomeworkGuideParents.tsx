@@ -7,7 +7,8 @@ import {
   Battery, 
   Sun,
   Heart,
-  BookOpen
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import { Card, Badge, Heading, GradientText, IconBox, TwoColumnSection } from '../components/ui';
 
@@ -36,7 +37,7 @@ const HomeworkGuideParents = () => {
             <Heading level={2}>The Double Shift: School + Tuition</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            In many Indian households, a child's day starts at 6 AM and ends at 10 PM. Between school, private tuition, and the homework from <em>both</em>, students are working longer hours than most corporate adults.
+            In many Indian households, a child's day starts at 6 AM and ends at 10 PM. Between school, private tuition, and the homework from <em>both</em>, students are working longer hours than most corporate adults. This is often driven by parental FOMO (Fear Of Missing Out).
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -56,7 +57,7 @@ const HomeworkGuideParents = () => {
                 <h3>The Reality</h3>
               </div>
               <p className="text-green-800">
-                Research shows that after about <strong>4 hours of homework per week</strong>, the academic benefits flatten out. Beyond that, it leads to burnout, sleep deprivation, and actually <em>lowers</em> cognitive performance.
+                Research by <strong>Harris Cooper</strong> at Duke University shows that after about <strong>1.5 to 2 hours of homework per week</strong> for middle schoolers, the academic benefits flatten out. For elementary students, the correlation between homework and achievement is nearly zero. Beyond a certain point, it leads to burnout, sleep deprivation, and actually <em>lowers</em> cognitive performance.
               </p>
             </div>
           </div>
@@ -123,7 +124,7 @@ const HomeworkGuideParents = () => {
               </div>
               <h3 className="font-bold text-lg mb-2">The Burnout Limit</h3>
               <p className="text-gray-600 text-sm">
-                For elementary students, there is almost <strong>zero correlation</strong> between homework and academic achievement. Focus on reading for pleasure instead.
+                If your child is crying over homework, they aren't learning. They are just surviving. The brain shuts down under high stress.
               </p>
             </Card>
             <Card className="text-center p-6">
@@ -147,16 +148,53 @@ const HomeworkGuideParents = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Dig Deeper</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Read the research behind homework effectiveness and the importance of play.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.alfiekohn.org/homework-myth/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 The Homework Myth <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Alfie Kohn's extensive work on why our kids get too much of a bad thing.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.challengesuccess.org/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Challenge Success (Stanford) <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Strategies for schools and families to create a more balanced, academically fulfilling life.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Smile className="w-12 h-12 mx-auto mb-6 text-yellow-400" />
           <Heading level={2} className="text-white mb-4">A Challenge for Parents</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             This week, try cutting one tuition class or setting a strict "homework stop time" at 8 PM. Observe the change in your child's mood and energy.
           </p>
-          {/* <Button variant="primary" size="lg">
-            Read: The Science of Play
-          </Button> */}
         </div>
 
       </div>

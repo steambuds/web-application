@@ -5,7 +5,9 @@ import {
   Search,
   PenTool,
   Brain,
-  ShieldAlert
+  ShieldAlert,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -41,7 +43,7 @@ const AICheatingGuide = () => {
             <Heading level={2}>The Copy-Paste Trap</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Everyone uses AI, but most use it wrong. When you ask AI to "write an essay on climate change" and hand it in, you haven't learned anything. You've just outsourced your thinking.
+            Everyone uses AI, but most use it wrong. When you ask AI to "write an essay on climate change" and hand it in, you haven't learned anything. You've just outsourced your thinking. This is often called <strong>"Cognitive Offloading"</strong>—where you let the machine do the heavy lifting, causing your own mental muscles to atrophy.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -65,7 +67,7 @@ const AICheatingGuide = () => {
                 </li>
               </ul>
               <p className="text-sm text-red-600 mt-4 italic">
-                Result: You get the grade, but your brain muscles atrophy.
+                Result: You get the grade, but your brain muscles atrophy. You become dependent on the tool.
               </p>
             </div>
             
@@ -89,7 +91,7 @@ const AICheatingGuide = () => {
                 </li>
               </ul>
               <p className="text-sm text-green-600 mt-4 italic">
-                Result: You learn faster and deeper than ever before.
+                Result: You learn faster and deeper than ever before. You remain the pilot; AI is just the co-pilot.
               </p>
             </div>
           </div>
@@ -102,7 +104,7 @@ const AICheatingGuide = () => {
             <Heading level={2}>Prompt Engineering 101</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            The quality of the answer depends on the quality of your question. Here are three prompts to transform your study sessions.
+            The quality of the answer depends on the quality of your question. This is a skill called <strong>Prompt Engineering</strong>. Here are three prompts to transform your study sessions.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -115,7 +117,7 @@ const AICheatingGuide = () => {
                 Don't ask for the answer. Ask it to guide you.
               </p>
               <div className="bg-gray-100 p-3 rounded text-xs text-gray-700 font-mono">
-                "I'm studying [Topic]. Don't give me the answer, but ask me questions to help me figure it out myself."
+                "I'm studying [Topic]. Don't give me the answer, but ask me questions to help me figure it out myself. If I get it wrong, give me a hint, not the solution."
               </div>
             </Card>
 
@@ -128,7 +130,7 @@ const AICheatingGuide = () => {
                 Use it to improve <em>your</em> writing, not replace it.
               </p>
               <div className="bg-gray-100 p-3 rounded text-xs text-gray-700 font-mono">
-                "Here is my draft. Roast it. Tell me where my logic is weak and how to make the introduction punchier."
+                "Here is my draft. Roast it. Tell me where my logic is weak, where I am being repetitive, and how to make the introduction punchier."
               </div>
             </Card>
 
@@ -141,7 +143,7 @@ const AICheatingGuide = () => {
                 Stuck on jargon? Break it down.
               </p>
               <div className="bg-gray-100 p-3 rounded text-xs text-gray-700 font-mono">
-                "Explain Quantum Entanglement using an analogy about socks. Treat me like a 5th grader."
+                "Explain Quantum Entanglement using an analogy about socks. Treat me like a 5th grader. Use bullet points."
               </div>
             </Card>
           </div>
@@ -159,7 +161,7 @@ const AICheatingGuide = () => {
                <div className="space-y-4">
                  <h3 className="text-2xl font-bold mb-4">AI Hallucinates</h3>
                  <p className="text-gray-600">
-                   Large Language Models (LLMs) are like confident improvisors. They can sound 100% sure while being 100% wrong.
+                   Large Language Models (LLMs) are like confident improvisors. They can sound 100% sure while being 100% wrong. This is called a <strong>"Hallucination."</strong>
                  </p>
                  <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
                    <p className="text-yellow-900">
@@ -185,8 +187,48 @@ const AICheatingGuide = () => {
           />
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Learn More from the Experts</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Explore these authentic articles to understand how AI is reshaping education and how you can stay ahead.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://academicintegrity.org/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 International Center for Academic Integrity <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Understanding the core values of integrity in the age of AI.
+               </p>
+             </a>
+
+             <a 
+               href="https://openai.com/index/teaching-with-ai/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Teaching with AI (OpenAI Guide) <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Official guide from the creators of ChatGPT on how it can be used effectively for learning.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion */}
-        <div className="bg-purple-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-purple-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <Bot className="w-12 h-12 mx-auto mb-6 text-purple-300" />
           <Heading level={2} className="text-white mb-4">Don't Be a Robot</Heading>
           <p className="text-purple-200 text-lg max-w-2xl mx-auto mb-8">

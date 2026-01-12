@@ -10,7 +10,9 @@ import {
   Smile,
   Users,
   Lightbulb,
-  CheckCircle
+  CheckCircle,
+  ExternalLink,
+  BookOpen
 } from 'lucide-react';
 import {
   Card,
@@ -46,7 +48,7 @@ const HolisticDevelopmentGuide = () => {
             <Heading level={2}>The "Whole Child" Checklist</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Success in the 21st century requires more than high marks. Is your child developing these crucial life competencies?
+            Success in the 21st century requires more than high marks. Organizations like <strong>UNESCO</strong> and <strong>ASCD</strong> advocate for a "Whole Child" approach, ensuring children are healthy, safe, engaged, supported, and challenged.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -107,7 +109,7 @@ const HolisticDevelopmentGuide = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold mb-4">Involve Them in Real Life</h3>
                 <p className="text-gray-600">
-                  You don't need a special class to teach these skills. Daily life provides the best curriculum.
+                  You don't need a special class to teach these skills. Daily life provides the best curriculum. Harvard's Center on the Developing Child calls this <strong>"Serve and Return"</strong>—responsive interactions that build brain architecture.
                 </p>
                 <div className="space-y-4 mt-6">
                   <div className="flex items-start gap-3">
@@ -136,7 +138,7 @@ const HolisticDevelopmentGuide = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900">Emotional Check-ins</h4>
-                      <p className="text-gray-600 text-sm">Instead of "What did you score?", ask "What was hard for you today? How did you handle it?"</p>
+                      <p className="text-gray-600 text-sm">Instead of "What did you score?", ask "What was hard for you today? How did you handle it?" This builds emotional intelligence.</p>
                     </div>
                   </div>
                 </div>
@@ -192,8 +194,48 @@ const HolisticDevelopmentGuide = () => {
           </div>
         </section>
 
+        {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Evidence-Based Parenting</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Learn more about the science of child development from these trusted sources.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://developingchild.harvard.edu/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Harvard Center on the Developing Child <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Scientific reports on how early experiences shape brain architecture and lifelong health.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.ascd.org/whole-child" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 ASCD Whole Child Initiative <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 A framework for policies and practices that support the comprehensive development of children.
+               </p>
+             </a>
+          </div>
+        </section>
+
         {/* Conclusion / CTA */}
-        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center">
+        <div className="bg-gray-900 text-white rounded-2xl p-8 md:p-12 text-center mt-8">
           <CheckCircle className="w-12 h-12 mx-auto mb-6 text-green-400" />
           <Heading level={2} className="text-white mb-4">Start Small Today</Heading>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">

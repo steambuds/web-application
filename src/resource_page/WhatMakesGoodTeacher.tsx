@@ -12,7 +12,8 @@ import {
   Globe,
   Shield,
   Video,
-  Mic
+  Mic,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -48,7 +49,7 @@ const WhatMakesGoodTeacher = () => {
             <Heading level={2}>The Gen Z Challenge</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Dr. Vikas Divyakirti highlights the unique challenges of teaching in the internet age—specifically reduced attention spans and instant fact-checking.
+            <strong>Dr. Vikas Divyakirti</strong> (Founder, Drishti IAS) highlights the unique challenges of teaching in the internet age—specifically reduced attention spans and instant fact-checking. A teacher is no longer the "source" of knowledge, but the "curator" and "interpreter."
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -60,7 +61,7 @@ const WhatMakesGoodTeacher = () => {
                 <div>
                   <h3 className="font-bold text-xl mb-2">Interactive Communication</h3>
                   <p className="text-gray-600">
-                    Teaching must be a two-way street. In an era of distraction, involving students through questions and dialogue is the only way to maintain engagement.
+                    Teaching must be a two-way street. In an era of distraction, involving students through questions, humor, and dialogue is the only way to maintain engagement.
                   </p>
                 </div>
               </div>
@@ -122,7 +123,7 @@ const WhatMakesGoodTeacher = () => {
             <Heading level={2}>The Nation Builder</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            Dr. Kumar Vishwas emphasizes the profound responsibility of educators in shaping the character of a nation.
+            <strong>Dr. Kumar Vishwas</strong> emphasizes the profound responsibility of educators in shaping the character of a nation.
           </p>
 
           <div className="bg-purple-50 rounded-2xl p-8 mb-12">
@@ -161,7 +162,7 @@ const WhatMakesGoodTeacher = () => {
             <Heading level={2}>What Students Say</Heading>
           </div>
           <p className="text-gray-700 text-lg mb-8">
-            After collecting 26,000 responses, Azul Terronez identified what makes a good teacher great from the student's perspective.
+            After collecting 26,000 responses, <strong>Azul Terronez</strong> identified what makes a good teacher great from the student's perspective. The answer? It's almost never about subject knowledge.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -180,7 +181,7 @@ const WhatMakesGoodTeacher = () => {
                </div>
                <h3 className="font-bold text-lg mb-2">Be a Learner</h3>
                <p className="text-gray-600 text-sm">
-                 Students rarely see teachers learning. Showing vulnerability and discovering answers together inspires students.
+                 Students rarely see teachers learning. Showing vulnerability and discovering answers <em>together</em> inspires students.
                </p>
              </Card>
              <Card className="text-center p-6">
@@ -238,6 +239,46 @@ const WhatMakesGoodTeacher = () => {
                  </div>
                </div>
             </div>
+          </div>
+        </section>
+
+        {/* Section 5: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Watch the Experts</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Inspiration from the educators mentioned above.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://www.youtube.com/watch?v=vrU6YJle6Q4" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Azul Terronez TED Talk <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 "What makes a good teacher great?" - A must-watch for every educator.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.drishtiias.com/about-us/vikas-divyakirti" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Dr. Vikas Divyakirti's Philosophy <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 Exploring the teaching methods of India's most famous educator.
+               </p>
+             </a>
           </div>
         </section>
 

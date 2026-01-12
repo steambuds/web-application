@@ -8,7 +8,9 @@ import {
   CheckCircle,
   TrendingUp,
   Layers,
-  Target
+  Target,
+  BookOpen,
+  ExternalLink
 } from 'lucide-react';
 import {
   Card,
@@ -140,7 +142,7 @@ const PedagogicalExcellence = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold mb-4">The Role of Scaffolding</h3>
                 <p className="text-gray-600">
-                  Scaffolding involves providing students with just enough assistance to perform a task within their <strong>Zone of Proximal Development</strong>.
+                  Scaffolding involves providing students with just enough assistance to perform a task within their <strong>Zone of Proximal Development (ZPD)</strong>—a concept by Lev Vygotsky.
                 </p>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center gap-2">
@@ -153,7 +155,7 @@ const PedagogicalExcellence = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500" />
-                    Gradual release of responsibility
+                    Gradual release of responsibility ("I do, We do, You do")
                   </li>
                 </ul>
                 <p className="text-gray-600 italic mt-4">
@@ -320,6 +322,47 @@ const PedagogicalExcellence = () => {
             </Card>
           </div>
         </section>
+
+         {/* Section 4: External Resources */}
+        <section className="pt-12 border-t border-gray-200">
+          <div className="flex items-center gap-3 mb-6">
+            <IconBox icon={<BookOpen className="h-5 w-5" />} color="primary" />
+            <Heading level={2}>Deep Dive</Heading>
+          </div>
+          <p className="text-gray-700 mb-6">
+            Resources for the pedagogical nerd.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+             <a 
+               href="https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 Vanderbilt University: Bloom's Taxonomy <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 A detailed guide to the framework for teaching and learning.
+               </p>
+             </a>
+
+             <a 
+               href="https://www.onetonline.org/find/descriptor/browse/Interests/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="group block p-6 bg-white rounded-xl border border-gray-200 hover:border-primary/50 hover:shadow-md transition-all"
+             >
+               <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary flex items-center gap-2">
+                 O*NET: RIASEC Interests <ExternalLink className="w-4 h-4" />
+               </h3>
+               <p className="text-gray-600 mt-2 text-sm">
+                 The official source for the Holland Codes (RIASEC) used in career counseling.
+               </p>
+             </a>
+          </div>
+        </section>
+
       </div>
     </div>
   );
