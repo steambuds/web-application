@@ -1,35 +1,54 @@
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Send, ChevronLeft, ChevronRight, User, MessageCircle, X, Lock } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '../../components/ui';
 import { useHeaderAction } from '../../context/HeaderActionContext';
+import { useAuth } from '../../context/AuthContext';
 import {
-  STUDENT_ACTIVITIES,
   DUMMY_CONVERSATIONS,
-  FREE_ACTIVITIES_COUNT,
   Activity,
   Message
-} from '../../config/studentContent';
+} from '../../config/content';
 import { formatMessageTime } from '../../utils/helpers';
+import { getUserTypeFromPath, getActivitiesForUserType } from '../../utils/contentLoader';
 
-interface StudentActivitiesProps {
-  isPublic?: boolean;
-}
-
-export interface StudentActivitiesRef {
+export interface UnifiedActivitiesRef {
   openMobileMenu: () => void;
 }
 
 /**
- * StudentActivities Component
+ * UnifiedActivities Component
  * Desktop: Three-panel layout (collapsible activity selector, activity area, collapsible chat)
  * Mobile: Full-screen activity area with floating action buttons
- * Public mode: Locks activities after FREE_ACTIVITIES_COUNT
+ * Supports all user types (student, teacher, guardian, school)
+ * Dynamically loads activities based on user type and authentication state
  * Exposes openMobileMenu method for parent components
  */
-const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProps>(({ isPublic = false }, ref) => {
-  const [selectedActivity, setSelectedActivity] = useState<Activity>(STUDENT_ACTIVITIES[0]);
-  const [messages, setMessages] = useState<Message[]>(DUMMY_CONVERSATIONS[STUDENT_ACTIVITIES[0].id]);
+const UnifiedActivities = forwardRef<UnifiedActivitiesRef, {}>((_, ref) => {
+  const location = useLocation();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+
+  // Extract user type from URL
+  const userType = getUserTypeFromPath(location.pathname);
+  if (!userType) {
+    // Fallback to home if user type cannot be determined
+    navigate('/');
+    return null;
+  }
+
+  // Load activities dynamically based on user type, auth state, and user's actual roles
+  // contentLoader acts like an API endpoint - checks role match and returns appropriate content
+  const { activities, freeCount } = getActivitiesForUserType(
+    userType,
+    isAuthenticated,
+    user?.roles || []
+  );
+
+  const [selectedActivity, setSelectedActivity] = useState<Activity>(activities[0] || {} as Activity);
+  const [messages, setMessages] = useState<Message[]>(
+    activities.length > 0 ? (DUMMY_CONVERSATIONS[activities[0].id] || []) : []
+  );
   const [newMessage, setNewMessage] = useState('');
 
   // Desktop collapsible states
@@ -41,11 +60,10 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
 
   const { setTitle, setMobileAction, setHideDefaultNav } = useHeaderAction();
-  const navigate = useNavigate();
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const isActivityLocked = (index: number): boolean => {
-    return isPublic && index >= FREE_ACTIVITIES_COUNT;
+    return !isAuthenticated && index >= freeCount;
   };
 
   // Expose openMobileMenu method to parent component
@@ -88,21 +106,40 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
 
   // Sync with Header Context
   useEffect(() => {
-    // Only set mobile action if NOT in public mode (public mode controlled by parent)
-    if (!isPublic) {
-      setTitle(null);
-      setMobileAction(() => () => setIsMobileActivitySelectorOpen(true));
-      setHideDefaultNav(true);
-    }
+    setTitle(null);
+    setMobileAction(() => () => setIsMobileActivitySelectorOpen(true));
+    setHideDefaultNav(true);
 
     return () => {
-      if (!isPublic) {
-        setTitle(null);
-        setMobileAction(null);
-        setHideDefaultNav(false);
-      }
+      setTitle(null);
+      setMobileAction(null);
+      setHideDefaultNav(false);
     };
-  }, [selectedActivity, setTitle, setMobileAction, setHideDefaultNav, isPublic]);
+  }, [selectedActivity, setTitle, setMobileAction, setHideDefaultNav]);
+
+  // Handle case where user type has no activities
+  if (activities.length === 0) {
+    return (
+      <div className="h-full w-full bg-white flex items-center justify-center p-8">
+        <div className="text-center max-w-md">
+          <MessageCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">
+            Activities Coming Soon!
+          </h2>
+          <p className="text-gray-600">
+            We're preparing exciting activities for you. Check back soon!
+          </p>
+          {!isAuthenticated && (
+            <div className="mt-6">
+              <Link to="/login">
+                <Button variant="primary">Sign In to Get Notified</Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -121,7 +158,7 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-2 space-y-2">
-              {STUDENT_ACTIVITIES.map((activity, index) => {
+              {activities.map((activity, index) => {
                 const isLocked = isActivityLocked(index);
                 return (
                   <div key={activity.id} className="relative">
@@ -149,8 +186,8 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
                   </div>
                 );
               })}
-              
-              {isPublic && (
+
+              {!isAuthenticated && (
                 <div className="mt-4 p-3 bg-gray-50 rounded-lg text-center border border-gray-200">
                   <p className="text-xs text-gray-600 mb-2">Login for more activities</p>
                   <Link to="/login">
@@ -360,7 +397,7 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                {STUDENT_ACTIVITIES.map((activity, index) => {
+                {activities.map((activity, index) => {
                   const isLocked = isActivityLocked(index);
                   return (
                     <button
@@ -387,8 +424,8 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
                     </button>
                   );
                 })}
-                
-                {isPublic && (
+
+                {!isAuthenticated && (
                   <div className="pt-4 mt-2 border-t border-gray-100">
                     <Link to="/login">
                       <Button variant="primary" className="w-full">Sign In for More</Button>
@@ -490,6 +527,6 @@ const StudentActivities = forwardRef<StudentActivitiesRef, StudentActivitiesProp
   );
 });
 
-StudentActivities.displayName = 'StudentActivities';
+UnifiedActivities.displayName = 'UnifiedActivities';
 
-export default StudentActivities;
+export default UnifiedActivities;

@@ -310,3 +310,34 @@ export const FREE_GUARDIAN_RESOURCES_COUNT = 2; // Number of free guardian resou
 export const SCHOOL_ARTICLES: Article[] = TEACHER_ARTICLES;
 
 export const FREE_SCHOOL_RESOURCES_COUNT = 2; // Number of free school resources for non-authenticated users
+
+/**
+ * Structured Content Map for Unified Dashboard System
+ * Centralizes all content by user type for easier access and management
+ */
+export const CONTENT_BY_USER_TYPE = {
+  student: {
+    articles: STUDENT_ARTICLES,
+    activities: STUDENT_ACTIVITIES,
+    freeResourceCount: FREE_RESOURCES_COUNT,
+    freeActivityCount: FREE_ACTIVITIES_COUNT
+  },
+  teacher: {
+    articles: TEACHER_ARTICLES,
+    activities: [], // Future: add teacher activities
+    freeResourceCount: FREE_TEACHER_RESOURCES_COUNT,
+    freeActivityCount: 0
+  },
+  guardian: {
+    articles: GUARDIAN_ARTICLES,
+    activities: [], // Future: add guardian activities
+    freeResourceCount: FREE_GUARDIAN_RESOURCES_COUNT,
+    freeActivityCount: 0
+  },
+  school: {
+    articles: SCHOOL_ARTICLES,
+    activities: [], // Future: add school activities
+    freeResourceCount: FREE_SCHOOL_RESOURCES_COUNT,
+    freeActivityCount: 0
+  }
+};

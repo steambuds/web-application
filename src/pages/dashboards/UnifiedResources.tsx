@@ -1,50 +1,67 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { GraduationCap, X, ChevronLeft, ChevronRight, Lock } from 'lucide-react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useHeaderAction } from '../../context/HeaderActionContext';
+import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui';
-import { STUDENT_ARTICLES, FREE_RESOURCES_COUNT } from '../../config/studentContent';
 import { getBadgeClassName } from '../../utils/helpers';
+import { getUserTypeFromPath, getResourcesForUserType } from '../../utils/contentLoader';
 
-interface StudentResourcesProps {
-  isPublic?: boolean;
-}
-
-export interface StudentResourcesRef {
+export interface UnifiedResourcesRef {
   openMobileMenu: () => void;
 }
 
 /**
- * StudentResources Component
+ * UnifiedResources Component
  * Desktop: Collapsible sidebar with article list + main content area
  * Mobile: Full-screen article viewer with bottom sheet selector
- * Public mode: Locks articles after FREE_RESOURCES_COUNT
+ * Supports all user types (student, teacher, guardian, school)
+ * Dynamically loads content based on user type and authentication state
  * Exposes openMobileMenu method for parent components
  */
-const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(({ isPublic = false }, ref) => {
+const UnifiedResources = forwardRef<UnifiedResourcesRef, {}>((_, ref) => {
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+
+  // Extract user type from URL
+  const userType = getUserTypeFromPath(location.pathname);
+  if (!userType) {
+    // Fallback to home if user type cannot be determined
+    navigate('/');
+    return null;
+  }
+
+  // Load content dynamically based on user type, auth state, and user's actual roles
+  // contentLoader acts like an API endpoint - checks role match and returns appropriate content
+  const { articles, freeCount } = getResourcesForUserType(
+    userType,
+    isAuthenticated,
+    user?.roles || []
+  );
+
   const articleIdParam = searchParams.get('id');
-  
+
   // Use the ID from URL if valid, otherwise default to first article
-  const initialArticleId = articleIdParam && STUDENT_ARTICLES.find(a => a.id === articleIdParam) 
-    ? articleIdParam 
-    : STUDENT_ARTICLES[0].id;
+  const initialArticleId = articleIdParam && articles.find(a => a.id === articleIdParam)
+    ? articleIdParam
+    : articles[0]?.id || '';
 
   const [selectedArticleId, setSelectedArticleId] = useState<string>(initialArticleId);
   const [isListOpen, setIsListOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setTitle, setMobileAction, setHideDefaultNav } = useHeaderAction();
-  const navigate = useNavigate();
 
-  const selectedArticle = STUDENT_ARTICLES.find(a => a.id === selectedArticleId);
+  const selectedArticle = articles.find(a => a.id === selectedArticleId);
   const SelectedArticleComponent = selectedArticle?.component;
 
   // Sync state with URL param changes
   useEffect(() => {
-    if (articleIdParam && STUDENT_ARTICLES.find(a => a.id === articleIdParam)) {
+    if (articleIdParam && articles.find(a => a.id === articleIdParam)) {
       setSelectedArticleId(articleIdParam);
     }
-  }, [articleIdParam]);
+  }, [articleIdParam, articles]);
 
   const handleArticleSelect = (id: string) => {
     // Update URL instead of just local state
@@ -53,7 +70,7 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
   };
 
   const isArticleLocked = (index: number): boolean => {
-    return isPublic && index >= FREE_RESOURCES_COUNT;
+    return !isAuthenticated && index >= freeCount;
   };
 
   // Expose openMobileMenu method to parent component
@@ -63,41 +80,36 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
 
   useEffect(() => {
     // Set header configuration for this page
-    // Only set mobile action if NOT in public mode (public mode controlled by parent)
-    if (!isPublic) {
-      setTitle(null);
-      setMobileAction(() => () => setIsMobileMenuOpen(true));
-      setHideDefaultNav(true);
-    }
+    setTitle(null);
+    setMobileAction(() => () => setIsMobileMenuOpen(true));
+    setHideDefaultNav(true);
 
     // Cleanup on unmount
     return () => {
-      if (!isPublic) {
-        setTitle(null);
-        setMobileAction(null);
-        setHideDefaultNav(false);
-      }
+      setTitle(null);
+      setMobileAction(null);
+      setHideDefaultNav(false);
     };
-  }, [selectedArticle, setTitle, setMobileAction, setHideDefaultNav, isPublic]);
+  }, [selectedArticle, setTitle, setMobileAction, setHideDefaultNav]);
 
   return (
     <div className="h-full w-full bg-white flex flex-col lg:flex-row overflow-hidden">
-      
+
       {/* Desktop Left Sidebar (Collapsible) */}
       {isListOpen && (
         <div className="hidden lg:flex w-80 flex-col border-r border-gray-200 bg-white h-full shrink-0">
           <div className="p-4 border-b border-gray-200 flex items-center justify-between">
             <h2 className="font-bold text-gray-900">Resources</h2>
-            <button 
+            <button
               onClick={() => setIsListOpen(false)}
               className="p-1 hover:bg-gray-100 rounded"
             >
               <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
           </div>
-          
+
           <div className="flex-1 overflow-y-auto p-3 space-y-2">
-            {STUDENT_ARTICLES.map((article, index) => {
+            {articles.map((article, index) => {
               const isSelected = article.id === selectedArticleId;
               const isLocked = isArticleLocked(index);
 
@@ -134,8 +146,8 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
                 </div>
               );
             })}
-            
-            {isPublic && (
+
+            {!isAuthenticated && (
               <div className="mt-4 p-4 bg-gray-50 rounded-lg text-center border border-gray-200">
                 <p className="text-xs text-gray-600 mb-3">Sign in to access all resources</p>
                 <Link to="/login">
@@ -181,7 +193,7 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
       {/* Mobile Selection Modal */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setIsMobileMenuOpen(false)}>
-          <div 
+          <div
             className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[80vh] flex flex-col overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
@@ -191,9 +203,9 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
                 <X className="w-6 h-6 text-gray-600" />
               </button>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
-              {STUDENT_ARTICLES.map((article, index) => {
+              {articles.map((article, index) => {
                 const isSelected = article.id === selectedArticleId;
                 const isLocked = isArticleLocked(index);
 
@@ -233,8 +245,8 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
                   </button>
                 );
               })}
-              
-              {isPublic && (
+
+              {!isAuthenticated && (
                 <div className="pt-4 border-t border-gray-100">
                   <Link to="/login" className="block">
                     <Button variant="primary" className="w-full">Sign In for More</Button>
@@ -249,7 +261,6 @@ const StudentResources = forwardRef<StudentResourcesRef, StudentResourcesProps>(
   );
 });
 
-StudentResources.displayName = 'StudentResources';
+UnifiedResources.displayName = 'UnifiedResources';
 
-export default StudentResources;
-
+export default UnifiedResources;
