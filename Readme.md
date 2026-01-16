@@ -63,6 +63,7 @@ Build output will be in the `dist/` directory.
 ## Project Structure
 
 ```path
+
 src/
 ├── components/     # Reusable UI components (Header, Footer)
 ├── pages/          # Route pages (Home, About, Contact, etc.)
