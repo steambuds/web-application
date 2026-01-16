@@ -62,13 +62,15 @@ Build output will be in the `dist/` directory.
 
 ## Project Structure
 
-```
+```path
+
 src/
 ├── components/     # Reusable UI components (Header, Footer)
 ├── pages/          # Route pages (Home, About, Contact, etc.)
 ├── config/         # Configuration files (services, contact, etc.)
 ├── images/         # Static assets
 └── index.css       # Global styles and Tailwind config
+
 ```
 
 ## Tech Stack
