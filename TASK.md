@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 21
+**Total Tasks:** 23
 - **Pending:** 9 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 12 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018)
+- **Completed:** 14 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018, WEB-019, WEB-020)
 - **Blocked:** 0
 
 ## Task Template
@@ -408,6 +408,24 @@ AnalyticsTracker component was added to track page visits with sessionStorage-ba
 ---
 
 ## Completed Tasks
+
+### WEB-020: Update Favicon
+**Status:** completed
+**Created:** 2026-01-16
+**Completed:** 2026-01-16
+
+#### Description
+Update the application favicon to use the STEAM Buds logo (`src/images/steambuds_logo.svg`) instead of the default Vite logo.
+
+#### Contextual Changes
+**Files Modified:**
+- `index.html` - Updated `<link rel="icon">` href to point to `/src/images/steambuds_logo.svg`.
+
+**Key Features Implemented:**
+- Correct branding in browser tab.
+
+#### Notes
+Direct link to source image used as Vite handles source asset processing.
 
 ### WEB-019: Revamp Animated Intro
 **Status:** completed
