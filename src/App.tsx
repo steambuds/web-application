@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { HeaderActionProvider } from './context/HeaderActionContext';
+import { IntroAnimationProvider } from './context/IntroAnimationContext';
 import { isAppModePath } from './utils/helpers';
 import { UserType } from './types/unified';
 import ProtectedRoute from './components/ProtectedRoute';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -125,7 +125,6 @@ const AppLayout = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!isAppMode && <Footer />}
     </div>
   );
 };
@@ -133,12 +132,14 @@ const AppLayout = () => {
 function App() {
   return (
     <AuthProvider>
-      <HeaderActionProvider>
-        <Router>
-          <AnalyticsTracker />
-          <AppLayout />
-        </Router>
-      </HeaderActionProvider>
+      <IntroAnimationProvider>
+        <HeaderActionProvider>
+          <Router>
+            <AnalyticsTracker />
+            <AppLayout />
+          </Router>
+        </HeaderActionProvider>
+      </IntroAnimationProvider>
     </AuthProvider>
   );
 }

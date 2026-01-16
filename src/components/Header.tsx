@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, User, Info, Mail, BookOpen, Activity } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Home, User, Info, Mail, BookOpen, Activity, GraduationCap, Users, Building2, ChevronDown } from 'lucide-react';
 import logoImage from '../images/steambuds_logo.svg';
 import { Button } from './ui';
 import { useAuth } from '../context/AuthContext';
 import { useHeaderAction } from '../context/HeaderActionContext';
+import { useIntroAnimation } from '../context/IntroAnimationContext';
 import { getUserInitials, getNavLinkClassName } from '../utils/helpers';
 
 // Navigation link type
@@ -93,6 +94,13 @@ const getSchoolNavLinks = (pathname: string): NavLink[] => {
   return [{ to: DASHBOARD_ROUTES.school, label: 'My Dashboard', icon: <Home className="h-4 w-4" /> }];
 };
 
+const USER_TYPE_OPTIONS = [
+  { id: 'student', label: 'Student', icon: GraduationCap, path: '/student/dashboard' },
+  { id: 'guardian', label: 'Guardian', icon: Users, path: '/guardian/dashboard' },
+  { id: 'teacher', label: 'Teacher', icon: BookOpen, path: '/teacher/dashboard' },
+  { id: 'school', label: 'School', icon: Building2, path: '/school/dashboard' },
+];
+
 /**
  * Header Component
  * Responsive navigation header with role-based navigation links
@@ -100,9 +108,12 @@ const getSchoolNavLinks = (pathname: string): NavLink[] => {
  */
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserTypeDropdownOpen, setIsUserTypeDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const { title, mobileAction, customNavLinks } = useHeaderAction();
+  const { showUserTypeDropdown } = useIntroAnimation();
 
   /**
    * Get navigation links based on user role and current route
@@ -201,7 +212,7 @@ const Header: React.FC = () => {
             </nav>
           ) : (
             // Public navigation
-            <nav className="flex space-x-3 md:space-x-6">
+            <nav className="flex items-center space-x-3 md:space-x-6">
               {location.pathname === '/' ? (
                 // Home page navigation (About Us, Contact) - filter out current page
                 <>
@@ -217,6 +228,50 @@ const Header: React.FC = () => {
                       <span>{link.label}</span>
                     </Link>
                   ))}
+
+                  {/* User Type Dropdown (shown after intro animation) */}
+                  {showUserTypeDropdown && (
+                    <div className="relative">
+                      <button
+                        onClick={() => setIsUserTypeDropdownOpen(!isUserTypeDropdownOpen)}
+                        className="relative flex items-center gap-1 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-bold text-sm md:text-base shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden group"
+                      >
+                        {/* Animated shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+                        <span className="relative">I am a</span>
+                        <ChevronDown className={`relative w-4 h-4 transition-transform duration-300 ${isUserTypeDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      {isUserTypeDropdownOpen && (
+                        <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-2xl border-2 border-gray-100 py-2 z-50 backdrop-blur-lg">
+                          {USER_TYPE_OPTIONS.map((option, index) => (
+                            <button
+                              key={option.id}
+                              onClick={() => {
+                                navigate(option.path);
+                                setIsUserTypeDropdownOpen(false);
+                              }}
+                              className={`w-full px-4 py-3 text-left hover:bg-gradient-to-r flex items-center gap-3 transition-all duration-200 rounded-lg mx-1 group
+                                ${index === 0 ? 'hover:from-blue-50 hover:to-blue-100' : ''}
+                                ${index === 1 ? 'hover:from-green-50 hover:to-green-100' : ''}
+                                ${index === 2 ? 'hover:from-purple-50 hover:to-purple-100' : ''}
+                                ${index === 3 ? 'hover:from-orange-50 hover:to-orange-100' : ''}
+                              `}
+                            >
+                              <option.icon className={`w-5 h-5 transition-colors duration-200
+                                ${index === 0 ? 'text-blue-500 group-hover:text-blue-600' : ''}
+                                ${index === 1 ? 'text-green-500 group-hover:text-green-600' : ''}
+                                ${index === 2 ? 'text-purple-500 group-hover:text-purple-600' : ''}
+                                ${index === 3 ? 'text-orange-500 group-hover:text-orange-600' : ''}
+                              `} />
+                              <span className="text-gray-700 font-medium group-hover:text-gray-900">{option.label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </>
               ) : (
                 // Other public pages (Home, About Us, Contact) - filter out current page
