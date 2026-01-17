@@ -12,11 +12,11 @@
 
 ## Task Summary
 
-**Total Tasks:** 21
+**Total Tasks:** 23
 - **Pending:** 9 (BUILD-001, WEB-005, WEB-006, WEB-007, WEB-008, WEB-009, WEB-010, WEB-011, WEB-012)
 - **Planned:** 0
 - **In Progress:** 0
-- **Completed:** 12 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018)
+- **Completed:** 14 (BUILD-001, WEB-001, WEB-002, WEB-003, WEB-004, WEB-005, WEB-013, WEB-014, WEB-015, WEB-016, WEB-017, WEB-018, WEB-019, WEB-020)
 - **Blocked:** 0
 
 ## Task Template
@@ -408,6 +408,46 @@ AnalyticsTracker component was added to track page visits with sessionStorage-ba
 ---
 
 ## Completed Tasks
+
+### WEB-020: Update Favicon
+**Status:** completed
+**Created:** 2026-01-16
+**Completed:** 2026-01-16
+
+#### Description
+Update the application favicon to use the STEAM Buds logo (`src/images/steambuds_logo.svg`) instead of the default Vite logo.
+
+#### Contextual Changes
+**Files Modified:**
+- `index.html` - Updated `<link rel="icon">` href to point to `/src/images/steambuds_logo.svg`.
+
+**Key Features Implemented:**
+- Correct branding in browser tab.
+
+#### Notes
+Direct link to source image used as Vite handles source asset processing.
+
+### WEB-019: Revamp Animated Intro
+**Status:** completed
+**Created:** 2026-01-16
+**Completed:** 2026-01-16
+
+#### Description
+Revamped the `AnimatedIntro` component to replace the basic CSS-drawn characters with a professional, icon-driven animation sequence that aligns with the "Inspire. Ignite. Create. Master." tagline. The new animation features a "Chaos to Order" theme using Lucide icons and brand colors.
+
+#### Contextual Changes
+**Files Modified:**
+- `src/components/AnimatedIntro.tsx` - Completely rewritten to use Lucide icons (`GraduationCap`, `BookOpen`, `Users`, `Building2`, `Lightbulb`, `Rocket`, `Target`, `Brain`, `Sparkles`, `ArrowRight`) and implemented a new timeline-based animation (Ignite -> Create -> Master). Added "Skip Intro" button and parallax background effects.
+
+**Key Features Implemented:**
+- Professional icon-based animation replacing amateur CSS drawings.
+- "Chaos to Order" sequence visualizing skills organizing.
+- Dynamic background gradients and parallax effects.
+- Smooth transitions for user type expansion.
+- improved "Skip" functionality.
+
+#### Notes
+This update provides a much more polished first impression for the application.
 
 ### WEB-018: Update Home Navigation for Mobile
 **Status:** completed

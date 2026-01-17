@@ -83,3 +83,90 @@
   .badge { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-light text-primary-dark; }
   .badge-outline { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border border-primary-light text-primary-dark; }
 }
+
+@layer utilities {
+  /* Floating animation for skill tags */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-20px) rotate(2deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(-2deg);
+    }
+    75% {
+      transform: translateY(-15px) rotate(1deg);
+    }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Wave animation for hand */
+  @keyframes wave {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+
+  .animate-wave {
+    animation: wave 0.5s ease-in-out infinite;
+  }
+
+  /* Fade in animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+
+  /* Slide from left */
+  @keyframes slide-from-left {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-from-left {
+    animation: slide-from-left 0.8s ease-out forwards;
+  }
+
+  /* Slide from right */
+  @keyframes slide-from-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-from-right {
+    animation: slide-from-right 0.8s ease-out forwards;
+  }
+}

@@ -1,26 +1,20 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { HeaderActionProvider } from './context/HeaderActionContext';
+import { IntroAnimationProvider } from './context/IntroAnimationContext';
 import { isAppModePath } from './utils/helpers';
+import { UserType } from './types/unified';
 import ProtectedRoute from './components/ProtectedRoute';
 import RoleProtectedRoute from './components/RoleProtectedRoute';
-import PublicRoute from './components/PublicRoute';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import RnD from './pages/R&D';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Student from './pages/Student';
-import Teacher from './pages/Teacher';
-import Guardian from './pages/Guardian';
-import School from './pages/School';
-import StudentDashboard from './pages/dashboards/StudentDashboard';
-import TeacherDashboard from './pages/dashboards/TeacherDashboard';
-import GuardianDashboard from './pages/dashboards/GuardianDashboard';
-import SchoolDashboard from './pages/dashboards/SchoolDashboard';
+import UnifiedDashboard from './pages/dashboards/UnifiedDashboard';
 import AdminDashboard from './pages/dashboards/AdminDashboard';
 import GroupAttendancePage from './pages/dashboards/GroupAttendancePage';
 import Profile from './pages/Profile';
@@ -82,84 +76,40 @@ const AppLayout = () => {
           {/* Home with auth redirect */}
           <Route path="/" element={<Home />} />
 
-          {/* Public role pages - redirect authenticated users to their dashboard */}
-          <Route path="/student" element={
-            <PublicRoute>
-              <Student />
-            </PublicRoute>
-          } />
-          <Route path="/teacher" element={
-            <PublicRoute>
-              <Teacher />
-            </PublicRoute>
-          } />
-          <Route path="/guardian" element={
-            <PublicRoute>
-              <Guardian />
-            </PublicRoute>
-          } />
-          <Route path="/school" element={
-            <PublicRoute>
-              <School />
-            </PublicRoute>
-          } />
+          {/* Redirect old public pages to unified dashboards */}
+          <Route path="/student" element={<Navigate to="/student/dashboard" replace />} />
+          <Route path="/teacher" element={<Navigate to="/teacher/dashboard" replace />} />
+          <Route path="/guardian" element={<Navigate to="/guardian/dashboard" replace />} />
+          <Route path="/school" element={<Navigate to="/school/dashboard" replace />} />
 
-          {/* Private dashboard routes - role-specific protection */}
+          {/* Admin dashboard - requires authentication and admin role */}
           <Route path="/admin/dashboard" element={
             <RoleProtectedRoute allowedRoles={['admin']}>
               <AdminDashboard />
             </RoleProtectedRoute>
           } />
-          <Route path="/student/dashboard" element={
-            <RoleProtectedRoute allowedRoles={['student']}>
-              <StudentDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/student/dashboard/resources" element={
-            <RoleProtectedRoute allowedRoles={['student']}>
-              <StudentDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/student/dashboard/activities" element={
-            <RoleProtectedRoute allowedRoles={['student']}>
-              <StudentDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/teacher/dashboard" element={
-            <RoleProtectedRoute allowedRoles={['teacher']}>
-              <TeacherDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/teacher/dashboard/resources" element={
-            <RoleProtectedRoute allowedRoles={['teacher']}>
-              <TeacherDashboard />
-            </RoleProtectedRoute>
-          } />
+
+          {/* Teacher attendance page - requires authentication and teacher role */}
           <Route path="/teacher/groups/:groupId/attendance" element={
             <RoleProtectedRoute allowedRoles={['teacher']}>
               <GroupAttendancePage />
             </RoleProtectedRoute>
           } />
-          <Route path="/guardian/dashboard" element={
-            <RoleProtectedRoute allowedRoles={['guardian', 'other']}>
-              <GuardianDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/guardian/dashboard/resources" element={
-            <RoleProtectedRoute allowedRoles={['guardian', 'other']}>
-              <GuardianDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/school/dashboard" element={
-            <RoleProtectedRoute allowedRoles={['school_admin']}>
-              <SchoolDashboard />
-            </RoleProtectedRoute>
-          } />
-          <Route path="/school/dashboard/resources" element={
-            <RoleProtectedRoute allowedRoles={['school_admin']}>
-              <SchoolDashboard />
-            </RoleProtectedRoute>
-          } />
+
+          {/* Unified dashboard routes - publicly accessible for all user types
+              Content access is controlled by contentLoader.tsx based on user's role */}
+          {(['student', 'teacher', 'guardian', 'school'] as UserType[]).map((userType) => (
+            <React.Fragment key={userType}>
+              {/* Main Dashboard - publicly accessible */}
+              <Route path={`/${userType}/dashboard`} element={<UnifiedDashboard />} />
+
+              {/* Resources - publicly accessible */}
+              <Route path={`/${userType}/dashboard/resources`} element={<UnifiedDashboard />} />
+
+              {/* Activities - publicly accessible */}
+              <Route path={`/${userType}/dashboard/activities`} element={<UnifiedDashboard />} />
+            </React.Fragment>
+          ))}
 
           {/* Profile page */}
           <Route
@@ -175,7 +125,6 @@ const AppLayout = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!isAppMode && <Footer />}
     </div>
   );
 };
@@ -183,12 +132,14 @@ const AppLayout = () => {
 function App() {
   return (
     <AuthProvider>
-      <HeaderActionProvider>
-        <Router>
-          <AnalyticsTracker />
-          <AppLayout />
-        </Router>
-      </HeaderActionProvider>
+      <IntroAnimationProvider>
+        <HeaderActionProvider>
+          <Router>
+            <AnalyticsTracker />
+            <AppLayout />
+          </Router>
+        </HeaderActionProvider>
+      </IntroAnimationProvider>
     </AuthProvider>
   );
 }

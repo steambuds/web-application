@@ -10,21 +10,35 @@ import NotAuthorized from './NotAuthorized';
 interface RoleProtectedRouteProps {
   children: React.ReactNode;
   allowedRoles: UserRole[];
+  allowPublicAccess?: boolean; // Allow non-authenticated users to see restricted content
 }
 
 /**
  * RoleProtectedRoute Component
  *
  * Protects routes by checking:
- * 1. If user is authenticated (if not, redirect to login)
- * 2. If user has one of the allowed roles (if not, show NotAuthorized)
+ * 1. If allowPublicAccess=true and user is not authenticated, render children (with restricted content)
+ * 2. If allowPublicAccess=false (default) and user is not authenticated, redirect to login
+ * 3. If user is authenticated, check if user has one of the allowed roles
+ *    - If yes, render children
+ *    - If no, show NotAuthorized
  *
  * Usage:
+ * // Standard protected route (requires auth)
  * <RoleProtectedRoute allowedRoles={['student']}>
  *   <StudentDashboard />
  * </RoleProtectedRoute>
+ *
+ * // Public access with restricted content (no auth required)
+ * <RoleProtectedRoute allowedRoles={['student']} allowPublicAccess={true}>
+ *   <UnifiedDashboard />
+ * </RoleProtectedRoute>
  */
-const RoleProtectedRoute: React.FC<RoleProtectedRouteProps> = ({ children, allowedRoles }) => {
+const RoleProtectedRoute: React.FC<RoleProtectedRouteProps> = ({
+  children,
+  allowedRoles,
+  allowPublicAccess = false
+}) => {
   const { isAuthenticated, isLoading, user } = useAuth();
 
   // Show loading spinner while checking auth state
@@ -36,7 +50,12 @@ const RoleProtectedRoute: React.FC<RoleProtectedRouteProps> = ({ children, allow
     );
   }
 
-  // Redirect to login if not authenticated
+  // If public access is allowed and user is not authenticated, render children (with restricted content)
+  if (allowPublicAccess && !isAuthenticated) {
+    return <>{children}</>;
+  }
+
+  // If not authenticated and public access NOT allowed, redirect to login
   if (!isAuthenticated || !user) {
     return <Navigate to="/login" replace />;
   }
